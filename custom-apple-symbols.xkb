@@ -1,0 +1,492 @@
+xkb_symbols "fancy_us" {
+
+    name[group1]="English (US) Apple";
+
+    key  <ESC> {         [          Escape ] };
+    key <AE01> {
+        symbols[Group1]= [               1,          exclam ],
+        symbols[Group2]= [      exclamdown,           slash ]
+    };
+    key <AE02> {
+        symbols[Group1]= [               2,              at ],
+        symbols[Group2]= [       trademark,        EuroSign ]
+    };
+    key <AE03> {
+        symbols[Group1]= [               3,      numbersign ],
+        symbols[Group2]= [        sterling,           U2039 ]
+    };
+    key <AE04> {
+        symbols[Group1]= [               4,          dollar ],
+        symbols[Group2]= [            cent,           U203A ]
+    };
+    key <AE05> {
+        symbols[Group1]= [               5,         percent ],
+        symbols[Group2]= [        infinity,           UFB01 ]
+    };
+    key <AE06> {
+        symbols[Group1]= [               6,     asciicircum ],
+        symbols[Group2]= [         section,           UFB02 ]
+    };
+    key <AE07> {
+        symbols[Group1]= [               7,       ampersand ],
+        symbols[Group2]= [       paragraph,           U2021 ]
+    };
+    key <AE08> {
+        symbols[Group1]= [               8,        asterisk ],
+        symbols[Group2]= [           U25CF,           U25CB ]
+    };
+    key <AE09> {
+        symbols[Group1]= [               9,       parenleft ],
+        symbols[Group2]= [           U1D43,  periodcentered ]
+    };
+    key <AE10> {
+        symbols[Group1]= [               0,      parenright ],
+        symbols[Group2]= [           U1D52,           UFF0C ]
+    };
+    key <AE11> {
+        symbols[Group1]= [           minus,      underscore ],
+        symbols[Group2]= [          emdash,           U2015 ]
+    };
+    key <AE12> {
+        symbols[Group1]= [           equal,            plus ],
+        symbols[Group2]= [        notequal,       plusminus ]
+    };
+    key <BKSP> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [       BackSpace,       BackSpace,        NoSymbol,        NoSymbol, Terminate_Server ],
+        symbols[Group2]= [       BackSpace,       BackSpace ]
+    };
+    key  <TAB> {         [             Tab,    ISO_Left_Tab ] };
+    key <AD01> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               q,               Q ],
+        symbols[Group2]= [              oe,              OE ]
+    };
+    key <AD02> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               w,               W ],
+        symbols[Group2]= [     Greek_SIGMA, doublelowquotemark ]
+    };
+    key <AD03> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               e,               E ],
+        symbols[Group2]= [      dead_acute,           acute ]
+    };
+    key <AD04> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               r,               R ],
+        symbols[Group2]= [      registered,        permille ]
+    };
+    key <AD05> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               t,               T ],
+        symbols[Group2]= [          dagger,           breve ]
+    };
+    key <AD06> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               y,               Y ],
+        symbols[Group2]= [             yen,          Aacute ]
+    };
+    key <AD07> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               u,               U ],
+        symbols[Group2]= [  dead_diaeresis,       diaeresis ]
+    };
+    key <AD08> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               i,               I ],
+        symbols[Group2]= [ dead_circumflex,     asciicircum ]
+    };
+    key <AD09> {
+        type= "ALPHABETIC",
+        symbols[Group1]= [               o,               O ],
+        symbols[Group2]= [          oslash,          Oslash ]
+    };
+    key <AD10> {
+        type= "ALPHABETIC",
+        symbols[Group1]= [               p,               P ],
+        symbols[Group2]= [        Greek_pi,        Greek_PI ]
+    };
+    key <AD11> {
+        symbols[Group1]= [     bracketleft,       braceleft ],
+        symbols[Group2]= [ leftdoublequotemark, rightdoublequotemark ]
+    };
+    key <AD12> {
+        symbols[Group1]= [    bracketright,      braceright ],
+        symbols[Group2]= [ leftsinglequotemark, rightsinglequotemark ]
+    };
+    key <RTRN> {         [          Return ] };
+    key <LCTL> {         [       Control_L ] };
+    key <AC01> {
+        type= "ALPHABETIC",
+        symbols[Group1]= [               a,               A ],
+        symbols[Group2]= [           aring,           Aring ]
+    };
+    key <AC02> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               s,               S ],
+        symbols[Group2]= [          ssharp,          Iacute ]
+    };
+    key <AC03> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               d,               D ],
+        symbols[Group2]= [ partialderivative,     Icircumflex ]
+    };
+    key <AC04> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               f,               F ],
+        symbols[Group2]= [       U0001D453,      Idiaeresis ]
+    };
+    key <AC05> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               g,               G ],
+        symbols[Group2]= [       copyright,     doubleacute ]
+    };
+    key <AC06> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               h,               H ],
+        symbols[Group2]= [        abovedot,          Oacute ]
+    };
+    key <AC07> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               j,               J ],
+        symbols[Group2]= [     Greek_DELTA,     Ocircumflex ]
+    };
+    key <AC08> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               k,               K ],
+        symbols[Group2]= [          degree ]
+    };
+    key <AC09> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               l,               L ],
+        symbols[Group2]= [         notsign,          Ograve ]
+    };
+    key <AC10> {
+        symbols[Group1]= [       semicolon,           colon ],
+        symbols[Group2]= [        ellipsis,          Uacute ]
+    };
+    key <AC11> {
+        symbols[Group1]= [      apostrophe,        quotedbl ],
+        symbols[Group2]= [              ae,              AE ]
+    };
+    key <TLDE> {
+        symbols[Group1]= [           grave,      asciitilde ],
+        symbols[Group2]= [      dead_grave,           grave ]
+    };
+    key <LFSH> {         [         Shift_L ] };
+    key <BKSL> {
+        symbols[Group1]= [       backslash,             bar ],
+        symbols[Group2]= [   guillemotleft,  guillemotright ]
+    };
+    key <AB01> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               z,               Z ],
+        symbols[Group2]= [     Greek_OMEGA,         cedilla ]
+    };
+    key <AB02> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               x,               X ],
+        symbols[Group2]= [        approxeq,          ogonek ]
+    };
+    key <AB03> {
+        type= "ALPHABETIC",
+        symbols[Group1]= [               c,               C ],
+        symbols[Group2]= [        ccedilla,        Ccedilla ]
+    };
+    key <AB04> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               v,               V ],
+        symbols[Group2]= [         radical,           U22C4 ]
+    };
+    key <AB05> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               b,               B ],
+        symbols[Group2]= [        integral,           U23AE ]
+    };
+    key <AB06> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               n,               N ],
+        symbols[Group2]= [      dead_tilde,      asciitilde ]
+    };
+    key <AB07> {
+        type[group1]= "ALPHABETIC",
+        symbols[Group1]= [               m,               M ],
+        symbols[Group2]= [        Greek_mu,     Acircumflex ]
+    };
+    key <AB08> {
+        symbols[Group1]= [           comma,            less ],
+        symbols[Group2]= [   lessthanequal,        overline ]
+    };
+    key <AB09> {
+        symbols[Group1]= [          period,         greater ],
+        symbols[Group2]= [ greaterthanequal,           breve ]
+    };
+    key <AB10> {
+        symbols[Group1]= [           slash,        question ],
+        symbols[Group2]= [        division,    questiondown ]
+    };
+    key <RTSH> {         [         Shift_R ] };
+    key <KPMU> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [     KP_Multiply,     KP_Multiply,     KP_Multiply,     KP_Multiply,   XF86ClearGrab ],
+        symbols[Group2]= [     KP_Multiply,     KP_Multiply ]
+    };
+    key <LALT> {         [           Alt_L,          Meta_L ] };
+    key <SPCE> {         [           space ] };
+    key <CAPS> {         [       Caps_Lock ] };
+    key <FK01> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [              F1,              F1,              F1,              F1, XF86Switch_VT_1 ],
+        symbols[Group2]= [              F1,              F1 ]
+    };
+    key <FK02> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [              F2,              F2,              F2,              F2, XF86Switch_VT_2 ],
+        symbols[Group2]= [              F2,              F2 ]
+    };
+    key <FK03> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [              F3,              F3,              F3,              F3, XF86Switch_VT_3 ],
+        symbols[Group2]= [              F3,              F3 ]
+    };
+    key <FK04> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [              F4,              F4,              F4,              F4, XF86Switch_VT_4 ],
+        symbols[Group2]= [              F4,              F4 ]
+    };
+    key <FK05> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [              F5,              F5,              F5,              F5, XF86Switch_VT_5 ],
+        symbols[Group2]= [              F5,              F5 ]
+    };
+    key <FK06> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [              F6,              F6,              F6,              F6, XF86Switch_VT_6 ],
+        symbols[Group2]= [              F6,              F6 ]
+    };
+    key <FK07> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [              F7,              F7,              F7,              F7, XF86Switch_VT_7 ],
+        symbols[Group2]= [              F7,              F7 ]
+    };
+    key <FK08> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [              F8,              F8,              F8,              F8, XF86Switch_VT_8 ],
+        symbols[Group2]= [              F8,              F8 ]
+    };
+    key <FK09> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [              F9,              F9,              F9,              F9, XF86Switch_VT_9 ],
+        symbols[Group2]= [              F9,              F9 ]
+    };
+    key <FK10> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [             F10,             F10,             F10,             F10, XF86Switch_VT_10 ],
+        symbols[Group2]= [             F10,             F10 ]
+    };
+    key <NMLK> {         [        Num_Lock ] };
+    key <SCLK> {         [     Scroll_Lock ] };
+    key  <KP7> {         [         KP_Home,            KP_7 ] };
+    key  <KP8> {         [           KP_Up,            KP_8 ] };
+    key  <KP9> {         [        KP_Prior,            KP_9 ] };
+    key <KPSU> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [     KP_Subtract,     KP_Subtract,     KP_Subtract,     KP_Subtract,  XF86Prev_VMode ],
+        symbols[Group2]= [     KP_Subtract,     KP_Subtract ]
+    };
+    key  <KP4> {         [         KP_Left,            KP_4 ] };
+    key  <KP5> {         [        KP_Begin,            KP_5 ] };
+    key  <KP6> {         [        KP_Right,            KP_6 ] };
+    key <KPAD> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [          KP_Add,          KP_Add,          KP_Add,          KP_Add,  XF86Next_VMode ],
+        symbols[Group2]= [          KP_Add,          KP_Add ]
+    };
+    key  <KP1> {         [          KP_End,            KP_1 ] };
+    key  <KP2> {         [         KP_Down,            KP_2 ] };
+    key  <KP3> {         [         KP_Next,            KP_3 ] };
+    key  <KP0> {         [       KP_Insert,            KP_0 ] };
+    key <KPDL> {         [       KP_Delete,      KP_Decimal ] };
+    key <LVL3> {         [ ISO_Level3_Shift ] };
+    key <LSGT> {
+        type[group1]= "FOUR_LEVEL",
+        symbols[Group1]= [            less,         greater,             bar,       brokenbar ],
+        symbols[Group2]= [            less,         greater ],
+        symbols[Group3]= [             bar ]
+    };
+    key <FK11> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [             F11,             F11,             F11,             F11, XF86Switch_VT_11 ],
+        symbols[Group2]= [             F11,             F11 ]
+    };
+    key <FK12> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [             F12,             F12,             F12,             F12, XF86Switch_VT_12 ],
+        symbols[Group2]= [             F12,             F12 ]
+    };
+    key <KATA> {         [        Katakana ] };
+    key <HIRA> {         [        Hiragana ] };
+    key <HENK> {         [     Henkan_Mode ] };
+    key <HKTG> {         [ Hiragana_Katakana ] };
+    key <MUHE> {         [        Muhenkan ] };
+    key <KPEN> {         [        KP_Enter ] };
+    key <RCTL> {         [       Control_R ] };
+    key <KPDV> {
+        type[group1]= "CTRL+ALT",
+        symbols[Group1]= [       KP_Divide,       KP_Divide,       KP_Divide,       KP_Divide,      XF86Ungrab ],
+        symbols[Group2]= [       KP_Divide,       KP_Divide ]
+    };
+    key <PRSC> {
+        type= "PC_ALT_LEVEL2",
+        symbols[Group1]= [           Print,         Sys_Req ]
+    };
+    key <LNFD> {         [        Linefeed ] };
+    key <HOME> {         [            Home ] };
+    key   <UP> {         [              Up ] };
+    key <PGUP> {         [           Prior ] };
+    key <LEFT> {         [            Left ] };
+    key <RGHT> {         [           Right ] };
+    key  <END> {         [             End ] };
+    key <DOWN> {         [            Down ] };
+    key <PGDN> {         [            Next ] };
+    key  <INS> {         [          Insert ] };
+    key <DELE> {         [          Delete ] };
+    key <MUTE> {         [   XF86AudioMute ] };
+    key <VOL-> {         [ XF86AudioLowerVolume ] };
+    key <VOL+> {         [ XF86AudioRaiseVolume ] };
+    key <POWR> {         [    XF86PowerOff ] };
+    key <KPEQ> {         [        KP_Equal ] };
+    key <I126> {         [       plusminus ] };
+    key <PAUS> {
+        type= "PC_CONTROL_LEVEL2",
+        symbols[Group1]= [           Pause,           Break ]
+    };
+    key <I128> {         [     XF86LaunchA ] };
+    key <I129> {         [      KP_Decimal,      KP_Decimal ] };
+    key <HNGL> {         [          Hangul ] };
+    key <HJCV> {         [    Hangul_Hanja ] };
+    key <LWIN> {         [         Super_L ] };
+    key <RWIN> {         [         Super_R ] };
+    key <COMP> {         [         Super_R ] };
+    key <STOP> {         [          Cancel ] };
+    key <AGAI> {         [            Redo ] };
+    key <PROP> {         [        SunProps ] };
+    key <UNDO> {         [            Undo ] };
+    key <FRNT> {         [        SunFront ] };
+    key <COPY> {         [        XF86Copy ] };
+    key <OPEN> {         [        XF86Open ] };
+    key <PAST> {         [       XF86Paste ] };
+    key <FIND> {         [            Find ] };
+    key  <CUT> {         [         XF86Cut ] };
+    key <HELP> {         [            Help ] };
+    key <I147> {         [      XF86MenuKB ] };
+    key <I148> {         [  XF86Calculator ] };
+    key <I150> {         [       XF86Sleep ] };
+    key <I151> {         [      XF86WakeUp ] };
+    key <I152> {         [    XF86Explorer ] };
+    key <I153> {         [        XF86Send ] };
+    key <I155> {         [        XF86Xfer ] };
+    key <I156> {         [     XF86Launch1 ] };
+    key <I157> {         [     XF86Launch2 ] };
+    key <I158> {         [         XF86WWW ] };
+    key <I159> {         [         XF86DOS ] };
+    key <I160> {         [ XF86ScreenSaver ] };
+    key <I161> {         [ XF86RotateWindows ] };
+    key <I162> {         [    XF86TaskPane ] };
+    key <I163> {         [        XF86Mail ] };
+    key <I164> {         [   XF86Favorites ] };
+    key <I165> {         [  XF86MyComputer ] };
+    key <I166> {         [        XF86Back ] };
+    key <I167> {         [     XF86Forward ] };
+    key <I169> {         [       XF86Eject ] };
+    key <I170> {         [       XF86Eject,       XF86Eject ] };
+    key <I171> {         [   XF86AudioNext ] };
+    key <I172> {         [   XF86AudioPlay,  XF86AudioPause ] };
+    key <I173> {         [   XF86AudioPrev ] };
+    key <I174> {         [   XF86AudioStop,       XF86Eject ] };
+    key <I175> {         [ XF86AudioRecord ] };
+    key <I176> {         [ XF86AudioRewind ] };
+    key <I177> {         [       XF86Phone ] };
+    key <I179> {         [       XF86Tools ] };
+    key <I180> {         [    XF86HomePage ] };
+    key <I181> {         [      XF86Reload ] };
+    key <I182> {         [       XF86Close ] };
+    key <I185> {         [    XF86ScrollUp ] };
+    key <I186> {         [  XF86ScrollDown ] };
+    key <I187> {         [       parenleft ] };
+    key <I188> {         [      parenright ] };
+    key <I189> {         [         XF86New ] };
+    key <I190> {         [            Redo ] };
+    key <FK13> {         [       XF86Tools ] };
+    key <FK14> {         [     XF86Launch5 ] };
+    key <FK15> {         [     XF86Launch6 ] };
+    key <FK16> {         [     XF86Launch7 ] };
+    key <FK17> {         [     XF86Launch8 ] };
+    key <FK18> {         [     XF86Launch9 ] };
+    key <FK20> {         [ XF86AudioMicMute ] };
+    key <FK21> {         [ XF86TouchpadToggle ] };
+    key <FK22> {         [  XF86TouchpadOn ] };
+    key <FK23> {
+        type= "PC_SHIFT_SUPER_LEVEL2",
+        symbols[Group1]= [ XF86TouchpadOff,        NoSymbol ]
+    };
+    key <LVL5> {         [     Mode_switch ] };
+    key  <ALT> {         [        NoSymbol,           Alt_L ] };
+    key <META> {         [        NoSymbol,          Meta_L ] };
+    key <SUPR> {         [        NoSymbol,         Super_L ] };
+    key <HYPR> {         [        NoSymbol,         Hyper_L ] };
+    key <I208> {         [   XF86AudioPlay ] };
+    key <I209> {         [  XF86AudioPause ] };
+    key <I210> {         [     XF86Launch3 ] };
+    key <I211> {         [     XF86Launch4 ] };
+    key <I212> {         [     XF86LaunchB ] };
+    key <I213> {         [     XF86Suspend ] };
+    key <I214> {         [       XF86Close ] };
+    key <I215> {         [   XF86AudioPlay ] };
+    key <I216> {         [ XF86AudioForward ] };
+    key <I218> {         [           Print ] };
+    key <I220> {         [      XF86WebCam ] };
+    key <I223> {         [        XF86Mail ] };
+    key <I224> {         [   XF86Messenger ] };
+    key <I225> {         [      XF86Search ] };
+    key <I226> {         [          XF86Go ] };
+    key <I227> {         [     XF86Finance ] };
+    key <I228> {         [        XF86Game ] };
+    key <I229> {         [        XF86Shop ] };
+    key <I231> {         [          Cancel ] };
+    key <I232> {         [ XF86MonBrightnessDown ] };
+    key <I233> {         [ XF86MonBrightnessUp ] };
+    key <I234> {         [  XF86AudioMedia ] };
+    key <I235> {         [     XF86Display ] };
+    key <I236> {         [ XF86KbdLightOnOff ] };
+    key <I237> {         [ XF86KbdBrightnessDown ] };
+    key <I238> {         [ XF86KbdBrightnessUp ] };
+    key <I239> {         [        XF86Send ] };
+    key <I240> {         [       XF86Reply ] };
+    key <I241> {         [ XF86MailForward ] };
+    key <I242> {         [        XF86Save ] };
+    key <I243> {         [   XF86Documents ] };
+    key <I244> {         [     XF86Battery ] };
+    key <I245> {         [   XF86Bluetooth ] };
+    key <I246> {         [        XF86WLAN ] };
+    key <I254> {         [        XF86WWAN ] };
+    key <I255> {         [      XF86RFKill ] };
+    modifier_map Control { <LCTL> };
+    modifier_map Shift { <LFSH> };
+    modifier_map Shift { <RTSH> };
+    modifier_map Mod1 { <LALT> };
+    modifier_map Lock { <CAPS> };
+    modifier_map Mod2 { <NMLK> };
+    modifier_map Mod5 { <LVL3> };
+    modifier_map Control { <RCTL> };
+    modifier_map Mod5 { <RALT> };
+    modifier_map Mod4 { <LWIN> };
+    modifier_map Mod4 { <RWIN> };
+    modifier_map Mod4 { <COMP> };
+    modifier_map Mod3 { <LVL5> };
+    modifier_map Mod1 { <ALT> };
+    modifier_map Mod1 { <META> };
+    modifier_map Mod4 { <SUPR> };
+    modifier_map Mod3 { <HYPR> };
+};
