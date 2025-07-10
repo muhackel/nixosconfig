@@ -70,7 +70,7 @@ in
           enable = true;
           enableContribAndExtras = true;
           enableConfiguredRecompile = true;
-          config = /home/muhackel/.xmonad/xmonad.hs;
+          config = ./xmonad.hs;
         };
       };
     };
