@@ -29,18 +29,7 @@ in
     };
   };
   hardware.cpu.intel.updateMicrocode = true;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.settings = {
-    General = {
-      Enable = "Sink,Media,Socket";
-      Disable = "Headset,Source";
-    };
-  };
-  hardware.bluetooth.input = {
-    General = {
-      LEAutoSecurity = "true";
-    };
-  };
+ 
   services.xserver.videoDrivers = [
     #  "intel"
 	  "modesetting"

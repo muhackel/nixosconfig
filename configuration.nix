@@ -13,6 +13,7 @@ in
       ./general.nix
       ./hardware-configuration.nix
       ./hardware-lenovo-tp25.nix
+      ./hardware-bluetooth.nix
       ./user-muhackel.nix
       ./software-ptls.nix
       ./software-hamradio.nix
