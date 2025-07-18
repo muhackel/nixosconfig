@@ -50,8 +50,8 @@ in
 
   #sound.enable = true;
   services = {
-    #displayManager.sddm.enable = true;
-    #displayManager.sddm.wayland.enable = true;
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
 
     desktopManager.plasma6.enable = true;
     xserver = {
@@ -65,7 +65,7 @@ in
       #  x=1920;
       #  y=1080;
       #};
-      displayManager.lightdm.enable = true;
+      #displayManager.lightdm.enable = true;
       windowManager = { 
         xmonad = {
           enable = true;
