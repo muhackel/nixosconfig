@@ -177,6 +177,7 @@ in
     usbutils
     htop
     nvtopPackages.full
+    dysk
     #xorg.xbacklight
     #brightnessctl
     rclone
