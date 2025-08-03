@@ -123,30 +123,6 @@ in
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users = {
-    users = {
-      test = {
-        isNormalUser = true;
-        extraGroups = [
-          "wheel"
-          "docker"
-          "libvirtd"
-          "networkmanager"
-          "vboxusers"
-          "plugdev"
-          "uucp"
-        ];
-        shell = pkgs.zsh;
-        linger = true;
-        initialPassword = "1qaz!QAZ";
-        packages = with pkgs; [
-
-        ];
-      };
-    };
-  };
-
-  
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
