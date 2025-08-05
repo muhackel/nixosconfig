@@ -16,6 +16,7 @@ in
       ./hardware-bluetooth.nix
       ./hardware-keyboard.nix
       ./user-muhackel.nix
+      ./software-network.nix
       ./software-ptls.nix
       ./software-hamradio.nix
       ./software-virtualisation.nix
@@ -199,7 +200,7 @@ in
     texliveFull
     virt-manager
     nixos-generators
-    lutris
+    #lutris
     jellyfin-media-player
     kdePackages.yakuake
     kdePackages.filelight
@@ -237,7 +238,7 @@ in
   };
 
   programs.steam = {
-    enable = true;
+    enable = false;
   };
   programs.direnv.enable = true;
 
