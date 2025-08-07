@@ -13,4 +13,9 @@ in
     vpcs.enable = true;
   };
   environment.systemPackages = gnspkgs;
+  programs.winbox = {
+   enable = true;
+   openFirewall = true;
+   package = pkgs.winbox4;
+  };
 }

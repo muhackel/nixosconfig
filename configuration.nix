@@ -185,6 +185,7 @@ in
     vscode
 
     libreoffice
+    gimp3
     google-chrome
     ausweisapp
     mate.caja
@@ -223,7 +224,7 @@ in
   
 
   #programs.light.enable = true;
-
+  
   programs.git = {
     enable = true;
   };
