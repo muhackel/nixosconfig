@@ -1,5 +1,5 @@
 {
-  description = "My first flake!";
+  description = "System Configuration Flake";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -18,7 +18,9 @@
       nixosConfigurations = {
         HAL9000 = lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./configuration.nix ];
+          modules = [ ./configuration.nix 
+                      ./boot-tp25.nix
+          ];
       };
     };
   };
