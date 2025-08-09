@@ -5,7 +5,15 @@
 { config, lib, pkgs, ... }:
 
 let
-  
+  vscode-desktop-fix = pkgs.makeDesktopItem {
+    name = "code";
+    desktopName = "Visual Studio Code";
+    genericName = "Text Editor";
+    exec = "${pkgs.vscode}/bin/code %F";
+    icon = "com.visualstudio.code";
+    categories = [ "Utility" "TextEditor" "Development" "IDE" ];
+    startupWMClass = "Code";
+  };
 in
 {
   imports =
@@ -162,7 +170,7 @@ in
     #pasystray
     #libsForQt5.qt5ct
     #qt6ct
-
+    vscode-desktop-fix
     ###xmonad tools
     dzen2
     conky
