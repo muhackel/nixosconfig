@@ -202,7 +202,6 @@ in
     virt-manager
     nixos-generators
     #lutris
-    jellyfin-media-player
     kdePackages.yakuake
     kdePackages.filelight
     camunda-modeler
