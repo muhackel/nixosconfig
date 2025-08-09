@@ -14,6 +14,22 @@ in
   imports = [
     #./hardware-general.nix
   ];
+
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.loader = {
+    timeout = null;
+    systemd-boot = {
+      enable = true;
+      memtest86.enable = true;
+      netbootxyz.enable = true;
+    };
+    efi.canTouchEfiVariables = true;
+  };
+  boot.kernelModules = [ "kvm-intel" "vfio_pci" "vfio" "vfio_iommu_type1" ];
+  boot.extraModulePackages = [ ];
+  boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "zfs" ];
+
   hardware.nvidiaOptimus.disable = false;
   hardware.graphics.extraPackages = tp25gfxpkgs;
   environment.systemPackages = tp25pkgs;
