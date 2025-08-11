@@ -205,12 +205,6 @@ in
     kdePackages.yakuake
     kdePackages.filelight
     camunda-modeler
-    
-    ### SDR Shit
-    
-    
-    ### Proxmark/RFID Shit
-    proxmark3
   ];
   fonts = {
     packages = with pkgs; [
