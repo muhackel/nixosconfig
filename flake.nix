@@ -20,6 +20,17 @@
           system = "x86_64-linux";
           modules = [ ./configuration.nix 
                       ./boot-tp25.nix
+                      ./general.nix
+                      ./hardware-configuration.nix
+                      ./hardware-lenovo-tp25.nix
+                      ./hardware-bluetooth.nix
+                      ./hardware-keyboard.nix
+                      ./user-muhackel.nix
+                      ./software-network.nix
+                      ./software-nfc.nix
+                      ./software-ptls.nix
+                      ./software-hamradio.nix
+                      ./software-virtualisation.nix
           ];
       };
     };

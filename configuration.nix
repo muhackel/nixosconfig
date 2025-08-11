@@ -10,16 +10,7 @@ in
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./general.nix
-      ./hardware-configuration.nix
-      ./hardware-lenovo-tp25.nix
-      ./hardware-bluetooth.nix
-      ./hardware-keyboard.nix
-      ./user-muhackel.nix
-      ./software-network.nix
-      ./software-ptls.nix
-      ./software-hamradio.nix
-      ./software-virtualisation.nix
+
     ];
   
   networking = {
@@ -43,7 +34,7 @@ in
 
     desktopManager.plasma6.enable = true;
     xserver = {
-      enable = true;
+      enable = false;
       enableCtrlAltBackspace = true;
       #deviceSection = ''
       #  Option "DRI" "3"
@@ -63,6 +54,7 @@ in
         };
       };
     };
+
     libinput = {
         enable = true;
     };
@@ -110,7 +102,7 @@ in
       enable = true;
     };
     fprintd = {
-      enable = false;
+      enable = true;
       tod= {
         enable = false;
         driver = pkgs.libfprint-2-tod1-vfs0090;
