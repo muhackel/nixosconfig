@@ -28,12 +28,16 @@ in
   };
   
   #sound.enable = true;
-  services = {
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
 
-    desktopManager.plasma6.enable = true;
-    xserver = {
+  services.desktopManager.plasma6 = {
+    enable = true;
+  };
+
+  services.xserver = {
       enable = false;
       enableCtrlAltBackspace = true;
       #deviceSection = ''
@@ -55,67 +59,65 @@ in
       };
     };
 
-    libinput = {
+  services.libinput = {
         enable = true;
-    };
-    picom = {
-      enable = true;
-      opacityRules = [
-        "80:class_g = 'Alacritty' && focused"
-        "80:class_g = 'Alacritty' && !focused"
-      ];
-    };
-    syncthing = {
-      enable = true;
-    };
-    blueman = {
-      enable = false;
-    };
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-      };
-      wireplumber = {
-        enable = true;
-      };
-      pulse = {
-        enable = true;
-      };
-    };
-    printing = {
-      enable = true;
-    };
-    geoclue2 = {
-      enable = false;
-      enableWifi = true;
-      enableModemGPS = true;
-    };
-    emacs = {
-      enable = true;
-      package = pkgs.emacs-gtk;
-    };
-    fstrim = {
-      enable = true;
-    };
-    fwupd = {
-      enable = true;
-    };
-    fprintd = {
-      enable = true;
-      tod= {
-        enable = false;
-        driver = pkgs.libfprint-2-tod1-vfs0090;
-      };
-    };
-    
   };
 
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  services.picom = {
+    enable = true;
+    opacityRules = [
+      "80:class_g = 'Alacritty' && focused"
+      "80:class_g = 'Alacritty' && !focused"
+    ];
+  };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  services.syncthing = {
+      enable = true;
+  };
+
+  services.blueman = {
+      enable = false;
+  };
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+    };
+    wireplumber = {
+      enable = true;
+    };
+    pulse = {
+      enable = true;
+    };
+  };
+
+  services.printing = {
+    enable = true;
+  };
+
+  services.geoclue2 = {
+    enable = false;
+    enableWifi = true;
+    enableModemGPS = true;
+  };
+
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs-gtk;
+  };
+  services.fstrim = {
+    enable = true;
+  };
+  services.fwupd = {
+    enable = true;
+  };
+  services.fprintd = {
+    enable = true;
+    tod= {
+      enable = false;
+      driver = pkgs.libfprint-2-tod1-vfs0090;
+    };
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
