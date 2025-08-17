@@ -148,7 +148,6 @@ in
 
     ###system/*ui
     ranger
-    solaar
     rclone-browser
     networkmanagerapplet
     github-desktop

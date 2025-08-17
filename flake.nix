@@ -25,6 +25,7 @@
                       ./hardware-lenovo-tp25.nix
                       ./hardware-bluetooth.nix
                       ./hardware-keyboard.nix
+                      ./hardware-mouse.nix
                       ./user-muhackel.nix
                       ./software-network.nix
                       ./software-nfc.nix
