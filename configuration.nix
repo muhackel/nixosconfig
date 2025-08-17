@@ -145,6 +145,7 @@ in
     glxinfo
     xorg.xmodmap
     unzip
+    nixfmt-rfc-style
 
     ###system/*ui
     ranger
