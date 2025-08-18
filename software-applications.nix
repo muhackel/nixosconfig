@@ -55,6 +55,9 @@ let
 in
 {
   environment.systemPackages = apppkgs ++ clipkgs ;
+  programs.vscode = {
+    enable = true;
+  };
   programs.ausweisapp = {
     enable = true;
     openFirewall = true;

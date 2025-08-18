@@ -129,9 +129,7 @@ in
   programs.zsh = {
     enable = true;
   };
-  programs.vscode = {
-    enable = true;
-  };
+
 
   programs.steam = {
     enable = false;
