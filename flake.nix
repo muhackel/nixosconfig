@@ -27,6 +27,7 @@
                       ./hardware-keyboard.nix
                       ./hardware-mouse.nix
                       ./user-muhackel.nix
+                      ./software-applications.nix
                       ./software-network.nix
                       ./software-nfc.nix
                       ./software-ptls.nix

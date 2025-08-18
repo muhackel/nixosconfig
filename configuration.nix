@@ -123,10 +123,10 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     ###system/basic
-    fwupd
-    aspell
-    aspellDicts.de
-    aspellDicts.en
+
+
+
+
     zfs
     oh-my-posh
     arandr
@@ -169,16 +169,13 @@ in
     stalonetray
     trayer
     dunst
-    caffeine-ng
     #redshift
     i3lock-fancy
     xss-lock
     lxappearance
 
     ### Messaging
-    signal-desktop
-    ferdium
-    discord
+
     vscode
 
     libreoffice-fresh
@@ -202,7 +199,6 @@ in
     #lutris
     kdePackages.yakuake
     kdePackages.filelight
-    camunda-modeler
   ];
   fonts = {
     packages = with pkgs; [
