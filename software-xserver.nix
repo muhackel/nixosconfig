@@ -2,6 +2,9 @@
 let
   xsupportpkgs = with pkgs; [
     xorg.xinput
+    xorg.xmodmap
+    xorg.xbacklight
+    arandr
   ];
   xmonadpkgs = with pkgs; [
     alacritty
@@ -13,6 +16,8 @@ let
     haskellPackages.xmobar
     i3lock-fancy
     lxappearance
+    mate.caja
+    networkmanagerapplet
     redshift
     rofi
     stalonetray
@@ -31,6 +36,18 @@ in
         enableConfiguredRecompile = true;
         config = ./xmonad.hs;
     };
+  };
+
+  services.picom = {
+    enable = config.services.xserver.enable;
+    opacityRules = [
+      "80:class_g = 'Alacritty' && focused"
+      "80:class_g = 'Alacritty' && !focused"
+    ];
+  };
+
+  services.libinput = {
+        enable = true;
   };
 
   environment.systemPackages = xsupportpkgs ++ xmonadpkgs;

@@ -37,17 +37,9 @@ in
     enable = true;
   };
 
-  services.libinput = {
-        enable = true;
-  };
 
-  services.picom = {
-    enable = true;
-    opacityRules = [
-      "80:class_g = 'Alacritty' && focused"
-      "80:class_g = 'Alacritty' && !focused"
-    ];
-  };
+
+
 
   services.syncthing = {
       enable = true;
@@ -102,61 +94,16 @@ in
   environment.systemPackages = with pkgs; [
     ###system/basic
 
-
-
-
-    zfs
-    oh-my-posh
-    arandr
-    alacritty
-    wget
-    pciutils
-    usbutils
-    htop
-    nvtopPackages.full
-    dysk
-    #xorg.xbacklight
-    #brightnessctl
-    rclone
-    git
-    alsa-utils
-    killall
-    i7z
-    glxinfo
-    xorg.xmodmap
-    unzip
-    nixfmt-rfc-style
-
-    ###system/*ui
-    ranger
-    rclone-browser
-    networkmanagerapplet
-    github-desktop
-    #pamixer
-    #pasystray
-    #libsForQt5.qt5ct
-    #qt6ct
-
-    vscode
-
-    libreoffice-fresh
-    gimp3
-    google-chrome
-    ausweisapp
-    mate.caja
-    mpv
-    freecad
-
     python311Full
     python311Packages.tkinter
 
     #steam-run
-    drawio
-    yed
-    plantuml
-    texliveFull
-    virt-manager
-    nixos-generators
+    
+    
+    
+    
+    
+    
     #lutris
     kdePackages.yakuake
     kdePackages.filelight
@@ -199,7 +146,7 @@ in
   qt = {
     enable = true;
     #style = "gtk2";
-    platformTheme = "qt5ct";
+    #platformTheme = "qt5ct";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
