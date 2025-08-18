@@ -124,6 +124,9 @@ in
   environment.systemPackages = with pkgs; [
     ###system/basic
     fwupd
+    aspell
+    aspellDicts.de
+    aspellDicts.en
     zfs
     oh-my-posh
     arandr
