@@ -14,9 +14,16 @@ let
     ethtool
     ipcalc
     netcat-gnu
+    inetutils
     iputils
     iptraf-ng
     kismet
+    nbtscan
+    netdiscover
+    netsniff-ng
+    nmap
+    nomachine-client
+    zenmap
   ];
 in
 {
@@ -38,6 +45,8 @@ in
   };
 
   programs.iftop.enable = true;
+
+  programs.mtr.enable = true;
 
   programs.winbox = {
     enable = true;

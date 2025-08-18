@@ -31,5 +31,8 @@
   nixpkgs.config = {
     allowUnfree = true;
     allowBroken = true;
+    permittedInsecurePackages = [
+      "libxml2-2.13.8"
+    ];
   };
 }
