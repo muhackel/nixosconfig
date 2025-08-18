@@ -181,12 +181,13 @@ in
     discord
     vscode
 
-    libreoffice
+    libreoffice-fresh
     gimp3
     google-chrome
     ausweisapp
     mate.caja
     mpv
+    freecad
 
     python311Full
     python311Packages.tkinter
