@@ -37,28 +37,6 @@ in
     enable = true;
   };
 
-  services.xserver = {
-      enable = false;
-      enableCtrlAltBackspace = true;
-      #deviceSection = ''
-      #  Option "DRI" "3"
-      #  Option "TearFree" "true"
-      #'';
-      #virtualScreen = {
-      #  x=1920;
-      #  y=1080;
-      #};
-      #displayManager.lightdm.enable = true;
-      windowManager = { 
-        xmonad = {
-          enable = true;
-          enableContribAndExtras = true;
-          enableConfiguredRecompile = true;
-          config = ./xmonad.hs;
-        };
-      };
-    };
-
   services.libinput = {
         enable = true;
   };
@@ -130,7 +108,6 @@ in
     zfs
     oh-my-posh
     arandr
-    autorandr
     alacritty
     wget
     pciutils
@@ -159,22 +136,6 @@ in
     #pasystray
     #libsForQt5.qt5ct
     #qt6ct
-
-    ###xmonad tools
-    dzen2
-    conky
-    dmenu
-    rofi
-    haskellPackages.xmobar
-    stalonetray
-    trayer
-    dunst
-    #redshift
-    i3lock-fancy
-    xss-lock
-    lxappearance
-
-    ### Messaging
 
     vscode
 

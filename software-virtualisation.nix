@@ -1,21 +1,14 @@
 { config, lib, pkgs, ... }:
 
 {
-  virtualisation = {
-    vmware.host = {
-      enable = false;
-    };
-    virtualbox = {
-      host = {
-        enable = true;
-        enableExtensionPack = true;
-      };
-    };
-    libvirtd = {
-      enable = true;
-    };
-    docker = {
-      enable = true;
-    };
+  virtualisation.vmware.host.enable = false;
+
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
   };
+
+  virtualisation.libvirtd.enable = true;
+
+  virtualisation.docker.enable = true;
 }
