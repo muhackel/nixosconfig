@@ -5,6 +5,7 @@ let
     alacritty
     bambu-studio
     camunda-modeler
+    #cura
     rclone-browser
     libreoffice-fresh
     drawio

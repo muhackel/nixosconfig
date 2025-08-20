@@ -6,7 +6,7 @@
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = [ "nix-command" "flakes" ];
-    max-jobs = 3; # use 3 cores for building packages
+    max-jobs = 2; # use 2 cores for building packages
   };
 
   nix.gc = {
