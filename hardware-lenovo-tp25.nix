@@ -37,7 +37,7 @@ in
   # Enable nvidia Optimus support and install extra hardware modules and or packages
   hardware.nvidiaOptimus.disable = false;
   hardware.graphics.extraPackages = tp25gfxpkgs;
-  environment.systemPackages = tp25pkgs;
+
   hardware.nvidia = {
     open = false;
     prime = {
@@ -62,16 +62,7 @@ in
   };
   # Enable cpu microcode updates
   hardware.cpu.intel.updateMicrocode = true;
-  # Install and enable the systemd services for wwan module
-  systemd = {
-    packages = [
-      pkgs.modemmanager
-    ];
-    services = {
-      ModemManager.wantedBy = [ "multi-user.target" ];
-    };
-    
-  };
+  
 
   # System monitor configuration for the Lenovo TP25 unplugged and docked at home
   services.autorandr = {
@@ -123,4 +114,40 @@ in
         };
       };
     };
+
+  # Install and enable the systemd services for wwan module
+  systemd.packages = [
+    pkgs.modemmanager
+  ];
+  systemd.services = {
+    ModemManager.wantedBy = [ "multi-user.target" ];
+  };
+    
+  networking = {
+    hostName = "HAL9000";
+    hostId = "DEADBEEF";
+    networkmanager = {
+      enable = true;
+    };
+    usePredictableInterfaceNames = false;
+    #proxy = {
+      #default = "http://user:password@proxy:port/";
+      #noProxy = "127.0.0.1,localhost,internal.domain";
+    #};
+    firewall.enable = false;
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    wireplumber.enable = true;
+    pulse.enable = true;
+  };
+
+  services.fstrim.enable = true;
+  services.fwupd.enable = true;
+  
+  services.printing.enable = true;
+
+  environment.systemPackages = tp25pkgs;
 }

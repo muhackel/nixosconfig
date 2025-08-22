@@ -37,4 +37,8 @@
       "libsoup-2.74.3"
     ];
   };
+
+  services.openssh.enable = true;
+  security.sudo.wheelNeedsPassword = false;
+  programs.zsh.enable = true;
 }

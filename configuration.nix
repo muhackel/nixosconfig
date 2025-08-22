@@ -12,21 +12,7 @@ in
     [ # Include the results of the hardware scan.
 
     ];
-  
-  networking = {
-    hostName = "HAL9000";
-    hostId = "DEADBEEF";
-    networkmanager = {
-      enable = true;
-    };
-    usePredictableInterfaceNames = false;
-    #proxy = {
-      #default = "http://user:password@proxy:port/";
-      #noProxy = "127.0.0.1,localhost,internal.domain";
-    #};
-    firewall.enable = false;
-  };
-  
+
   #sound.enable = true;
   services.displayManager.sddm = {
     enable = true;
@@ -48,22 +34,6 @@ in
   services.blueman = {
       enable = false;
   };
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-    };
-    wireplumber = {
-      enable = true;
-    };
-    pulse = {
-      enable = true;
-    };
-  };
-
-  services.printing = {
-    enable = true;
-  };
 
   services.geoclue2 = {
     enable = false;
@@ -75,12 +45,7 @@ in
     enable = true;
     package = pkgs.emacs-gtk;
   };
-  services.fstrim = {
-    enable = true;
-  };
-  services.fwupd = {
-    enable = true;
-  };
+  
   services.fprintd = {
     enable = true;
     tod= {
@@ -120,33 +85,20 @@ in
 
   #programs.light.enable = true;
   
-  programs.git = {
-    enable = true;
-  };
-  programs.evolution = {
-    enable = true;
-  };
-  programs.zsh = {
-    enable = true;
-  };
+  
+  
 
 
   programs.steam = {
     enable = false;
   };
-  programs.direnv.enable = true;
 
   programs.hyprland.enable = true;
 
   location.provider = "manual";
   location.latitude = "48.790457";
   location.longitude = "9.204377";
-  qt = {
-    enable = true;
-    #style = "gtk2";
-    #platformTheme = "qt5ct";
-  };
-
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -158,7 +110,7 @@ in
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -170,7 +122,6 @@ in
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
-  security.sudo.wheelNeedsPassword = false;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

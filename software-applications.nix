@@ -63,4 +63,14 @@ in
     enable = true;
     openFirewall = true;
   };
+  programs.git = {
+    enable = true;
+  };
+  programs.evolution = {
+    enable = true;
+  };
+  programs.direnv = {
+    enable = true;
+  };
+
 }
