@@ -41,4 +41,10 @@
   services.openssh.enable = true;
   security.sudo.wheelNeedsPassword = false;
   programs.zsh.enable = true;
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.hack
+      xkcd-font
+    ];
+  };
 }

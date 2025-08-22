@@ -73,4 +73,12 @@ in
     enable = true;
   };
 
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs-gtk;
+  };
+  services.syncthing = {
+      enable = true;
+  };
+
 }

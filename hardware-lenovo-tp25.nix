@@ -34,6 +34,18 @@ in
   # Additional Kernel Modules for the system
   boot.kernelModules = [ "kvm-intel" "vfio_pci" "vfio" "vfio_iommu_type1" ];
   boot.extraModulePackages = [ ];
+
+  location.provider = "manual";
+  location.latitude = "48.790457";
+  location.longitude = "9.204377";
+  services.geoclue2 = {
+    enable = false;
+    enableWifi = true;
+    enableModemGPS = true;
+  };
+
+
+
   # Enable nvidia Optimus support and install extra hardware modules and or packages
   hardware.nvidiaOptimus.disable = false;
   hardware.graphics.extraPackages = tp25gfxpkgs;

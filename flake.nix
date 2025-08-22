@@ -33,6 +33,7 @@
                       ./software-ptls.nix
                       ./software-hamradio.nix
                       ./software-virtualisation.nix
+                      ./software-wayland.nix
                       ./software-xserver.nix
           ];
       };
