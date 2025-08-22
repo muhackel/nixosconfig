@@ -8,6 +8,7 @@ let
   gnspkgs = with pkgs; [
     gns3-gui
     inetutils
+    ciscoPacketTracer8
   ];
   networkingpkgs = with pkgs; [
     arp-scan
@@ -27,6 +28,8 @@ let
   ];
 in
 {
+
+
   environment.systemPackages = gnspkgs ++ networkingpkgs;
 
   services.atftpd.enable = true;
