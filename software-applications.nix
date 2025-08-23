@@ -56,6 +56,8 @@ let
   devpackages = with pkgs; [
     cmake
     python3
+    ghc
+    #haskellPackages.ghcup 
   ];
 in
 {
