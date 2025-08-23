@@ -2,7 +2,7 @@
   description = "System Configuration Flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     # use the following for unstable:
     # nixpkgs.url = "nixpkgs/nixos-unstable";
