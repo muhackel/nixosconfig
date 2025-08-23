@@ -53,9 +53,12 @@ let
     ferdium
     discord
   ];
+  devpackages = with pkgs; [
+    cmake
+  ];
 in
 {
-  environment.systemPackages = apppkgs ++ clipkgs ;
+  environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages;
   programs.vscode = {
     enable = true;
   };
