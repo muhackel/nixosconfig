@@ -55,6 +55,7 @@ let
   ];
   devpackages = with pkgs; [
     cmake
+    python3
   ];
 in
 {
