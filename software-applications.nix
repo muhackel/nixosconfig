@@ -5,14 +5,22 @@ let
     alacritty
     bambu-studio
     camunda-modeler
+    darktable
+    eagle
+    freefilesync
+    inkscape
     #cura
     rclone-browser
     libreoffice-fresh
     drawio
     github-desktop
     google-chrome
+    ioquake3
+    kitty
     mpv
+    meld
     freecad
+    gpu-viewer
     gparted
     #pamixer
     #pasystray
@@ -20,6 +28,11 @@ let
     gimp3
     yed
     virt-manager
+    adoptopenjdk-icedtea-web
+    remmina
+    rpi-imager
+    transmission_4-qt6
+    #unigine-heaven
   ];
   clipkgs = with pkgs; [
     alsa-utils
@@ -28,7 +41,9 @@ let
     aspellDicts.en
     broot
     caffeine-ng
+    plantuml
     dysk
+    minicom
     fwupd
     git
     glxinfo
@@ -41,7 +56,9 @@ let
     nixos-generators
     pciutils
     ranger
+    glances
     rclone
+    hexyl
     unzip
     usbutils
     wget
@@ -52,11 +69,13 @@ let
     signal-desktop
     ferdium
     discord
+    hexchat
   ];
   devpackages = with pkgs; [
     cmake
     python3
     ghc
+    #haskellPackages.hls
     #haskellPackages.ghcup 
   ];
 in
@@ -77,6 +96,10 @@ in
   };
   programs.direnv = {
     enable = true;
+  };
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
   };
 
   services.emacs = {

@@ -7,6 +7,7 @@ let
     arandr
   ];
   xmonadpkgs = with pkgs; [
+    feh
     alacritty
     conky
     dzen2
