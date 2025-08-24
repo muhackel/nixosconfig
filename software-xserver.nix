@@ -51,5 +51,6 @@ in
         enable = true;
   };
 
-  environment.systemPackages = xsupportpkgs ++ xmonadpkgs;
+  # only add these packages when the X server is enabled
+  environment.systemPackages = lib.optionals config.services.xserver.enable (xsupportpkgs ++ xmonadpkgs);
 }

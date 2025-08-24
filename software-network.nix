@@ -47,6 +47,13 @@ in
     #port = 5201;
   };
 
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true;
+    usbmon.enable = true;
+    package = pkgs.wireshark-qt;
+  };
+
   programs.iftop.enable = true;
 
   programs.mtr.enable = true;
