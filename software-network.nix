@@ -35,8 +35,8 @@ in
   services.atftpd.enable = true;
 
   services.gns3-server = {
-    enable = true;
-    dynamips.enable = true;
+    enable = false;
+    dynamips.enable = false;
     ubridge.enable = true;
     vpcs.enable = true;
   };

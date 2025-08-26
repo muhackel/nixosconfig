@@ -3,7 +3,7 @@ let
   apppkgs = with pkgs; [
     audacity
     alacritty
-    bambu-studio
+    #bambu-studio
     camunda-modeler
     darktable
     eagle
@@ -73,6 +73,7 @@ let
   ];
   devpackages = with pkgs; [
     cmake
+    automake
     python3
     ghc
     #haskellPackages.hls
@@ -99,7 +100,7 @@ in
   };
   programs.obs-studio = {
     enable = true;
-    enableVirtualCamera = true;
+    enableVirtualCamera = false;
   };
 
   services.emacs = {
