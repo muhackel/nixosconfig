@@ -9,8 +9,8 @@ let
 in
 {
   nixpkgs.overlays = [ 
-    (import ./overlays/osm-gps-map.nix) 
-    (import ./overlays/ciscoPacketTracer8/default.nix)
+    (import ./overlays/osm-gps-map) 
+    (import ./overlays/ciscoPacketTracer8)
     #(import ./overlays/v4l2loopback-fix.nix)
     ];
 
