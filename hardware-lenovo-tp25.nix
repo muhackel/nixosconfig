@@ -44,6 +44,7 @@ in
     enableModemGPS = true;
   };
 
+  powerManagement.enable = true;
 
 
   # Enable nvidia Optimus support and install extra hardware modules and or packages
