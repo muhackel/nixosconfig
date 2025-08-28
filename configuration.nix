@@ -8,7 +8,6 @@ let
   usedOverlays = [ 
     (import ./overlays/osm-gps-map) 
     (import ./overlays/ciscoPacketTracer8)
-    #(import ./overlays/v4l2loopback-fix.nix)
     ];
   usedFonts = with pkgs; [
       nerd-fonts.hack
