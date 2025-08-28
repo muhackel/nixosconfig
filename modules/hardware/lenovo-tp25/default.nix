@@ -14,7 +14,7 @@ let
 in
 {
   imports = [
-
+    ./boot-tp25.nix
   ];
   # Additional filesystems supported by the system
   boot.supportedFilesystems = [ "zfs" ];

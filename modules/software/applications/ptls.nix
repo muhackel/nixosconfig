@@ -13,7 +13,7 @@ let
     xorg.libX11
     libunwind
   ];
-  configtool = pkgs.callPackage ./packages/configtool { };
+  configtool = pkgs.callPackage ../../../packages/configtool { };
 in
 {
   programs.nix-ld = {

@@ -5,7 +5,7 @@
   {
     fancy_us = {
       description = "English (US) Apple";
-      symbolsFile = pkgs.writeText "custom-apple.xkb" (builtins.readFile ./sources/xkb/custom-apple-symbols.xkb);
+      symbolsFile = pkgs.writeText "custom-apple.xkb" (builtins.readFile ../../../sources/xkb/custom-apple-symbols.xkb);
       languages = [ "en" ]; 
     };
   };
