@@ -46,6 +46,7 @@ let
     minicom
     fwupd
     git
+    gitAndTools.git-lfs
     glxinfo
     htop
     nvtopPackages.full
