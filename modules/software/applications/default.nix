@@ -1,31 +1,31 @@
 { config, lib, pkgs, ... }:
 let
   apppkgs = with pkgs; [
-    audacity
+    #audacity
     alacritty
     #bambu-studio
     camunda-modeler
-    darktable
+    #darktable
     eagle
     freefilesync
-    inkscape
+    #inkscape
     #cura
     rclone-browser
     libreoffice-fresh
-    drawio
+    #drawio
     github-desktop
     google-chrome
     ioquake3
     kitty
     mpv
     meld
-    freecad
+    #freecad
     gpu-viewer
     gparted
     #pamixer
     #pasystray
     vscode
-    gimp3
+    #gimp3
     yed
     virt-manager
     adoptopenjdk-icedtea-web
@@ -111,5 +111,12 @@ in
   services.syncthing = {
       enable = true;
   };
-
+  services.flatpak.enable = true;
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
 }
