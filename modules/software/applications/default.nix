@@ -100,7 +100,7 @@ in
   };
   programs.obs-studio = {
     enable = true;
-    enableVirtualCamera = false;
+    enableVirtualCamera = true;
   };
 
   services.emacs = {
