@@ -17,4 +17,16 @@ in
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="6089", ENV{ID_SOFTWARE_RADIO}="1", MODE="0660", GROUP="ham"
 
   '';
+  systemd.user.services.virtual-sdr-sink = {
+    description = "Create PipeWire virtual sink for SDR (VirtualSDR)";
+    after = [ "pipewire.service" ];
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = ''
+        ${pkgs.pulseaudio}/bin/pactl load-module module-null-sink sink_name=VirtualSDR sink_properties=device.description=VirtualSDR || true
+      '';
+      RemainAfterExit = "yes";
+    };
+  };
 }
