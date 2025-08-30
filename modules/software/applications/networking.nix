@@ -53,6 +53,7 @@ in
     usbmon.enable = true;
     package = pkgs.wireshark-qt;
   };
+  users.users.muhackel.extraGroups = [ "wireshark" ];
 
   programs.iftop.enable = true;
 
