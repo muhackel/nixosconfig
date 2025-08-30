@@ -1,31 +1,30 @@
 { config, lib, pkgs, ... }:
 let
   apppkgs = with pkgs; [
-    #audacity
+    audacity
     alacritty
-    #bambu-studio
     camunda-modeler
-    #darktable
+    darktable
     eagle
     freefilesync
-    #inkscape
-    #cura
+    inkscape
     rclone-browser
     libreoffice-fresh
-    #drawio
+    drawio
     github-desktop
     google-chrome
     ioquake3
     kitty
+    kicad
     mpv
     meld
-    #freecad
+    freecad
     gpu-viewer
     gparted
     #pamixer
     #pasystray
     vscode
-    #gimp3
+    gimp3
     yed
     virt-manager
     adoptopenjdk-icedtea-web
