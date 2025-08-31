@@ -33,7 +33,7 @@ in
   environment.systemPackages = gnspkgs ++ networkingpkgs;
 
   services.atftpd.enable = true;
-
+### BROKEN Will not build! stuck at building gns3-server-2.2.51 (pytestCheckPhase): tests/controller/test_notification.py ......                             [ 52%]
   services.gns3-server = {
     enable = false;
     dynamips.enable = false;

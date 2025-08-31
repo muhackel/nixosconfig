@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   apppkgs = with pkgs; [
+    bambu-studio
+    # BROKEN cura
     audacity
     alacritty
     camunda-modeler
