@@ -80,7 +80,7 @@ in
 
   # System monitor configuration for the Lenovo TP25 unplugged and docked at home
   services.autorandr = {
-      enable = true;
+      enable = config.services.xserver.enable;
       matchEdid = true;
       profiles = {
         "undocked" = {
