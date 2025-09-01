@@ -1,15 +1,16 @@
 { config, lib, pkgs, ... }:
 let
   # Extra Packages for the Lenovo TP25 hardware as installed packages
-  tp25pkgs = with pkgs; [ 
-    vdpauinfo 
-    libva-utils 
-    modem-manager-gui 
+  tp25pkgs = with pkgs; [
+    intel-gpu-tools
+    vdpauinfo
+    libva-utils
+    modem-manager-gui
   ];
   # Extra Graphics Packages for the Lenovo TP25 hardware as installed hardware modules
-  tp25gfxpkgs = with pkgs; [ 
-    intel-media-driver 
-    libvdpau-va-gl 
+  tp25gfxpkgs = with pkgs; [
+    intel-media-driver
+    libvdpau-va-gl
   ];
 in
 {
