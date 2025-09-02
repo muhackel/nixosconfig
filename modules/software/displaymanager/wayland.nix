@@ -4,6 +4,11 @@ let
     kdePackages.yakuake
     kdePackages.filelight
     kdePackages.partitionmanager
+    kdePackages.ksystemlog
+    kdePackages.krdc
+    # BROKEN 
+    #kdePackages.umbrello
+    kdePackages.marble
   ];
 in
 {
