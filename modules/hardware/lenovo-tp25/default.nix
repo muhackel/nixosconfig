@@ -36,6 +36,8 @@ in
   boot.kernelModules = [ "kvm-intel" "vfio_pci" "vfio" "vfio_iommu_type1" ];
   boot.extraModulePackages = [ ];
 
+  #boot.kernelPackages = pkgs.linuxPackages_6_16;
+
   location.provider = "manual";
   location.latitude = "48.790457";
   location.longitude = "9.204377";
