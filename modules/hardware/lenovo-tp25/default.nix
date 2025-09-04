@@ -48,7 +48,13 @@ in
   };
 
   powerManagement.enable = true;
-
+  services.undervolt = {
+    enable = true;
+    coreOffset = -75;
+    analogioOffset = -50;
+    gpuOffset = -50;
+    uncoreOffset = -75;
+  };
 
   # Enable nvidia Optimus support and install extra hardware modules and or packages
   hardware.nvidiaOptimus.disable = false;
