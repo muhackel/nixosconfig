@@ -16,6 +16,7 @@ in
 {
   imports = [
     ./boot-tp25.nix
+    ./hardware-configuration.nix
   ];
   # Additional filesystems supported by the system
   boot.supportedFilesystems = [ "zfs" ];
