@@ -41,7 +41,6 @@ let
     aspellDicts.de
     aspellDicts.en
     broot
-    caffeine-ng
     plantuml
     dysk
     minicom
