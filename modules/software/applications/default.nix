@@ -23,8 +23,6 @@ let
     freecad
     gpu-viewer
     gparted
-    #pamixer
-    #pasystray
     vscode
     gimp3
     yed
@@ -33,7 +31,6 @@ let
     remmina
     rpi-imager
     transmission_4-qt6
-    #unigine-heaven
   ];
   clipkgs = with pkgs; [
     alsa-utils
@@ -66,20 +63,8 @@ let
     plantuml
     texliveFull
   ];
-  communicationpkgs = with pkgs; [
-    signal-desktop
-    ferdium
-    discord
-    hexchat
-  ];
-  devpackages = with pkgs; [
-    cmake
-    automake
-    python3
-    ghc
-    #haskellPackages.hls
-    #haskellPackages.ghcup 
-  ];
+  communicationpkgs = with pkgs; [ signal-desktop ferdium discord hexchat teamspeak3 ];
+  devpackages = with pkgs; [ cmake automake python3 ghc ];
 in
 {
   environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages;

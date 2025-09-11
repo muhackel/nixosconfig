@@ -16,9 +16,14 @@
   };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, ... }:
     let
       lib = nixpkgs.lib;
     in {
@@ -40,8 +45,14 @@
                       ./modules/software/applications/ptls.nix
                       ./modules/software/virtualisation
                       ./modules/software/displaymanager
+                      home-manager.nixosModules.home-manager
+                      {
+                        home-manager.useGlobalPkgs = true;
+                        home-manager.useUserPackages = true;
+                        # home-manager.users.muhackel = import ./modules/user/muhackel/home.nix;
+                      }
           ];
+        };
       };
     };
-  };
 }
