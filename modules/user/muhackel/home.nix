@@ -3,7 +3,7 @@ let
 
 in
 {
-  home.stateVersion = "25.11";
+  home.stateVersion = config.system.stateVersion;
 
 
 }

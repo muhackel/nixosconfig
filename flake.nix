@@ -30,7 +30,8 @@
       nixosConfigurations = {
         HAL9000 = lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./configuration.nix 
+          modules = [ { system.stateVersion = "25.11"; }
+                      ./configuration.nix
                       ./modules/hardware/lenovo-tp25
                       ./modules/hardware/bluetooth
                       ./modules/hardware/keyboard

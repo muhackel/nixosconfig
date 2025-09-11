@@ -35,11 +35,6 @@ in
   services.openssh.enable = true;
   security.sudo.wheelNeedsPassword = false;
   programs.zsh.enable = true;
-
-  
-
-
-
-  system.stateVersion = "25.11"; # Did you read the comment?
+  #system.stateVersion = config.system.stateVersion;
 }
 
