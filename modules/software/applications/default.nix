@@ -103,6 +103,9 @@ in
     enable = true;
     enableVirtualCamera = true;
   };
+  programs.java = {
+    enable = true;
+  };
 
   services.emacs = {
     enable = true;
