@@ -31,6 +31,7 @@ let
     remmina
     rpi-imager
     transmission_4-qt6
+    obsidian
   ];
   clipkgs = with pkgs; [
     alsa-utils
