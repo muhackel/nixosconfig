@@ -37,6 +37,8 @@
                       ./modules/hardware/keyboard
                       ./modules/hardware/mouse/logitech-wireless
                       ./modules/hardware/printer
+                      ./modules/hardware/printer/HP
+                      ./modules/hardware/printer/HP/hplj4100
                       ./modules/user/muhackel
                       ./modules/software/fonts
                       ./modules/software/localisation
