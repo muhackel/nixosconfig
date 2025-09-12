@@ -60,7 +60,6 @@ let
     unzip
     usbutils
     wget
-    plantuml
     texliveFull
   ];
   communicationpkgs = with pkgs; [ signal-desktop ferdium discord hexchat teamspeak3 ];
