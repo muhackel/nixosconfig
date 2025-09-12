@@ -36,6 +36,7 @@
                       ./modules/hardware/bluetooth
                       ./modules/hardware/keyboard
                       ./modules/hardware/mouse/logitech-wireless
+                      ./modules/hardware/printer
                       ./modules/user/muhackel
                       ./modules/software/fonts
                       ./modules/software/localisation

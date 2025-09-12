@@ -170,7 +170,7 @@ in
   services.fstrim.enable = true;
   services.fwupd.enable = true;
   
-  services.printing.enable = true;
+
 
   environment.systemPackages = tp25pkgs;
 }
