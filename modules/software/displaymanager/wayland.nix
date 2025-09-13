@@ -9,6 +9,7 @@ let
     # BROKEN 
     #kdePackages.umbrello
     kdePackages.marble
+    polonium
   ];
 in
 {
