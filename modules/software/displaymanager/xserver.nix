@@ -47,9 +47,6 @@ in
     ];
   };
 
-  services.libinput = {
-        enable = true;
-  };
 
   # only add these packages when the X server is enabled
   environment.systemPackages = lib.optionals config.services.xserver.enable (xsupportpkgs ++ xmonadpkgs);
