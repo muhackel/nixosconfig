@@ -30,6 +30,9 @@
       nixosConfigurations = {
         HAL9000 = lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = {
+            wantsXserver = false;
+          };
           modules = [ { system.stateVersion = "25.11"; }
                       ./configuration.nix
                       ./modules/hardware/lenovo-tp25

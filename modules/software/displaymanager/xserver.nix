@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, wantsXserver, ... }:  # wantsXserver als Parameter hinzufügen
 let
   xsupportpkgs = with pkgs; [
     xorg.xinput
@@ -28,25 +28,24 @@ let
 in
 {
   services.xserver = {
-    enable = false;
+    enable = wantsXserver;  # Variable verwenden, um X-Server zu aktivieren/deaktivieren
     enableCtrlAltBackspace = true;
 
     windowManager.xmonad = {
-        enable = config.services.xserver.enable;
-        enableContribAndExtras = true;
-        enableConfiguredRecompile = true;
-        config = ./sources/xmonad/xmonad.hs;
+      enable = config.services.xserver.enable;  # Abhängig von enable machen
+      enableContribAndExtras = true;
+      enableConfiguredRecompile = true;
+      config = ./sources/xmonad/xmonad.hs;
     };
   };
 
   services.picom = {
-    enable = config.services.xserver.enable;
+    enable = config.services.xserver.enable;  # Abhängig von enable machen
     opacityRules = [
       "80:class_g = 'Alacritty' && focused"
       "80:class_g = 'Alacritty' && !focused"
     ];
   };
-
 
   # only add these packages when the X server is enabled
   environment.systemPackages = lib.optionals config.services.xserver.enable (xsupportpkgs ++ xmonadpkgs);
