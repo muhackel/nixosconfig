@@ -32,6 +32,7 @@
           system = "x86_64-linux";
           specialArgs = {
             wantsXserver = false;
+            wantsWayland = true;
           };
           modules = [ { system.stateVersion = "25.11"; }
                       ./configuration.nix

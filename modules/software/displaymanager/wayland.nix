@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, wantsWayland, ... }:  # wantsWayland als Parameter hinzufügen
 let
   waylandpkgs = with pkgs; [
     kdePackages.yakuake
@@ -20,5 +20,5 @@ in
   services.desktopManager.plasma6 = {
     enable = true;
   };
-  environment.systemPackages = waylandpkgs;
+  environment.systemPackages = lib.optionals wantsWayland waylandpkgs;
 }
