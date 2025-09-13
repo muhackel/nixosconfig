@@ -2,66 +2,67 @@
   config,
   lib,
   pkgs,
+  wantsNetworking,
   ...
 }:
-let
-  gnspkgs = with pkgs; [
-    gns3-gui
-    inetutils
-    ciscoPacketTracer8
-  ];
-  networkingpkgs = with pkgs; [
-    arp-scan
-    ethtool
-    ipcalc
-    netcat-gnu
-    inetutils
-    iputils
-    iptraf-ng
-    kismet
-    nbtscan
-    netdiscover
-    netsniff-ng
-    nmap
-    nomachine-client
-    zenmap
-  ];
-in
-{
+lib.mkIf wantsNetworking {
+  let
+    gnspkgs = with pkgs; [
+      gns3-gui
+      inetutils
+      ciscoPacketTracer8
+    ];
+    networkingpkgs = with pkgs; [
+      arp-scan
+      ethtool
+      ipcalc
+      netcat-gnu
+      inetutils
+      iputils
+      iptraf-ng
+      kismet
+      nbtscan
+      netdiscover
+      netsniff-ng
+      nmap
+      nomachine-client
+      zenmap
+    ];
+  in
+  {
+    environment.systemPackages = gnspkgs ++ networkingpkgs;
 
+    services.atftpd.enable = true;
 
-  environment.systemPackages = gnspkgs ++ networkingpkgs;
+    services.gns3-server = {
+      enable = true;
+      dynamips.enable = false;
+      ubridge.enable = true;
+      vpcs.enable = true;
+    };
 
-  services.atftpd.enable = true;
+    services.iperf3 = {
+      enable = true;
+      openFirewall = true;
+      #port = 5201;
+    };
 
-  services.gns3-server = {
-    enable = true;
-    dynamips.enable = false;
-    ubridge.enable = true;
-    vpcs.enable = true;
-  };
+    programs.wireshark = {
+      enable = true;
+      dumpcap.enable = true;
+      usbmon.enable = true;
+      package = pkgs.wireshark-qt;
+    };
+    users.users.muhackel.extraGroups = [ "wireshark" ];
 
-  services.iperf3 = {
-    enable = true;
-    openFirewall = true;
-    #port = 5201;
-  };
+    programs.iftop.enable = true;
 
-  programs.wireshark = {
-    enable = true;
-    dumpcap.enable = true;
-    usbmon.enable = true;
-    package = pkgs.wireshark-qt;
-  };
-  users.users.muhackel.extraGroups = [ "wireshark" ];
+    programs.mtr.enable = true;
 
-  programs.iftop.enable = true;
-
-  programs.mtr.enable = true;
-
-  programs.winbox = {
-    enable = true;
-    openFirewall = true;
-    package = pkgs.winbox4;
-  };
+    programs.winbox = {
+      enable = true;
+      openFirewall = true;
+      package = pkgs.winbox4;
+    };
+  }
 }

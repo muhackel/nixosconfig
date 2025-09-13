@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, wantsHamradio, ... }:
 let
   hampkgs = with pkgs; [
     hackrf
@@ -6,7 +6,7 @@ let
     wsjtx
   ];
 in
-{
+lib.mkIf wantsHamradio {
   users.groups.ham = {};
   users.users.muhackel.extraGroups = [ "ham" ];
   environment.systemPackages = hampkgs;

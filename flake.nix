@@ -33,6 +33,10 @@
           specialArgs = {
             wantsXserver = false;
             wantsWayland = true;
+            wantsHamradio = true;
+            wantsNetworking = true;
+            wantsNfc = true;
+            wantsPtls = true;
           };
           modules = [ { system.stateVersion = "25.11"; }
                       ./configuration.nix
@@ -47,10 +51,6 @@
                       ./modules/software/fonts
                       ./modules/software/localisation
                       ./modules/software/applications
-                      ./modules/software/applications/hamradio.nix
-                      ./modules/software/applications/networking.nix
-                      ./modules/software/applications/nfc.nix
-                      ./modules/software/applications/ptls.nix
                       ./modules/software/virtualisation
                       ./modules/software/displaymanager
                       #home-manager.nixosModules.home-manager

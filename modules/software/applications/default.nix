@@ -1,5 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, wantsHamradio, wantsNetworking, wantsNfc, wantsPtls, ... }:
 let
+  # Imports der spezialisierten Module basierend auf wants-Variablen
+  imports = lib.optionals wantsHamradio [ ./hamradio.nix ]
+           ++ lib.optionals wantsNetworking [ ./networking.nix ]
+           ++ lib.optionals wantsNfc [ ./nfc.nix ]
+           ++ lib.optionals wantsPtls [ ./ptls.nix ];
+
   apppkgs = with pkgs; [
     bambu-studio
     # BROKEN cura
