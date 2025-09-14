@@ -40,13 +40,7 @@
           };
           modules = [ { system.stateVersion = "25.11"; }
                       ./configuration.nix
-                      ./modules/hardware/lenovo-tp25
-                      ./modules/hardware/bluetooth
-                      ./modules/hardware/keyboard
-                      ./modules/hardware/mouse/logitech-wireless
-                      ./modules/hardware/printer
-                      ./modules/hardware/printer/HP
-                      ./modules/hardware/printer/HP/hplj4100
+                      ./modules/host/HAL9000
                       ./modules/user/muhackel
                       ./modules/software/fonts
                       ./modules/software/localisation
