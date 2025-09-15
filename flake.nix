@@ -33,6 +33,7 @@
           specialArgs = {
             wantsXserver = false;
             wantsWayland = true;
+            wantsPlasma6 = true;
             wantsHamradio = true;
             wantsNetworking = true;
             wantsNfc = true;
