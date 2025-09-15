@@ -8,6 +8,7 @@ let
   usedOverlays = [ 
     (import ./overlays/osm-gps-map) 
     (import ./overlays/ciscoPacketTracer8)
+    (import ./overlays/proxmark3)
   ];
   usedPermittedInsecurePackages = [
       "libxml2-2.13.8"
