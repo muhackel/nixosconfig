@@ -47,12 +47,12 @@
                       ./modules/software/applications
                       ./modules/software/virtualisation
                       ./modules/software/displaymanager
-                      #home-manager.nixosModules.home-manager
-                      #{
-                      #  home-manager.useGlobalPkgs = true;
-                      #  home-manager.useUserPackages = true;
-                      #  home-manager.users.muhackel = import ./modules/user/muhackel/home.nix;
-                      #}
+                      home-manager.nixosModules.home-manager
+                      {
+                        home-manager.useGlobalPkgs = true;
+                        home-manager.useUserPackages = true;
+                        home-manager.users.muhackel = import ./modules/user/muhackel/home.nix;
+                      }
           ];
         };
       };
