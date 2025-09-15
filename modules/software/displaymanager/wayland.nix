@@ -1,6 +1,6 @@
 { config, lib, pkgs, wantsWayland, wantsPlasma6, ... }:  # wantsWayland als Parameter hinzufügen
 let
-  waylandpkgs = with pkgs; [
+  plasmapkgs = with pkgs; [
     kdePackages.yakuake
     kdePackages.filelight
     kdePackages.partitionmanager
@@ -9,7 +9,7 @@ let
     # BROKEN 
     #kdePackages.umbrello
     kdePackages.marble
-    polonium
+    kdePackages.krohnkite
   ];
 in
 {
@@ -21,5 +21,5 @@ in
   services.desktopManager.plasma6 = {
     enable = wantsPlasma6;
   };
-  environment.systemPackages = lib.optionals wantsPlasma6 waylandpkgs;
+  environment.systemPackages = lib.optionals wantsPlasma6 plasmapkgs;
 }
