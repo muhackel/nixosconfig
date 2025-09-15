@@ -1,14 +1,14 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, wantsVMwareHost, wantsVirtualbox, wantsLibvirt, wantsDocker, ... }:
 
 {
-  virtualisation.vmware.host.enable = false;
+  virtualisation.vmware.host.enable = wantsVMwareHost;
 
   virtualisation.virtualbox.host = {
-    enable = true;
+    enable = wantsVirtualbox;
     enableExtensionPack = true;
   };
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.enable = wantsLibvirt;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker.enable = wantsDocker;
 }

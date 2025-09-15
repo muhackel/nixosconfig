@@ -37,6 +37,10 @@
             wantsNetworking = true;
             wantsNfc = true;
             wantsPtls = true;
+            wantsVMwareHost = false;
+            wantsDocker = true;
+            wantsVirtualbox = true;
+            wantsLibvirt = true;
           };
           modules = [ { system.stateVersion = "25.11"; }
                       ./configuration.nix
