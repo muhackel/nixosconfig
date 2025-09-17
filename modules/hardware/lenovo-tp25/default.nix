@@ -19,7 +19,7 @@ in
     ./hardware-configuration.nix
   ];
   # Additional filesystems supported by the system
-  boot.supportedFilesystems = [ "zfs" ];
+  # boot.supportedFilesystems = [ "zfs" ];
   # Configuration of the Boot Loader
   boot.loader = {
     timeout = null;
@@ -32,10 +32,12 @@ in
   };
   # Additional Kernel Modules for the initrd (available during boot)
   boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "zfs" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod"];
   # Additional Kernel Modules for the system
   boot.kernelModules = [ "kvm-intel" "vfio_pci" "vfio" "vfio_iommu_type1" ];
   boot.extraModulePackages = [ ];
+  boot.resumeDevice = "/dev/disk/by-uuid/5ceff991-6a93-42b9-9c14-c241dd958a94";
+  #boot.zfs.allowHibernation = true;
 
   #boot.kernelPackages = pkgs.linuxPackages_6_16;
 
