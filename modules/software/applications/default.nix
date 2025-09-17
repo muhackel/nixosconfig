@@ -64,7 +64,7 @@ let
     texliveFull
   ];
   communicationpkgs = with pkgs; [ signal-desktop ferdium discord hexchat teamspeak3 ];
-  devpackages = with pkgs; [ cmake automake python3 ghc ];
+  devpackages = with pkgs; [ cmake automake python3 ghc jdk21 ];
 in
 {
   # Imports der spezialisierten Module basierend auf wants-Variablen
@@ -94,7 +94,7 @@ in
     enableVirtualCamera = true;
   };
   programs.java = {
-    enable = true;
+    enable = false;
   };
 
   services.emacs = {
