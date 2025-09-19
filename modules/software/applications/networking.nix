@@ -6,10 +6,12 @@
   ...
 }:
 let
+  gns3extras = pkgs.callPackage ../../../packages/gns3extras { };
   gnspkgs = with pkgs; [
     gns3-gui
     inetutils
     ciscoPacketTracer8
+    gns3extras
   ];
   networkingpkgs = with pkgs; [
     arp-scan
@@ -31,6 +33,18 @@ let
 lib.mkIf wantsNetworking 
 {
   environment.systemPackages = gnspkgs ++ networkingpkgs;
+
+  # Run the gns3extras activation script on system activation so the
+  # symlinks in /var/lib/gns3 are created/updated automatically. We keep
+  # the invocation tolerant (|| true) so activation won't fail the whole
+  # activation if something about gns3 extras can't be applied.
+  system.activationScripts.gns3extras = {
+    text = ''
+      #!/bin/sh
+      # invoke activation script shipped inside the gns3extras package
+      ${gns3extras}/bin/gns3-extras-activate || true
+    '';
+  };
 
   services.atftpd.enable = true;
 
