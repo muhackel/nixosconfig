@@ -1,5 +1,6 @@
 { config, lib, pkgs, wantsPtls, ... }:
 let
+  configtool = pkgs.callPackage ../../../packages/configtool { };
   ptlspkgs = with pkgs; [
     configtool
   ];
@@ -13,7 +14,6 @@ let
     xorg.libX11
     libunwind
   ];
-  configtool = pkgs.callPackage ../../../packages/configtool { };
 in
 lib.mkIf wantsPtls 
 {
