@@ -64,7 +64,7 @@ let
     texliveFull
   ];
   communicationpkgs = with pkgs; [ signal-desktop ferdium discord hexchat teamspeak3 ];
-  devpackages = with pkgs; [ cmake automake python3 ghc jdk21 ];
+  devpackages = with pkgs; [ cmake automake python3 ghc jdk21 nodePackages.nodejs ];
 in
 {
   # Imports der spezialisierten Module basierend auf wants-Variablen
