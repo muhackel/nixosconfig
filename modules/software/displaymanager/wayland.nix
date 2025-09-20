@@ -10,6 +10,7 @@ let
     #kdePackages.umbrello
     kdePackages.marble
     kdePackages.krohnkite
+    kdePackages.kalgebra
   ];
 in
 {
