@@ -12,6 +12,9 @@ let
     inkscape
     rclone-browser
     libreoffice-fresh
+    librecad
+    qcad
+    qdirstat
     drawio
     github-desktop
     google-chrome
@@ -27,11 +30,15 @@ let
     gimp3
     yed
     virt-manager
+    virt-viewer
     adoptopenjdk-icedtea-web
     remmina
     rpi-imager
     transmission_4-qt6
     obsidian
+    veracrypt
+    vlc
+    qutebrowser
   ];
   clipkgs = with pkgs; [
     alsa-utils
@@ -62,6 +69,10 @@ let
     usbutils
     wget
     texliveFull
+    yt-dlp
+    yewtube
+    ventoy-full
+    testdisk
   ];
   communicationpkgs = with pkgs; [ signal-desktop ferdium discord hexchat teamspeak3 ];
   devpackages = with pkgs; [ cmake automake python3 ghc jdk21 nodePackages.nodejs ];

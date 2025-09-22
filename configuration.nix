@@ -14,6 +14,7 @@ let
       "libxml2-2.13.8"
       "libsoup-2.74.3"
       "qtwebengine-5.15.19"
+      "ventoy-1.1.07"
     ];
 in
 {
