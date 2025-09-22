@@ -172,6 +172,8 @@ in
   services.fstrim.enable = true;
   services.fwupd.enable = true;
   
+  hardware.nfc-nci.enable = true;
+  services.pcscd.enable = true;
 
 
   environment.systemPackages = tp25pkgs;
