@@ -37,6 +37,8 @@ in
   services.openssh.enable = true;
   security.sudo.wheelNeedsPassword = false;
   programs.zsh.enable = true;
+  services.fstrim.enable = true;
+  services.fwupd.enable = true;
   #system.stateVersion = config.system.stateVersion;
 }
 

@@ -15,21 +15,14 @@ let
 in
 {
   imports = [
+    ./boot.nix
     ./boot-tp25.nix
     ./hardware-configuration.nix
+    ./nfc.nix
+    ./powermgmt.nix
   ];
   # Additional filesystems supported by the system
   # boot.supportedFilesystems = [ "zfs" ];
-  # Configuration of the Boot Loader
-  boot.loader = {
-    timeout = null;
-    systemd-boot = {
-      enable = true;
-      memtest86.enable = true;
-      netbootxyz.enable = true;
-    };
-    efi.canTouchEfiVariables = true;
-  };
   # Additional Kernel Modules for the initrd (available during boot)
   boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod"];
@@ -48,15 +41,6 @@ in
     enable = false;
     enableWifi = true;
     enableModemGPS = true;
-  };
-
-  powerManagement.enable = true;
-  services.undervolt = {
-    enable = true;
-    coreOffset = -75;
-    analogioOffset = -75;
-    gpuOffset = -75;
-    uncoreOffset = -75;
   };
 
   # Enable nvidia Optimus support and install extra hardware modules and or packages
@@ -168,12 +152,6 @@ in
     wireplumber.enable = true;
     pulse.enable = true;
   };
-
-  services.fstrim.enable = true;
-  services.fwupd.enable = true;
-  
-  hardware.nfc-nci.enable = true;
-  services.pcscd.enable = true;
   # Validity fingerprint reader configuration is totally broken under linux ... it needs aditional python-validity to exchange TLS Keys with the sensor
   # services.fprintd.enable = true;
   # users.groups.plugdev = {};
@@ -181,7 +159,5 @@ in
   # services.udev.extraRules = ''
   #   SUBSYSTEM=="usb", ATTRS{idVendor}=="138a", ATTRS{idProduct}=="0097", MODE="0660", GROUP="plugdev"
   # '';
-
-
   environment.systemPackages = tp25pkgs;
 }
