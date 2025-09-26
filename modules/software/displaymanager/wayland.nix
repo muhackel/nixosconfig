@@ -11,6 +11,7 @@ let
     kdePackages.marble
     kdePackages.krohnkite
     kdePackages.kalgebra
+    kdePackages.sddm-kcm
   ];
 in
 {

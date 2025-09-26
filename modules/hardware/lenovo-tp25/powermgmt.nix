@@ -6,7 +6,7 @@
     enable = true;
     coreOffset = -75;
     analogioOffset = -75;
-    gpuOffset = -75;
+    gpuOffset = -70;
     uncoreOffset = -75;
   };
 }
