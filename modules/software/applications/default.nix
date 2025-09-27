@@ -1,4 +1,4 @@
-{ config, lib, pkgs, wantsHamradio, wantsNetworking, wantsNfc, wantsPtls, ... }:
+{ config, lib, pkgs, wantsHamradio, wantsNetworking, wantsNfc, wantsPtls, wantsGames, ... }:
 let
   apppkgs = with pkgs; [
     bambu-studio
@@ -82,7 +82,8 @@ in
   imports = lib.optionals wantsHamradio [ ./hamradio.nix ]
            ++ lib.optionals wantsNetworking [ ./networking.nix ]
            ++ lib.optionals wantsNfc [ ./nfc.nix ]
-           ++ lib.optionals wantsPtls [ ./ptls.nix ];
+           ++ lib.optionals wantsPtls [ ./ptls.nix ]
+           ++ lib.optionals wantsGames [ ./games.nix ];
   environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages;
   programs.vscode = {
     enable = true;
