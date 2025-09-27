@@ -68,6 +68,8 @@ in
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
     VDPAU_DRIVER = "va_gl";
+    vblank_mode = "0";
+    __GL_SYNC_TO_VBLANK = "0";
   };
   # Enable cpu microcode updates
   hardware.cpu.intel.updateMicrocode = true;

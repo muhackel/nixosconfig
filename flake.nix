@@ -38,6 +38,7 @@
             wantsNetworking = true;
             wantsNfc = true;
             wantsPtls = true;
+            wantsGames = true;
             wantsVMwareHost = false;
             wantsDocker = true;
             wantsVirtualbox = true;
