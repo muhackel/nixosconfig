@@ -1,13 +1,24 @@
 { config, lib, pkgs, ... }:
 let
+  nerdfonts = with pkgs.nerd-fonts; [
+    adwaita-mono
+    hack
+    open-dyslexic
+    sauce-code-pro
+    ubuntu
+    ubuntu-mono
+    ubuntu-sans
+  ];
   usedFonts = with pkgs; [
-      nerd-fonts.hack
-      xkcd-font
-      liberation_ttf
+    adwaita-fonts
+    xkcd-font
+    liberation_ttf
   ];
 in
 {
   fonts = {
-    packages = usedFonts;
+    enableDefaultPackages = true;
+    enableGhostscriptFonts = true;
+    packages = usedFonts ++ nerdfonts;
   };
 }
