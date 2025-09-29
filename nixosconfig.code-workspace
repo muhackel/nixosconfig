@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "../nixosconfig"
+		}
+	],
+	"settings": {
+		"editor.fontFamily": "Hack Nerd Font"
+	}
+}
