@@ -73,6 +73,8 @@ let
     yewtube
     ventoy-full
     testdisk
+    exfat
+    exfatprogs
   ];
   communicationpkgs = with pkgs; [ signal-desktop ferdium discord hexchat teamspeak3 ];
   devpackages = with pkgs; [ cmake automake python3 ghc jdk21 nodePackages.nodejs ];
