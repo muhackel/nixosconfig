@@ -43,6 +43,9 @@ in
     enableModemGPS = true;
   };
 
+  hardware.graphics.enable = true;  # Before 24.11: hardware.opengl.driSupport
+  hardware.graphics.enable32Bit = true;  # Before 24.11: hardware.opengl.driSupport32Bit
+
   # Enable nvidia Optimus support and install extra hardware modules and or packages
   hardware.nvidiaOptimus.disable = false;
   hardware.graphics.extraPackages = tp25gfxpkgs;
