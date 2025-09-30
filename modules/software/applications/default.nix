@@ -107,6 +107,9 @@ in
     enable = true;
     enableVirtualCamera = true;
   };
+  programs.noisetorch = {
+    enable = true;
+  };
 
   services.emacs = {
     enable = true;
