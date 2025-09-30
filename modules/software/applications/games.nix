@@ -15,8 +15,8 @@ lib.mkIf wantsGames {
     winetricks
     unigine-valley
     unigine-heaven
-    unigine-tropics
-    unigine-sanctuary
-    unigine-superposition
+    #unigine-tropics
+    #unigine-sanctuary
+    #unigine-superposition
   ];
 }
