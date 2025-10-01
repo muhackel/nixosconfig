@@ -73,6 +73,9 @@ in
     VDPAU_DRIVER = "va_gl";
     vblank_mode = "0";
     __GL_SYNC_TO_VBLANK = "0";
+    __GL_SHADER_DISK_CACHE=1;
+    __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1;
+    __GL_SHADER_DISK_CACHE_PATH="/tmp/.glshadercache";
   };
   # Enable cpu microcode updates
   hardware.cpu.intel.updateMicrocode = true;

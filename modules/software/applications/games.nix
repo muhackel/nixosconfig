@@ -19,4 +19,7 @@ lib.mkIf wantsGames {
     #unigine-sanctuary
     #unigine-superposition
   ];
+  systemd.user.extraConfig = ''
+  DefaultLimitNOFILE=524288:1048576
+'';
 }
