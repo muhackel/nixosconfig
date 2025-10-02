@@ -19,7 +19,10 @@ lib.mkIf wantsGames {
     #unigine-sanctuary
     #unigine-superposition
   ];
+
+  users.users.muhackel.extraGroups = [ "gamemode" ];
+
   systemd.user.extraConfig = ''
   DefaultLimitNOFILE=524288:1048576
-'';
+  '';
 }
