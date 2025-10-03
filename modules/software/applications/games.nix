@@ -26,6 +26,7 @@ lib.mkIf wantsGames {
   };
   environment.systemPackages = with pkgs; [ 
     lutris
+    #heroic
     mangohud
     wineWowPackages.stable #waylandFull
     winetricks
