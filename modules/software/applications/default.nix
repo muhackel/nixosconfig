@@ -27,6 +27,7 @@ let
     gpu-viewer
     gparted
     vscode
+    mcp-nixos
     gimp3
     yed
     virt-manager

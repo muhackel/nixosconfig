@@ -7,6 +7,7 @@
 }:
 let
   gns3extras = pkgs.callPackage ../../../packages/gns3extras { };
+
   gnspkgs = with pkgs; [
     gns3-gui
     inetutils
@@ -32,6 +33,9 @@ let
  in
 lib.mkIf wantsNetworking 
 {
+  nixpkgs.overlays = [ 
+    (import ../../../overlays/ciscoPacketTracer8) 
+  ];
   environment.systemPackages = gnspkgs ++ networkingpkgs;
 
   # Run the gns3extras activation script on system activation so the

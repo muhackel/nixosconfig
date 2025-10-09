@@ -45,20 +45,20 @@
             wantsLibvirt = true;
           };
           modules = [ { system.stateVersion = "25.11"; }
-                      ./configuration.nix
-                      ./modules/host/HAL9000
-                      ./modules/user/muhackel
-                      ./modules/software/fonts
-                      ./modules/software/localisation
-                      ./modules/software/applications
-                      ./modules/software/virtualisation
-                      ./modules/software/displaymanager
-                      home-manager.nixosModules.home-manager
-                      {
-                        home-manager.useGlobalPkgs = true;
-                        home-manager.useUserPackages = true;
-                        home-manager.users.muhackel = import ./modules/user/muhackel/home.nix;
-                      }
+            ./configuration.nix
+            ./modules/host/HAL9000
+            ./modules/user/muhackel
+            ./modules/software/fonts
+            ./modules/software/localisation
+            ./modules/software/applications
+            ./modules/software/virtualisation
+            ./modules/software/displaymanager
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.muhackel = import ./modules/user/muhackel/home.nix;
+            }
           ];
         };
       };
