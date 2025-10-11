@@ -1,7 +1,7 @@
 { config, lib, pkgs, wantsHamradio, wantsNetworking, wantsNfc, wantsPtls, wantsGames, ... }:
 let
   apppkgs = with pkgs; [
-    bambu-studio
+    # BROKEN CMAKE bambu-studio
     # BROKEN cura
     audacity
     alacritty
@@ -10,7 +10,7 @@ let
     eagle
     freefilesync
     inkscape
-    rclone-browser
+    # BROKEN CMAKE rclone-browser
     libreoffice-fresh
     librecad
     qcad
