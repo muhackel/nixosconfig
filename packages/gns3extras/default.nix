@@ -14,8 +14,8 @@ pkgs.stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/var/lib/gns3
-  # copy everything from the local sources/gns3 into the store output
-  cp -a --preserve=mode,timestamps ${./gns3}/. $out/var/lib/gns3/
+    # copy everything from the local sources/gns3 into the store output
+    cp -a --preserve=mode,timestamps ${./gns3}/. $out/var/lib/gns3/
 
     mkdir -p $out/bin
     # copy the activation script into the package and mark executable
@@ -27,7 +27,8 @@ pkgs.stdenv.mkDerivation {
       Installs the contents of the repository's sources/gns3 into the
       Nix store and provides a small activation script that creates
       symlinks from /var/lib/gns3 to the store files. Symlinks are
-      overwritten, regular files are left untouched.'';
+      overwritten, regular files are left untouched.
+    '';
     platforms = pkgs.lib.platforms.linux;
   };
 }
