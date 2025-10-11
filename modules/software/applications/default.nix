@@ -6,7 +6,7 @@ let
     audacity
     alacritty
     camunda-modeler
-    darktable
+    # darktable
     eagle
     freefilesync
     inkscape
@@ -39,7 +39,7 @@ let
     obsidian
     veracrypt
     vlc
-    qutebrowser
+    # qutebrowser
   ];
   clipkgs = with pkgs; [
     alsa-utils
