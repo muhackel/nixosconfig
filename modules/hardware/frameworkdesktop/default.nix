@@ -5,12 +5,14 @@ let
     #intel-gpu-tools
     vdpauinfo
     libva-utils
+    clinfo
     #modem-manager-gui
   ];
   # Extra Graphics Packages for the Lenovo TP25 hardware as installed hardware modules
-  tp25gfxpkgs = with pkgs; [
-    #intel-media-driver
-    #libvdpau-va-gl
+  gfxpkgs = with pkgs; [
+    rocmPackages.clr.icd    
+  ];
+  gfxpkgs32 = with pkgs; [
   ];
 in
 {
@@ -22,12 +24,12 @@ in
   # Additional filesystems supported by the system
   # boot.supportedFilesystems = [ "zfs" ];
   # Additional Kernel Modules for the initrd (available during boot)
-  boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod"];
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.availableKernelModules = [ ];
   # Additional Kernel Modules for the system
-  boot.kernelModules = [ "kvm-intel" "vfio_pci" "vfio" "vfio_iommu_type1" ];
+  boot.kernelModules = [  ];
   boot.extraModulePackages = [ ];
-  boot.resumeDevice = "/dev/disk/by-uuid/5ceff991-6a93-42b9-9c14-c241dd958a94";
+  #boot.resumeDevice = "/dev/disk/by-uuid/5ceff991-6a93-42b9-9c14-c241dd958a94";
   #boot.zfs.allowHibernation = true;
 
   #boot.kernelPackages = pkgs.linuxPackages_6_16;
@@ -46,8 +48,8 @@ in
 
   # Enable nvidia Optimus support and install extra hardware modules and or packages
   #hardware.nvidiaOptimus.disable = false;
-  #hardware.graphics.extraPackages = tp25gfxpkgs;
-
+  hardware.graphics.extraPackages = gfxpkgs;
+  hardware.graphics.extraPackages32 = gfxpkgs32;
   #hardware.nvidia = {
   #  open = false;
   #  prime = {
@@ -60,15 +62,13 @@ in
   #  };
   #};
   # set the xserver video drivers
-  #services.xserver.videoDrivers = [
-    #  "intel"
-	#  "modesetting"
-  #  "nvidia"
-  #];
+  services.xserver.videoDrivers = [
+    "amdgpu" 
+  ];
   # set the media acceleration drivers
   environment.sessionVariables = {
-    #LIBVA_DRIVER_NAME = "iHD";
-    #VDPAU_DRIVER = "va_gl";
+    LIBVA_DRIVER_NAME = "radeonsi";
+    VDPAU_DRIVER = "radeonsi";
     vblank_mode = "0";
     __GL_SYNC_TO_VBLANK = "0";
     __GL_SHADER_DISK_CACHE=1;
@@ -139,7 +139,7 @@ in
   };
     
   networking = {
-    hostName = "SPIWLKISTE";
+    hostName = "SPIELKISTE";
     hostId = "DEADBEEF";
     networkmanager = {
       enable = true;
