@@ -6,6 +6,7 @@ let
     vdpauinfo
     libva-utils
     clinfo
+    sbctl
     #modem-manager-gui
   ];
   # Extra Graphics Packages for the Lenovo TP25 hardware as installed hardware modules

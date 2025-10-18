@@ -21,9 +21,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... }:
+  outputs = { self, nixpkgs, home-manager, flake-utils, lanzaboote, ... }:
     let
       lib = nixpkgs.lib;
     in {
@@ -77,7 +81,14 @@
             wantsVirtualbox = true;
             wantsLibvirt = true;
           };
-          modules = [ { system.stateVersion = "25.11"; }
+          modules = [ { system.stateVersion = "25.11";
+                        boot.loader.systemd-boot.enable = lib.mkForce false;
+                        boot.lanzaboote = {
+                          enable = true;
+                          pkiBundle = "/var/lib/sbctl";
+                        };
+                      }
+            lanzaboote.nixosModules.lanzaboote
             ./configuration.nix
             ./modules/host/SPIELKISTE
             ./modules/user/muhackel
