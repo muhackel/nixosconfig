@@ -8,23 +8,24 @@ lib.mkIf wantsGames {
   programs.gamemode = {
     enable = true;
     enableRenice = true;
-    settings = {
-      general = {
-        renice = 10;
-        igpu_desiredgov = "performance";
-      };
-      gpu = {
-        apply_gpu_optimisations = "accept-responsibility";
-        gpu_device = 2;
-        nv_powermizer_mode = 1;
-      };
-      custom = {
-        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
-        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
-      };
-    };
+    #settings = {
+    #  general = {
+    #    renice = 10;
+    #    igpu_desiredgov = "performance";
+    #  };
+    #  gpu = {
+    #    apply_gpu_optimisations = "accept-responsibility";
+    #    gpu_device = 2;
+    #    nv_powermizer_mode = 1;
+    #  };
+    #  custom = {
+    #    start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+    #    end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+    #  };
+    #};
   };
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
+    bottles
     lutris
     #heroic
     mangohud
