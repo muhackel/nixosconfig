@@ -14,12 +14,11 @@
     settings = {
       general = {
         renice = 10;
-        #igpu_desiredgov = "performance";
       };
       gpu = {
-        #apply_gpu_optimisations = "accept-responsibility";
-        #gpu_device = 2;
-        #nv_powermizer_mode = 1;
+        apply_gpu_optimisations = "accept-responsibility";
+        gpu_device = 1;
+        amd_performance_level = "high";
       };
       custom = {
         start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
