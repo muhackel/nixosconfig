@@ -34,7 +34,7 @@ let
     virt-viewer
     adoptopenjdk-icedtea-web
     remmina
-    rpi-imager
+    #rpi-imager
     transmission_4-qt6
     obsidian
     veracrypt
