@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
-  # Extra Packages for the Lenovo TP25 hardware as installed packages
-  tp25pkgs = with pkgs; [
+  # Extra Packages
+  hwpkgs = with pkgs; [
     #intel-gpu-tools
     vdpauinfo
     libva-utils
@@ -9,11 +9,12 @@ let
     sbctl
     #modem-manager-gui
   ];
-  # Extra Graphics Packages for the Lenovo TP25 hardware as installed hardware modules
+  # Extra Graphics Packages
   gfxpkgs = with pkgs; [
-    rocmPackages.clr.icd    
+    #amdvlk
   ];
   gfxpkgs32 = with pkgs; [
+    #driversi686Linux.amdvlk
   ];
 in
 {
@@ -46,23 +47,14 @@ in
 
   hardware.graphics.enable = true;  # Before 24.11: hardware.opengl.driSupport
   hardware.graphics.enable32Bit = true;  # Before 24.11: hardware.opengl.driSupport32Bit
-
-  # Enable nvidia Optimus support and install extra hardware modules and or packages
-  #hardware.nvidiaOptimus.disable = false;
   hardware.graphics.extraPackages = gfxpkgs;
   hardware.graphics.extraPackages32 = gfxpkgs32;
-  #hardware.nvidia = {
-  #  open = false;
-  #  prime = {
-  #    offload = {
-  #      enable = true;
-  #      enableOffloadCmd = true;
-  #    };
-  #    nvidiaBusId = "PCI:2:0:0";
-  #    intelBusId =  "PCI:0:2:0";
-  #  };
-  #};
-  # set the xserver video drivers
+  hardware.amdgpu = {
+    overdrive.enable = true;
+    initrd.enable = true;
+    opencl.enable = true;
+  };
+  services.lact.enable = true;
   services.xserver.videoDrivers = [
     "amdgpu" 
   ];
@@ -76,9 +68,6 @@ in
     __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1;
     __GL_SHADER_DISK_CACHE_PATH="/tmp/.glshadercache";
   };
-  # Enable cpu microcode updates
-  #hardware.cpu.intel.updateMicrocode = true;
-  
 
   # System monitor configuration for the Lenovo TP25 unplugged and docked at home
   #services.autorandr = {
@@ -166,5 +155,5 @@ in
   # services.udev.extraRules = ''
   #   SUBSYSTEM=="usb", ATTRS{idVendor}=="138a", ATTRS{idProduct}=="0097", MODE="0660", GROUP="plugdev"
   # '';
-  environment.systemPackages = tp25pkgs;
+  environment.systemPackages = hwpkgs;
 }
