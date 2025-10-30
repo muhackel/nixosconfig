@@ -78,7 +78,7 @@ let
     exfatprogs
   ];
   communicationpkgs = with pkgs; [ signal-desktop ferdium discord hexchat teamspeak3 ];
-  devpackages = with pkgs; [ cmake automake python3 ghc jdk21 nodePackages.nodejs ];
+  devpackages = with pkgs; [ cmake automake python3 ghc nodePackages.nodejs ];
 in
 {
   # Imports der spezialisierten Module basierend auf wants-Variablen
@@ -89,6 +89,9 @@ in
            ++ lib.optionals wantsGames [ ./games.nix ];
   environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages;
   programs.vscode = {
+    enable = true;
+  };
+  programs.java = {
     enable = true;
   };
   programs.ausweisapp = {
