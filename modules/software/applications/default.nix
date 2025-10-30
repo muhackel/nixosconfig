@@ -52,8 +52,8 @@ let
     minicom
     fwupd
     git
-    gitAndTools.git-lfs
-    glxinfo
+    git-lfs
+    mesa-demos
     htop
     nvtopPackages.full
     oh-my-posh
