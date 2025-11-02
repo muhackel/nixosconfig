@@ -14,6 +14,7 @@ lib.mkIf wantsGames {
     lutris
     #heroic
     mangohud
+    openra
     steamtinkerlaunch
     wineWowPackages.stable #waylandFull
     winetricks
