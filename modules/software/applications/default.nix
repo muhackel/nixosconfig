@@ -1,5 +1,14 @@
 { config, lib, pkgs, wantsHamradio, wantsNetworking, wantsNfc, wantsPtls, wantsGames, ... }:
 let
+  jnlpApp = pkgs.adoptopenjdk-icedtea-web;
+  javawsWrapper = pkgs.writeScriptBin "javaws" ''
+    #!${pkgs.bash}/bin/bash
+    export JAVAWS_BIN="${jnlpApp}/bin/javaws"
+    export PATH="${pkgs.jdk8}/bin:$PATH"
+    export JAVA_HOME="${pkgs.jdk8}"
+    echo "DEBUG: Verwende Java: $(${pkgs.jdk8}/bin/java -version 2>&1 | head -n 1)"
+    exec "$JAVAWS_BIN" "$@"
+  '';
   apppkgs = with pkgs; [
     # BROKEN CMAKE bambu-studio
     # BROKEN cura
@@ -32,7 +41,6 @@ let
     yed
     virt-manager
     virt-viewer
-    adoptopenjdk-icedtea-web
     remmina
     #rpi-imager
     transmission_4-qt6
@@ -87,7 +95,7 @@ in
            ++ lib.optionals wantsNfc [ ./nfc.nix ]
            ++ lib.optionals wantsPtls [ ./ptls.nix ]
            ++ lib.optionals wantsGames [ ./games.nix ];
-  environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages;
+  environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages ++ [ javawsWrapper ];
   programs.vscode = {
     enable = true;
   };
