@@ -11,7 +11,7 @@ let
   gnspkgs = with pkgs; [
     gns3-gui
     inetutils
-    ciscoPacketTracer8
+    #ciscoPacketTracer8
     gns3extras
   ];
   networkingpkgs = with pkgs; [
@@ -27,15 +27,15 @@ let
     netdiscover
     netsniff-ng
     nmap
-    nomachine-client
+    #nomachine-client
     zenmap
   ];
  in
 lib.mkIf wantsNetworking 
 {
-  nixpkgs.overlays = [ 
-    (import ../../../overlays/ciscoPacketTracer8) 
-  ];
+  #nixpkgs.overlays = [ 
+  #  (import ../../../overlays/ciscoPacketTracer8) 
+  #];
   environment.systemPackages = gnspkgs ++ networkingpkgs;
 
   # Run the gns3extras activation script on system activation so the
