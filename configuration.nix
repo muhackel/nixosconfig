@@ -19,6 +19,7 @@ let
     ];
 in
 {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   nixpkgs.config = {
     allowUnfree = true;
     allowBroken = true;

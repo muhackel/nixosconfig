@@ -34,7 +34,6 @@ in
   #boot.resumeDevice = "/dev/disk/by-uuid/5ceff991-6a93-42b9-9c14-c241dd958a94";
   #boot.zfs.allowHibernation = true;
 
-  #boot.kernelPackages = pkgs.linuxPackages_6_16;
 
   location.provider = "manual";
   location.latitude = "48.790457";
