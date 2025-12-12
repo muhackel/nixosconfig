@@ -48,7 +48,7 @@
             wantsVirtualbox = true;
             wantsLibvirt = true;
           };
-          modules = [ { system.stateVersion = "25.11"; }
+          modules = [ { system.stateVersion = "26.05"; }
             ./configuration.nix
             ./modules/host/HAL9000
             ./modules/user/muhackel
@@ -81,7 +81,7 @@
             wantsVirtualbox = true;
             wantsLibvirt = true;
           };
-          modules = [ { system.stateVersion = "25.11";
+          modules = [ { system.stateVersion = "26.05";
                         boot.loader.systemd-boot.enable = lib.mkForce false;
                         boot.lanzaboote = {
                           enable = true;
