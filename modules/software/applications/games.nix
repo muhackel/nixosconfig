@@ -10,7 +10,7 @@ lib.mkIf wantsGames {
     enableRenice = true;
   };
   environment.systemPackages = with pkgs; [
-    bottles
+    (bottles.override { removeWarningPopup = true; })
     lutris
     #heroic
     mangohud
