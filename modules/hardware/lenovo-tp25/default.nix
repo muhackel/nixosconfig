@@ -34,7 +34,7 @@ in
 
   #boot.kernelPackages = pkgs.linuxPackages_6_16;
 
-  #location.provider = "manual";
+  location.provider = "geoclue2";
   #location.latitude = "48.790457";
   #location.longitude = "9.204377";
   services.geoclue2 = {
