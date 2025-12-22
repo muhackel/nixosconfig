@@ -34,11 +34,11 @@ in
 
   #boot.kernelPackages = pkgs.linuxPackages_6_16;
 
-  location.provider = "manual";
-  location.latitude = "48.790457";
-  location.longitude = "9.204377";
+  #location.provider = "manual";
+  #location.latitude = "48.790457";
+  #location.longitude = "9.204377";
   services.geoclue2 = {
-    enable = false;
+    enable = true;
     enableWifi = true;
     enableModemGPS = true;
   };

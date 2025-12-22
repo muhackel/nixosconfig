@@ -35,11 +35,11 @@ in
   #boot.zfs.allowHibernation = true;
 
 
-  location.provider = "manual";
-  location.latitude = "48.790457";
-  location.longitude = "9.204377";
+  #location.provider = "manual";
+  #location.latitude = "48.790457";
+  #location.longitude = "9.204377";
   services.geoclue2 = {
-    enable = false;
+    enable = true;
     enableWifi = true;
     enableModemGPS = true;
   };
