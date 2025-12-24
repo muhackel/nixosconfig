@@ -12,7 +12,7 @@ lib.mkIf wantsGames {
   environment.systemPackages = with pkgs; [
     (bottles.override { removeWarningPopup = true; })
     lutris
-    #heroic
+    heroic
     mangohud
     openra
     steamtinkerlaunch
