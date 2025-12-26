@@ -18,6 +18,7 @@ lib.mkIf wantsGames {
     steamtinkerlaunch
     wineWowPackages.stable #waylandFull
     winetricks
+    wowup-cf
     #unigine-valley
     #unigine-heaven
     #unigine-tropics
