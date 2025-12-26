@@ -49,7 +49,7 @@ in
   hardware.graphics.extraPackages = gfxpkgs;
   hardware.graphics.extraPackages32 = gfxpkgs32;
   hardware.amdgpu = {
-    overdrive.enable = true;
+    overdrive.enable = false; # disable overdrive for stability (needs to be determined if it is cause of instability)
     initrd.enable = true;
     opencl.enable = true;
   };
