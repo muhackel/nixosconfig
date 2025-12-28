@@ -6,6 +6,7 @@
     ../../hardware/bluetooth
     ../../hardware/keyboard
     ../../hardware/mouse/logitech-wireless
+    ../../hardware/mouse/logitech-g502
     ../../hardware/printer
     ../../hardware/printer/HP
     ../../hardware/printer/HP/hplj4100
