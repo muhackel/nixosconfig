@@ -18,6 +18,11 @@
       fsType = "ext4";
     };
 
+  fileSystems."/steam" =
+    { device = "/dev/disk/by-uuid/8525093b-bead-4f04-9b93-8cf46ee3ccb1";
+      fsType = "ext4";
+    };
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/7A9E-6BA5";
       fsType = "vfat";
