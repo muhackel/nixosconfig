@@ -24,24 +24,29 @@ in
     ./hardware-configuration.nix
   ];
   # Additional filesystems supported by the system
-  # boot.supportedFilesystems = [ "zfs" ];
+  #boot.supportedFilesystems = [ "zfs" ];
   # Additional Kernel Modules for the initrd (available during boot)
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.initrd.availableKernelModules = [ ];
   # Additional Kernel Modules for the system
   boot.kernelModules = [  ];
   boot.extraModulePackages = [ ];
-  #boot.resumeDevice = "/dev/disk/by-uuid/5ceff991-6a93-42b9-9c14-c241dd958a94";
   #boot.zfs.allowHibernation = true;
 
 
-  location.provider = "geoclue2";
-  #location.latitude = "48.790457";
-  #location.longitude = "9.204377";
+  location.provider = "manual";
+  location.latitude = "48.790457";
+  location.longitude = "9.204377";
   services.geoclue2 = {
     enable = true;
     enableWifi = true;
     enableModemGPS = true;
+  };
+
+
+  services.avahi = {
+    enable = true;
+    openFirewall = true;
   };
 
   hardware.graphics.enable = true;  # Before 24.11: hardware.opengl.driSupport
