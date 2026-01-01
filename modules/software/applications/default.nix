@@ -27,7 +27,6 @@ let
     drawio
     github-desktop
     google-chrome
-    ioquake3
     kitty
     kicad
     mpv
