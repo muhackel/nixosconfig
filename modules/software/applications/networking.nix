@@ -25,7 +25,7 @@ let
     kismet
     nbtscan
     netdiscover
-    netsniff-ng
+    #netsniff-ng BROKEN
     nmap
     #nomachine-client
     zenmap

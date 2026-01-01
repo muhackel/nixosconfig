@@ -35,7 +35,7 @@ let
     gpu-viewer
     gparted
     vscode
-    mcp-nixos
+    #mcp-nixos BROKEN
     gimp3
     yed
     virt-manager
@@ -56,7 +56,7 @@ let
     broot
     plantuml
     dysk
-    minicom
+    #minicom depency lrzsz is broken
     fwupd
     git
     git-lfs
