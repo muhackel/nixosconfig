@@ -66,7 +66,7 @@ let
     oh-my-posh
     i7z
     killall
-    nixfmt-rfc-style
+    nixfmt
     nixos-generators
     pciutils
     ranger
@@ -117,6 +117,9 @@ in
   programs.obs-studio = {
     enable = true;
     enableVirtualCamera = true;
+    plugins = with pkgs.obs-studio-plugins; [ 
+      obs-backgroundremoval 
+    ];
   };
   programs.noisetorch = {
     enable = true;
