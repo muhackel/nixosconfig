@@ -20,6 +20,7 @@ let
 in
 {
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.enableAllFirmware = true;
   nixpkgs.config = {
     allowUnfree = true;
     allowBroken = true;
