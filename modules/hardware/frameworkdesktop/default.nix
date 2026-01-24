@@ -152,12 +152,6 @@ in
     wireplumber.enable = true;
     pulse.enable = true;
   };
-  # Validity fingerprint reader configuration is totally broken under linux ... it needs aditional python-validity to exchange TLS Keys with the sensor
-  # services.fprintd.enable = true;
-  # users.groups.plugdev = {};
-  # users.users.muhackel.extraGroups = [ "plugdev" ]; # ersetze youruser
-  # services.udev.extraRules = ''
-  #   SUBSYSTEM=="usb", ATTRS{idVendor}=="138a", ATTRS{idProduct}=="0097", MODE="0660", GROUP="plugdev"
-  # '';
+
   environment.systemPackages = hwpkgs;
 }

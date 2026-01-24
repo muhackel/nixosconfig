@@ -84,7 +84,13 @@ let
     exfat
     exfatprogs
   ];
-  communicationpkgs = with pkgs; [ signal-desktop ferdium discord hexchat ]; # teamspeak3
+  communicationpkgs = with pkgs; [ 
+    signal-desktop 
+    ferdium 
+    discord 
+    hexchat 
+    teamspeak3
+  ];
   devpackages = with pkgs; [ cmake automake python3 ghc nodePackages.nodejs ];
 in
 {
