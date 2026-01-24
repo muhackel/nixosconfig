@@ -54,7 +54,12 @@ in
   hardware.graphics.extraPackages = tp25gfxpkgs;
 
   hardware.nvidia = {
+    #package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
     open = false;
+    powerManagement = {
+      enable = true;
+      finegrained = true;
+    };
     prime = {
       offload = {
         enable = true;
