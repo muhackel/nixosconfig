@@ -123,7 +123,7 @@
           };
           modules = [ { system.stateVersion = "26.05"; }
             ./configuration.nix
-            ./modules/host/HAL9000
+            ./modules/host/BFG9000
             ./modules/user/muhackel
             ./modules/software/fonts
             ./modules/software/localisation
