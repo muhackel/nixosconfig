@@ -48,10 +48,7 @@
             wantsVirtualbox = true;
             wantsLibvirt = true;
           };
-          modules = [ { 
-            boot.kernelPackages = pkgs.linuxPackages_latest;
-            system.stateVersion = "26.05"; 
-            }
+          modules = [ { system.stateVersion = "26.05"; }
             ./configuration.nix
             ./modules/host/HAL9000
             ./modules/user/muhackel
@@ -85,7 +82,6 @@
             wantsLibvirt = true;
           };
           modules = [ { system.stateVersion = "26.05";
-                        boot.kernelPackages = pkgs.linuxPackages_latest;
                         boot.loader.systemd-boot.enable = lib.mkForce false;
                         boot.lanzaboote = {
                           enable = true;
@@ -125,9 +121,7 @@
             wantsVirtualbox = true;
             wantsLibvirt = true;
           };
-          modules = [ { 
-            system.stateVersion = "26.05"; 
-            }
+          modules = [ { system.stateVersion = "26.05"; }
             ./configuration.nix
             ./modules/host/BFG9000
             ./modules/user/muhackel
