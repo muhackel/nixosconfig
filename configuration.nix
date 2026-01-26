@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, ... }:
 
 let
@@ -19,7 +15,6 @@ let
     ];
 in
 {
-  
   hardware.enableAllFirmware = true;
   nixpkgs.config = {
     allowUnfree = true;
@@ -30,7 +25,17 @@ in
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = [ "nix-command" "flakes" ];
-    # max-jobs = 4; #seems not to work ...
+    substituters = [
+      "https://cache.nixos.org/"
+      "https://nix-community.cachix.org"
+      "https://numtide.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
+    ];
+    trusted-users = [ "root" "muhackel" ];
   };
   nix.gc = {
     automatic = true;
@@ -42,6 +47,10 @@ in
   programs.zsh.enable = true;
   services.fstrim.enable = true;
   services.fwupd.enable = true;
+  services.udisks2 = {
+    enable = true;
+    mountOnMedia = true;
+  };
   #system.stateVersion = config.system.stateVersion;
 }
 
