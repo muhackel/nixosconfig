@@ -10,7 +10,7 @@
     ../../hardware/printer/HP
     ../../hardware/printer/HP/hplj4100
   ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
   programs.gamemode = {
     settings = {
       general = {
