@@ -83,7 +83,7 @@ in
     __GL_SHADER_DISK_CACHE=1;
     __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1;
     __GL_SHADER_DISK_CACHE_PATH="/tmp/.glshadercache";
-    _JAVA_OPTIONS="Dsun.java2d.uiScale=2"; #Scale Java Apps on 4k Displays
+    _JAVA_OPTIONS="-Dsun.java2d.uiScale=2"; #Scale Java Apps on 4k Displays
     #GDK_SCALE=2;
   };
   # Enable cpu microcode updates
