@@ -8,7 +8,7 @@ in
     enable = true;
     config = {
       gpu-context = "wayland";
-      hwdec = "vaapi";
+      hwdec = "vaapi"; # maybe vulkan in the future
     };
   };
 

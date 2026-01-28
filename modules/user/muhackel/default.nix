@@ -9,7 +9,8 @@
       "libvirtd"
       "networkmanager"
       "vboxusers"
-      "uucp"
+      "dialout"
+      "uucp" # legacy group for serial devices
     ];
     shell = pkgs.zsh;
     linger = true;
