@@ -169,8 +169,8 @@ in
     wireplumber.enable = true;
     pulse.enable = true;
   };
-  # Validity fingerprint reader configuration is totally broken under linux ... it needs aditional python-validity to exchange TLS Keys with the sensor
-  services.fprintd.enable = true;
+  # Fingerprint reader configuration is broken under KDE Plasma, explicitly for kwallet keyring integration, therefore disabled here
+  services.fprintd.enable = false;
   users.groups.plugdev = {};
   users.users.muhackel.extraGroups = [ "plugdev" ]; # ersetze youruser
   services.udev.extraRules = ''
