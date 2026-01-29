@@ -3,7 +3,7 @@
 {
   powerManagement.enable = true;
   services.undervolt = {
-    enable = true;
+    enable = false;
   #  coreOffset = -80;
   #  analogioOffset = -70;
   #  gpuOffset = -60;

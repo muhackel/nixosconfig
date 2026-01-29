@@ -5,6 +5,9 @@ let
     configtool
   ];
   nixldlibs =  with pkgs; [
+    stdenv.cc.cc.lib
+    glibc
+    libcxx
     gtk3
     pango
     cairo
