@@ -11,6 +11,7 @@
     ../../hardware/printer/HP
     ../../hardware/printer/HP/hplj4100
   ];
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
   programs.gamemode = {
     settings = {
       general = {
