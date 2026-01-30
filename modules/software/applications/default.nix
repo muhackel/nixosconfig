@@ -53,6 +53,9 @@ let
     aspell
     aspellDicts.de
     aspellDicts.en
+    hunspell
+    hunspellDicts.de_DE
+    hunspellDicts.en_US
     broot
     plantuml
     dysk

@@ -7,14 +7,11 @@ in
 
   i18n = {
     defaultLocale = "en_US.UTF-8"; # Die Sprache der Menüs
-    supportedLocales = [
-      "en_US.UTF-8/UTF-8"
-      "de_DE.UTF-8/UTF-8"
-      "de_DE/ISO-8859-1"
-      "de_DE@euro/ISO-8859-15"
-    ];
+    extraLocales = [ "all" ];
+    supportedLocales = [ "all" ];
     extraLocaleSettings = {
       LC_ADDRESS = "de_DE.UTF-8";
+      LC_COLLATE = "de_DE.UTF-8";    # Sortierreihenfolge
       LC_IDENTIFICATION = "de_DE.UTF-8";
       LC_MEASUREMENT = "de_DE.UTF-8"; # Metrisches System (Meter, KG)
       LC_MONETARY = "de_DE.UTF-8";    # Währung (Euro)
