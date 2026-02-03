@@ -69,7 +69,7 @@ lib.mkIf wantsNetworking
     enable = true;
     dumpcap.enable = true;
     usbmon.enable = true;
-    package = pkgs.wireshark-qt;
+    package = pkgs.wireshark;
   };
   users.users.muhackel.extraGroups = [ "wireshark" ];
 
