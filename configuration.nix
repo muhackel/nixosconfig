@@ -51,6 +51,19 @@ in
     enable = true;
     mountOnMedia = true;
   };
+  #system.activationScripts.diff = {
+  #  supportsDryActivation = true;
+  #  text = ''
+  #    export PATH="${pkgs.nix}/bin:$PATH"
+  #    if [ -e /run/current-system ]; then
+  #      echo "--- PAKET-ÄNDERUNGEN (nvd) ---"
+  #      ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig"
+  #      echo "------------------------------"
+  #    else
+  #      echo "Kein Referenzsystem (/run/current-system) gefunden."
+  #    fi
+  #  '';
+  #};
   #system.stateVersion = config.system.stateVersion;
 }
 

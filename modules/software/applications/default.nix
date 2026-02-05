@@ -64,6 +64,7 @@ let
     git
     git-lfs
     mesa-demos
+    nvd
     htop
     nvtopPackages.full
     oh-my-posh
