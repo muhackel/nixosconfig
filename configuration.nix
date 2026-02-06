@@ -51,19 +51,23 @@ in
     enable = true;
     mountOnMedia = true;
   };
-  #system.activationScripts.diff = {
-  #  supportsDryActivation = true;
-  #  text = ''
-  #    export PATH="${pkgs.nix}/bin:$PATH"
-  #    if [ -e /run/current-system ]; then
-  #      echo "--- PAKET-ÄNDERUNGEN (nvd) ---"
-  #      ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig"
-  #      echo "------------------------------"
-  #    else
-  #      echo "Kein Referenzsystem (/run/current-system) gefunden."
-  #    fi
-  #  '';
-  #};
+  system.activationScripts.z_diff = {
+    supportsDryActivation = true;
+    text = ''
+      export PATH="${pkgs.nix}/bin:$PATH"
+      if [ $(cat /proc/uptime | cut -d. -f1) -ge 30 ]; then
+        if [ -e /run/current-system ]; then
+          echo "--- PAKET-ÄNDERUNGEN (nvd) ---"
+          ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig"
+          echo "------------------------------"
+        else
+          echo "Kein Referenzsystem (/run/current-system) gefunden."
+        fi
+      else
+        echo "nvd diff skipped due to uptime < 30s"
+      fi
+    '';
+  };
   #system.stateVersion = config.system.stateVersion;
 }
 

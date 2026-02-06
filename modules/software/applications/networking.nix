@@ -43,10 +43,16 @@ lib.mkIf wantsNetworking
   # the invocation tolerant (|| true) so activation won't fail the whole
   # activation if something about gns3 extras can't be applied.
   system.activationScripts.gns3extras = {
+    supportsDryActivation = true;
     text = ''
       #!/bin/sh
-      # invoke activation script shipped inside the gns3extras package
-      ${gns3extras}/bin/gns3-extras-activate || true
+      # Only run if system uptime is at least 30 seconds
+      if [ $(cat /proc/uptime | cut -d. -f1) -ge 30 ]; then
+        # invoke activation script shipped inside the gns3extras package
+        ${gns3extras}/bin/gns3-extras-activate || true
+      else
+        echo "gns3extras activation script skipped due to uptime < 30s"
+      fi
     '';
   };
 
