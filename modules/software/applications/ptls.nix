@@ -14,7 +14,7 @@ let
     atk
     gdk-pixbuf
     glib
-    xorg.libX11
+    libx11
     libunwind
   ];
 in
