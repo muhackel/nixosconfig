@@ -142,6 +142,8 @@ in
   };
   services.syncthing = {
       enable = true;
+      user = "muhackel";
+      group = "users";
   };
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
