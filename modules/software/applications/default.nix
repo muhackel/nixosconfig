@@ -144,6 +144,10 @@ in
       enable = true;
       user = "muhackel";
       group = "users";
+      #systemService = false;
+      openDefaultPorts = true;
+      configDir = "/home/muhackel/.config/syncthing";
+      dataDir = "/home/muhackel";
   };
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
