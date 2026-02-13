@@ -17,7 +17,7 @@ lib.mkIf wantsGames {
     mangohud
     openra
     steamtinkerlaunch
-    wineWowPackages.stable #waylandFull
+    wineWow64Packages.stable #waylandFull
     winetricks
     wowup-cf
     #unigine-valley
