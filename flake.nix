@@ -45,6 +45,7 @@
             wantsGames = true;
             wantsVMwareHost = false;
             wantsDocker = true;
+            wantsWinboat = true;
             wantsVirtualbox = true;
             wantsLibvirt = true;
           };
@@ -78,6 +79,7 @@
             wantsGames = true;
             wantsVMwareHost = false;
             wantsDocker = true;
+            wantsWinboat = true;
             wantsVirtualbox = true;
             wantsLibvirt = true;
           };
@@ -118,6 +120,7 @@
             wantsGames = true;
             wantsVMwareHost = false;
             wantsDocker = true;
+            wantsWinboat = true;
             wantsVirtualbox = true;
             wantsLibvirt = true;
           };

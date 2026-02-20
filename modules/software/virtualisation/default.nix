@@ -1,4 +1,4 @@
-{ config, lib, pkgs, wantsVMwareHost, wantsVirtualbox, wantsLibvirt, wantsDocker, ... }:
+{ config, lib, pkgs, wantsVMwareHost, wantsVirtualbox, wantsLibvirt, wantsDocker, wantsWinboat, ... }:
 let
   winboatpkgs = with pkgs; [
     winboat
