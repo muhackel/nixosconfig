@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  wantsNetworking,
   ...
 }:
 let
@@ -31,7 +30,7 @@ let
     zenmap
   ];
  in
-lib.mkIf wantsNetworking 
+lib.mkIf config.local.features.networking
 {
   #nixpkgs.overlays = [ 
   #  (import ../../../overlays/ciscoPacketTracer8) 

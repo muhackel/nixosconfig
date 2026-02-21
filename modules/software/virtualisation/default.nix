@@ -1,19 +1,20 @@
-{ config, lib, pkgs, wantsVMwareHost, wantsVirtualbox, wantsLibvirt, wantsDocker, wantsWinboat, ... }:
+{ config, lib, pkgs, ... }:
 let
+  cfg = config.local.features;
   winboatpkgs = with pkgs; [
     winboat
   ];
 in
 {
-  virtualisation.vmware.host.enable = wantsVMwareHost;
+  virtualisation.vmware.host.enable = cfg.vmwareHost;
 
   virtualisation.virtualbox.host = {
-    enable = wantsVirtualbox;
+    enable = cfg.virtualbox;
     enableExtensionPack = true;
   };
 
-  virtualisation.libvirtd.enable = wantsLibvirt;
+  virtualisation.libvirtd.enable = cfg.libvirt;
 
-  virtualisation.docker.enable = wantsDocker;
-  environment.systemPackages = lib.mkIf wantsDocker winboatpkgs;
+  virtualisation.docker.enable = cfg.docker;
+  environment.systemPackages = lib.mkIf cfg.winboat winboatpkgs;
 }

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, wantsPtls, ... }:
+{ config, lib, pkgs, ... }:
 let
   configtool = pkgs.callPackage ../../../packages/configtool { };
   ptlspkgs = with pkgs; [
@@ -18,7 +18,7 @@ let
     libunwind
   ];
 in
-lib.mkIf wantsPtls 
+lib.mkIf config.local.features.ptls
 {
   programs.nix-ld = {
     enable = true;

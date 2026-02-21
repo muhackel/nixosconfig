@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ lib, pkgs ? import <nixpkgs> {} }:
 
 pkgs.stdenv.mkDerivation {
   pname = "configtool";

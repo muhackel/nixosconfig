@@ -1,5 +1,6 @@
-{ config, lib, pkgs, wantsXserver, ... }:  # wantsXserver als Parameter hinzufügen
+{ config, lib, pkgs, ... }:
 let
+  cfg = config.local.features;
   xsupportpkgs = with pkgs; [
     xorg.xinput
     xorg.xmodmap
@@ -28,7 +29,7 @@ let
 in
 {
   services.xserver = {
-    enable = wantsXserver;  # Variable verwenden, um X-Server zu aktivieren/deaktivieren
+    enable = cfg.xserver;
     enableCtrlAltBackspace = true;
 
     windowManager.xmonad = {

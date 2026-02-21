@@ -1,5 +1,6 @@
-{ config, lib, pkgs, wantsWayland, wantsPlasma6, ... }:  # wantsWayland als Parameter hinzufügen
+{ config, lib, pkgs, ... }:
 let
+  cfg = config.local.features;
   plasmapkgs = with pkgs; [
     kdePackages.yakuake
     kdePackages.filelight
@@ -16,12 +17,12 @@ let
 in
 {
   services.displayManager.sddm = {
-    enable = wantsWayland;
+    enable = cfg.wayland;
     wayland.enable = true;
   };
 
   services.desktopManager.plasma6 = {
-    enable = wantsPlasma6;
+    enable = cfg.plasma6;
   };
-  environment.systemPackages = lib.optionals wantsPlasma6 plasmapkgs;
+  environment.systemPackages = lib.optionals cfg.plasma6 plasmapkgs;
 }

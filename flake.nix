@@ -34,22 +34,23 @@
       nixosConfigurations = {
         HAL9000 = lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            wantsXserver = false;
-            wantsWayland = true;
-            wantsPlasma6 = true;
-            wantsHamradio = true;
-            wantsNetworking = true;
-            wantsNfc = true;
-            wantsPtls = true;
-            wantsGames = true;
-            wantsVMwareHost = false;
-            wantsDocker = true;
-            wantsWinboat = true;
-            wantsVirtualbox = true;
-            wantsLibvirt = true;
-          };
-          modules = [ { system.stateVersion = "26.05"; }
+          modules = [
+            ./modules/options.nix
+            { system.stateVersion = "26.05";
+              local.features = {
+                wayland = true;
+                plasma6 = true;
+                hamradio = true;
+                networking = true;
+                nfc = true;
+                ptls = true;
+                games = true;
+                docker = true;
+                winboat = true;
+                virtualbox = true;
+                libvirt = true;
+              };
+            }
             ./configuration.nix
             ./modules/host/HAL9000
             ./modules/user/muhackel
@@ -68,28 +69,28 @@
         };
         SPIELKISTE = lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            wantsXserver = false;
-            wantsWayland = true;
-            wantsPlasma6 = true;
-            wantsHamradio = true;
-            wantsNetworking = true;
-            wantsNfc = true;
-            wantsPtls = true;
-            wantsGames = true;
-            wantsVMwareHost = false;
-            wantsDocker = true;
-            wantsWinboat = true;
-            wantsVirtualbox = true;
-            wantsLibvirt = true;
-          };
-          modules = [ { system.stateVersion = "26.05";
-                        boot.loader.systemd-boot.enable = lib.mkForce false;
-                        boot.lanzaboote = {
-                          enable = true;
-                          pkiBundle = "/var/lib/sbctl";
-                        };
-                      }
+          modules = [
+            ./modules/options.nix
+            { system.stateVersion = "26.05";
+              local.features = {
+                wayland = true;
+                plasma6 = true;
+                hamradio = true;
+                networking = true;
+                nfc = true;
+                ptls = true;
+                games = true;
+                docker = true;
+                winboat = true;
+                virtualbox = true;
+                libvirt = true;
+              };
+              boot.loader.systemd-boot.enable = lib.mkForce false;
+              boot.lanzaboote = {
+                enable = true;
+                pkiBundle = "/var/lib/sbctl";
+              };
+            }
             lanzaboote.nixosModules.lanzaboote
             ./configuration.nix
             ./modules/host/SPIELKISTE
@@ -109,22 +110,23 @@
         };
         BFG9000 = lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            wantsXserver = false;
-            wantsWayland = true;
-            wantsPlasma6 = true;
-            wantsHamradio = true;
-            wantsNetworking = true;
-            wantsNfc = true;
-            wantsPtls = true;
-            wantsGames = true;
-            wantsVMwareHost = false;
-            wantsDocker = true;
-            wantsWinboat = true;
-            wantsVirtualbox = true;
-            wantsLibvirt = true;
-          };
-          modules = [ { system.stateVersion = "26.05"; }
+          modules = [
+            ./modules/options.nix
+            { system.stateVersion = "26.05";
+              local.features = {
+                wayland = true;
+                plasma6 = true;
+                hamradio = true;
+                networking = true;
+                nfc = true;
+                ptls = true;
+                games = true;
+                docker = true;
+                winboat = true;
+                virtualbox = true;
+                libvirt = true;
+              };
+            }
             ./configuration.nix
             ./modules/host/BFG9000
             ./modules/user/muhackel
