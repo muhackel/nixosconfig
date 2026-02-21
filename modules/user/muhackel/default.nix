@@ -1,17 +1,18 @@
 { config, lib, pkgs, ... }:
 
+let
+  baseGroups = [
+    "wheel"
+    "networkmanager"
+    "dialout"
+    "uucp" # legacy group for serial devices
+  ];
+in
+
 {
   users.users.muhackel = {
     isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "docker"
-      "libvirtd"
-      "networkmanager"
-      "vboxusers"
-      "dialout"
-      "uucp" # legacy group for serial devices
-    ];
+    extraGroups = lib.unique (baseGroups ++ config.local.userExtraGroups);
     shell = pkgs.zsh;
     linger = true;
     initialPassword = "1qaz!QAZ";

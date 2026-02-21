@@ -36,7 +36,7 @@ in
       enable = config.services.xserver.enable;  # Abhängig von enable machen
       enableContribAndExtras = true;
       enableConfiguredRecompile = true;
-      config = ./sources/xmonad/xmonad.hs;
+      config = ../../../sources/xmonad/xmonad.hs;
     };
   };
 

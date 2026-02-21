@@ -8,7 +8,7 @@ let
 in
 lib.mkIf config.local.features.hamradio {
   users.groups.ham = {};
-  users.users.muhackel.extraGroups = [ "ham" ];
+  local.userExtraGroups = [ "ham" ];
   environment.systemPackages = hampkgs;
   services.udev.extraRules = ''
     # original RTL2832U vid/pid (hama nano, for example)

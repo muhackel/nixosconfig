@@ -158,7 +158,7 @@ in
   # Fingerprint reader configuration is broken under KDE Plasma, explicitly for kwallet keyring integration, therefore disabled here
   services.fprintd.enable = false;
   users.groups.plugdev = {};
-  users.users.muhackel.extraGroups = [ "plugdev" ]; # ersetze youruser
+  local.userExtraGroups = [ "plugdev" ];
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTRS{idVendor}=="138a", ATTRS{idProduct}=="0097", MODE="0660", GROUP="plugdev"
   '';

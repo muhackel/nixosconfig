@@ -7,8 +7,32 @@ in
 
   i18n = {
     defaultLocale = "en_US.UTF-8"; # Die Sprache der Menüs
-    extraLocales = [ "all" ];
-    supportedLocales = [ "all" ];
+    extraLocales = [
+      "de_DE.UTF-8/UTF-8"
+      "de_AT.UTF-8/UTF-8"
+      "de_CH.UTF-8/UTF-8"
+      "de_LU.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
+      "en_GB.UTF-8/UTF-8"
+      "en_AU.UTF-8/UTF-8"
+      "en_CA.UTF-8/UTF-8"
+      "en_NZ.UTF-8/UTF-8"
+      "en_IE.UTF-8/UTF-8"
+      "en_ZA.UTF-8/UTF-8"
+    ];
+    supportedLocales = [
+      "de_DE.UTF-8/UTF-8"
+      "de_AT.UTF-8/UTF-8"
+      "de_CH.UTF-8/UTF-8"
+      "de_LU.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
+      "en_GB.UTF-8/UTF-8"
+      "en_AU.UTF-8/UTF-8"
+      "en_CA.UTF-8/UTF-8"
+      "en_NZ.UTF-8/UTF-8"
+      "en_IE.UTF-8/UTF-8"
+      "en_ZA.UTF-8/UTF-8"
+    ];
     extraLocaleSettings = {
       LC_ADDRESS = "de_DE.UTF-8";
       LC_COLLATE = "de_DE.UTF-8";    # Sortierreihenfolge

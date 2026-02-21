@@ -76,7 +76,7 @@ lib.mkIf config.local.features.networking
     usbmon.enable = true;
     package = pkgs.wireshark;
   };
-  users.users.muhackel.extraGroups = [ "wireshark" ];
+  local.userExtraGroups = [ "wireshark" ];
 
   programs.iftop.enable = true;
 

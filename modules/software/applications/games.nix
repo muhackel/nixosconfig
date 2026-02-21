@@ -30,7 +30,7 @@ lib.mkIf config.local.features.games {
     #unigine-superposition
   ];
 
-  users.users.muhackel.extraGroups = [ "gamemode" ];
+  local.userExtraGroups = [ "gamemode" ];
 
   systemd.user.extraConfig = ''
   DefaultLimitNOFILE=524288:1048576

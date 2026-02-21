@@ -6,6 +6,11 @@ let
   ];
 in
 {
+  local.userExtraGroups =
+    lib.optionals cfg.docker [ "docker" ]
+    ++ lib.optionals cfg.libvirt [ "libvirtd" ]
+    ++ lib.optionals cfg.virtualbox [ "vboxusers" ];
+
   virtualisation.vmware.host.enable = cfg.vmwareHost;
 
   virtualisation.virtualbox.host = {
