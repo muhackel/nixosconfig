@@ -1,5 +1,7 @@
 { config, lib, pkgs, wantsGames, ... }:
 
+let crossover = pkgs.callPackage ../../../packages/crossover { };
+in 
 lib.mkIf wantsGames {
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
@@ -11,6 +13,7 @@ lib.mkIf wantsGames {
   };
   environment.systemPackages = with pkgs; [
     (bottles.override { removeWarningPopup = true; })
+    # BROKEN ... not ready yet ... crossover
     ioquake3
     #lutris
     heroic
