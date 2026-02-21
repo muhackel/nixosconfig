@@ -32,5 +32,6 @@ pkgs.stdenv.mkDerivation {
   meta = {
     description = "ConfigTool ZIP unpacker";
     platforms = pkgs.lib.platforms.linux;
+    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
   };
 }
