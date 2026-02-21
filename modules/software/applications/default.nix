@@ -1,4 +1,4 @@
-{ config, lib, pkgs, wantsHamradio, wantsNetworking, wantsNfc, wantsPtls, wantsGames, ... }:
+{ config, lib, pkgs, ... }:
 let
   jnlpApp = pkgs.adoptopenjdk-icedtea-web;
   javawsWrapper = pkgs.writeScriptBin "javaws" ''
@@ -99,12 +99,13 @@ let
   devpackages = with pkgs; [ cmake automake python3 ghc nodePackages.nodejs ];
 in
 {
-  # Imports der spezialisierten Module basierend auf wants-Variablen
-  imports = lib.optionals wantsHamradio [ ./hamradio.nix ]
-           ++ lib.optionals wantsNetworking [ ./networking.nix ]
-           ++ lib.optionals wantsNfc [ ./nfc.nix ]
-           ++ lib.optionals wantsPtls [ ./ptls.nix ]
-           ++ lib.optionals wantsGames [ ./games.nix ];
+  imports = [
+    ./hamradio.nix
+    ./networking.nix
+    ./nfc.nix
+    ./ptls.nix
+    ./games.nix
+  ];
   environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages ++ [ javawsWrapper ];
   programs.vscode = {
     enable = true;
