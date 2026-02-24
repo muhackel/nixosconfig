@@ -31,7 +31,7 @@ let
     kicad
     mpv
     meld
-    #freecad BROKEN CMAKE BOOST?
+    freecad
     gpu-viewer
     gparted
     vscode
