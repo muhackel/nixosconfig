@@ -6,18 +6,17 @@ let
     kdePackages.filelight
     kdePackages.partitionmanager
     kdePackages.ksystemlog
-    kdePackages.krdc
-    # BROKEN 
-    #kdePackages.umbrello
-    kdePackages.marble
-    kdePackages.krohnkite
+    kdePackages.krdc 
+    #BROKEN kdePackages.umbrello
+    #kdePackages.marble
+    #kdePackages.krohnkite
     kdePackages.kalgebra
     kdePackages.sddm-kcm
   ];
 in
 {
   services.displayManager.sddm = {
-    enable = cfg.wayland;
+    enable = cfg.plasma6;
     wayland.enable = true;
   };
 

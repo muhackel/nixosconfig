@@ -2,9 +2,8 @@
 
 {
   options.local.features = {
-    xserver = lib.mkEnableOption "X11/Xserver desktop environment";
-    wayland = lib.mkEnableOption "Wayland display server";
-    plasma6 = lib.mkEnableOption "KDE Plasma 6 desktop environment";
+    xmonad = lib.mkEnableOption "xmonad X11/Xserver desktop environment";
+    plasma6 = lib.mkEnableOption "KDE Plasma 6 Wayland desktop environment";
     hamradio = lib.mkEnableOption "ham radio software";
     networking = lib.mkEnableOption "networking tools";
     nfc = lib.mkEnableOption "NFC tools";
