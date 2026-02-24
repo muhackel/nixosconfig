@@ -117,7 +117,6 @@
           features = {
             wayland = true;
             plasma6 = true;
-            hamradio = true;
             networking = true;
             nfc = true;
             ptls = true;

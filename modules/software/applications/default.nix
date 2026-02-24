@@ -31,7 +31,7 @@ let
     kicad
     mpv
     meld
-    freecad
+    #freecad BROKEN CMAKE BOOST?
     gpu-viewer
     gparted
     vscode
@@ -87,6 +87,7 @@ let
     testdisk
     exfat
     exfatprogs
+    witr # Why is this runneng? 
   ];
   communicationpkgs = with pkgs; [ 
     signal-desktop 
