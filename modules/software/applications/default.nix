@@ -88,6 +88,7 @@ let
     exfat
     exfatprogs
     witr # Why is this runneng? 
+
   ];
   communicationpkgs = with pkgs; [ 
     signal-desktop 
@@ -123,6 +124,10 @@ in
   };
   programs.evolution = {
     enable = true;
+  };
+  programs.gnupg = {
+    agent.enable = true;
+    package = pkgs.gnupg;
   };
   programs.direnv = {
     enable = true;
