@@ -72,7 +72,6 @@
         HAL9000 = mkHost {
           hostModule = ./modules/host/HAL9000;
           features = {
-            wayland = true;
             plasma6 = true;
             hamradio = true;
             networking = true;
@@ -89,7 +88,6 @@
         SPIELKISTE = mkHost {
           hostModule = ./modules/host/SPIELKISTE;
           features = {
-            wayland = true;
             plasma6 = true;
             hamradio = true;
             networking = true;
@@ -115,7 +113,6 @@
         BFG9000 = mkHost {
           hostModule = ./modules/host/BFG9000;
           features = {
-            wayland = true;
             plasma6 = true;
             networking = true;
             nfc = true;

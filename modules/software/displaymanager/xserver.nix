@@ -29,7 +29,7 @@ let
 in
 {
   services.xserver = {
-    enable = cfg.xserver;
+    enable = cfg.xmonad;
     enableCtrlAltBackspace = true;
 
     windowManager.xmonad = {
