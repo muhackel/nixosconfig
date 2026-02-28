@@ -15,7 +15,7 @@
     trusted-users = [ "root" "muhackel" ];
   };
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable-small";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -89,7 +89,7 @@
           hostModule = ./modules/host/SPIELKISTE;
           features = {
             plasma6 = true;
-            hamradio = true;
+            #hamradio = true;
             networking = true;
             nfc = true;
             ptls = true;
