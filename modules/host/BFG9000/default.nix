@@ -10,6 +10,17 @@
     ../../hardware/printer/HP
     ../../hardware/printer/HP/hplj4100
   ];
+  nixpkgs.overlays = [
+        (final: prev: {
+          ferdium = prev.ferdium.overrideAttrs (oldAttrs: {
+            # Wir hängen unsere Flags an den bestehenden Wrapper-Prozess an
+            postFixup = (oldAttrs.postFixup or "") + ''
+              wrapProgram $out/bin/ferdium \
+                --add-flags "--disable-gpu --disable-software-rasterizer"
+            '';
+          });
+        })
+      ];
   #boot.kernelPackages = pkgs.linuxPackages_latest;
   programs.gamemode = {
     settings = {

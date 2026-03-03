@@ -68,16 +68,7 @@ in
       intelBusId =  "PCI:0:2:0";
     };
   };
-  # Override the default package configuration for ferdium to disable gpu acceleration, which causes issues on optimus systems
-  nixpkgs.config.packageOverrides = pkgs: {
-    ferdium = pkgs.ferdium.overrideAttrs (oldAttrs: {
-      nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [ pkgs.makeWrapper ];
-      postInstall = (oldAttrs.postInstall or "") + ''
-        wrapProgram $out/bin/ferdium \
-          --add-flags "--disable-gpu --disable-software-rasterizer"
-      '';
-    });
-  };
+
   # set the xserver video drivers
   services.xserver.videoDrivers = [
     #  "intel"
