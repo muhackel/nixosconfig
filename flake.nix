@@ -89,7 +89,7 @@
           hostModule = ./modules/host/SPIELKISTE;
           features = {
             plasma6 = true;
-            #hamradio = true;
+            hamradio = true;
             networking = true;
             nfc = true;
             ptls = true;
