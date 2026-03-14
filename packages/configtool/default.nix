@@ -6,7 +6,23 @@ pkgs.stdenv.mkDerivation {
 
   src = ./ConfigTool.zip;
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = with pkgs; [
+    unzip
+    autoPatchelfHook
+  ];
+
+  buildInputs = with pkgs; [
+    gtk3
+    pango
+    cairo
+    atk
+    gdk-pixbuf
+    glib
+    libx11
+    libunwind
+    libcxx
+    stdenv.cc.cc.lib
+  ];
 
   unpackPhase = ''
     unzip $src -d .
@@ -14,24 +30,18 @@ pkgs.stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out
-    cp -r . $out/
+    cp -r ConfigTool $out/ConfigTool
 
-    # Hauptbinary ausführbar machen
-    chmod +x $out/ConfigTool/ConfigTool
+    chmod +x "$out/ConfigTool/ConfigTool"
+    chmod +x "$out/ConfigTool/Tools/x64/Emulator"
 
-    # Alle .so, .so.*, .bce, Emulator ausführbar machen
-    find $out -type f -name "*.so" -exec chmod +x {} \;
-    find $out -type f -name "*.so.*" -exec chmod +x {} \;
-    find $out -type f -name "*.bce" -exec chmod +x {} \;
-    find $out -type f -name "Emulator" -exec chmod +x {} \;
-    echo "Set executable flags and patched binaries"
     mkdir -p $out/bin
-    ln -s $out/ConfigTool/ConfigTool $out/bin/configtool
+    ln -s "$out/ConfigTool/ConfigTool" $out/bin/configtool
   '';
 
   meta = {
-    description = "ConfigTool ZIP unpacker";
-    platforms = pkgs.lib.platforms.linux;
+    description = "PTLS ConfigTool";
+    platforms = lib.platforms.linux;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
   };
 }
