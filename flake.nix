@@ -14,117 +14,71 @@
     ];
     trusted-users = [ "root" "muhackel" ];
   };
+
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, lanzaboote, ... }:
+  outputs = { self, nixpkgs, home-manager, lanzaboote, ... }:
     let
-      lib = nixpkgs.lib;
+      lib    = nixpkgs.lib;
+      myLib  = import ./lib { inherit lib home-manager self; };
 
-      # ── Gemeinsame Module für alle Desktop-Hosts ──
-      commonModules = [
-        ./modules/options.nix
-        ./configuration.nix
-        ./modules/user/muhackel
-        ./modules/software/fonts
-        ./modules/software/localisation
-        ./modules/software/applications
-        ./modules/software/virtualisation
-        ./modules/software/displaymanager
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.muhackel = import ./modules/user/muhackel/home.nix;
-        }
-      ];
-
-      # ── Helper: Desktop-Host erzeugen ──
-      mkHost = {
-        hostModule,
-        stateVersion ? "26.05",
-        features,
-        extraModules ? [],
-      }:
-      lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          { system.stateVersion = stateVersion;
-            local.features = features;
-          }
-          hostModule
-        ] ++ extraModules ++ commonModules;
+      # ── Feature-Set für alle Desktop-Hosts ──
+      commonFeatures = {
+        plasma6    = true;
+        hamradio   = true;
+        networking = true;
+        nfc        = true;
+        ptls       = true;
+        games      = true;
+        docker     = true;
+        winboat    = true;
+        virtualbox = true;
+        libvirt    = true;
       };
 
     in {
       nixosConfigurations = {
 
-        HAL9000 = mkHost {
+        HAL9000 = myLib.mkHost {
           hostModule = ./modules/host/HAL9000;
-          features = {
-            plasma6 = true;
-            hamradio = true;
-            networking = true;
-            nfc = true;
-            ptls = true;
-            games = true;
-            docker = true;
-            winboat = true;
-            virtualbox = true;
-            libvirt = true;
-          };
+          features   = commonFeatures;
         };
 
-        SPIELKISTE = mkHost {
-          hostModule = ./modules/host/SPIELKISTE;
-          features = {
-            plasma6 = true;
-            hamradio = true;
-            networking = true;
-            nfc = true;
-            ptls = true;
-            games = true;
-            docker = true;
-            winboat = true;
-            virtualbox = true;
-            libvirt = true;
-          };
+        SPIELKISTE = myLib.mkHost {
+          hostModule   = ./modules/host/SPIELKISTE;
+          features     = commonFeatures;
           extraModules = [
             lanzaboote.nixosModules.lanzaboote
             { boot.loader.systemd-boot.enable = lib.mkForce false;
               boot.lanzaboote = {
-                enable = true;
+                enable    = true;
                 pkiBundle = "/var/lib/sbctl";
               };
             }
           ];
         };
 
-        BFG9000 = mkHost {
+        BFG9000 = myLib.mkHost {
           hostModule = ./modules/host/BFG9000;
-          features = {
-            plasma6 = true;
-            networking = true;
-            nfc = true;
-            ptls = true;
-            games = true;
-            docker = true;
-            winboat = true;
-            virtualbox = true;
-            libvirt = true;
-          };
+          features   = commonFeatures // { hamradio = false; };
         };
 
+      };
+
+      checks.x86_64-linux = {
+        HAL9000    = self.nixosConfigurations.HAL9000.config.system.build.toplevel;
+        SPIELKISTE = self.nixosConfigurations.SPIELKISTE.config.system.build.toplevel;
+        BFG9000    = self.nixosConfigurations.BFG9000.config.system.build.toplevel;
       };
     };
 }
