@@ -87,7 +87,8 @@ let
     testdisk
     exfat
     exfatprogs
-    witr # Why is this runneng? 
+    witr # Why is this runneng?
+    claude-code
 
   ];
   communicationpkgs = with pkgs; [
@@ -110,6 +111,9 @@ in
     ./games.nix
   ];
   environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages ++ [ javawsWrapper ];
+  programs.nix-ld = {
+    enable = true;
+  };
   programs.vscode = {
     enable = true;
   };
