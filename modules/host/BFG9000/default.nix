@@ -9,6 +9,7 @@
     ../../hardware/printer
     ../../hardware/printer/HP
     ../../hardware/printer/HP/hplj4100
+    ./nm-dispatcher.nix
   ];
   nixpkgs.overlays = [
         (final: prev: {
