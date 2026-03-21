@@ -68,7 +68,7 @@ in
       intelBusId =  "PCI:0:2:0";
     };
   };
-  nixpkgs.config.cudaSupport = true;
+  # nixpkgs.config.cudaSupport = true;
 
   # set the xserver video drivers
   services.xserver.videoDrivers = [
