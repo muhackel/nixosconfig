@@ -22,6 +22,10 @@ in
     enable = true;
     tray.enable = true;
   };
+  xdg.configFile."ccstatusline/settings.json" = {
+    source = ./ccstatusline-settings.json;
+    force = true;
+  };
   xdg.configFile."plasma-localerc" = {
     text = ''
       [Formats]
