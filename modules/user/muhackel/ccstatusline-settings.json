@@ -36,6 +36,15 @@
         "type": "flex-separator",
         "color": ""
       },
+            {
+        "id": "cac265b3-2cbb-4db3-b16e-104c7f033d17",
+        "type": "tokens-total",
+        "color": ""
+      },
+      {
+        "id": "314dff3b-00ba-4922-837b-f48cdec9a1aa",
+        "type": "separator"
+      },
       {
         "id": "f1158067-d11e-4e64-b1ce-51a6a1742b1a",
         "type": "session-clock",
@@ -99,11 +108,11 @@
         "color": ""
       },
       {
-        "id": "685c3fde-fbd2-4db9-bcbf-2928ed07c1e9",
-        "type": "session-usage",
+        "id": "8e024689-bdf5-4db4-b74a-ddcbb6c9f406",
+        "type": "reset-timer",
         "color": "",
         "metadata": {
-          "display": "progress"
+          "display": "time"
         }
       },
       {
@@ -111,11 +120,11 @@
         "type": "separator"
       },
       {
-        "id": "8e024689-bdf5-4db4-b74a-ddcbb6c9f406",
-        "type": "reset-timer",
+        "id": "685c3fde-fbd2-4db9-bcbf-2928ed07c1e9",
+        "type": "session-usage",
         "color": "",
         "metadata": {
-          "display": "time"
+          "display": "progress"
         }
       }
     ],
@@ -158,31 +167,21 @@
         "color": ""
       },
       {
-        "id": "cac265b3-2cbb-4db3-b16e-104c7f033d17",
-        "type": "tokens-total",
+        "id": "fbd2fd62-9b50-4d71-9b8e-1ffac74bdbb5",
+        "type": "weekly-reset-timer",
         "color": ""
-      },
-      {
-        "id": "314dff3b-00ba-4922-837b-f48cdec9a1aa",
-        "type": "flex-separator",
-        "color": ""
-      },
-      {
-        "id": "f8f0d276-086e-4386-aaf5-d4393ec77faa",
-        "type": "weekly-usage",
-        "color": "",
-        "metadata": {
-          "display": "progress-short"
-        }
       },
       {
         "id": "15cc953d-a76d-41a0-a038-37024a313541",
         "type": "separator"
       },
       {
-        "id": "fbd2fd62-9b50-4d71-9b8e-1ffac74bdbb5",
-        "type": "weekly-reset-timer",
-        "color": ""
+        "id": "f8f0d276-086e-4386-aaf5-d4393ec77faa",
+        "type": "weekly-usage",
+        "color": "",
+        "metadata": {
+          "display": "progress"
+        }
       }
     ]
   ],
