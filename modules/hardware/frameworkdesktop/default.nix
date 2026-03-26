@@ -58,7 +58,7 @@ in
     initrd.enable = true;
     opencl.enable = true;
   };
-  nixpkgs.config.rocmSupport = true;
+  #nixpkgs.config.rocmSupport = true;
   services.lact.enable = true;
   services.xserver.videoDrivers = [
     "amdgpu" 

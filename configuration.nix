@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  usedOverlays = [ 
+  usedOverlays = [
     (import overlays/osm-gps-map) 
     (import overlays/proxmark3)
   ];
