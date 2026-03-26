@@ -61,7 +61,10 @@ in
     src="$HOME/.claude/claude.json"
     dst="$HOME/.claude.json"
     if [ -f "$src" ]; then
+      echo "Claude: Symlink $dst -> $src"
       ln -sf "$src" "$dst"
+    else
+      echo "Claude: $src nicht gefunden, überspringe Symlink"
     fi
   '';
 
