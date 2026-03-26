@@ -90,6 +90,7 @@ let
     witr # Why is this runneng?
     claude-code
     (callPackage ../../../packages/mcpvault {})
+    (callPackage ../../../packages/better-sqlite3 {})
   ];
   communicationpkgs = with pkgs; [
     signal-desktop
