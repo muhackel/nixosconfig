@@ -92,6 +92,7 @@ let
     (callPackage ../../../packages/mcpvault {})
     (callPackage ../../../packages/better-sqlite3 {})
   ];
+
   communicationpkgs = with pkgs; [
     signal-desktop
     element-desktop
@@ -163,6 +164,18 @@ in
   #    configDir = "/home/muhackel/.config/syncthing";
   #    dataDir = "/home/muhackel";
   #};
+  # Claude Code erwartet ~/.claude.json, die eigentliche Datei liegt in ~/.claude/
+  system.activationScripts.claudeJsonSymlink = ''
+    src="/home/muhackel/.claude/claude.json"
+    dst="/home/muhackel/.claude.json"
+    if [ -f "$src" ]; then
+      echo "Claude: Symlink $dst -> $src"
+      ln -sf "$src" "$dst"
+    else
+      echo "Claude: $src nicht gefunden, überspringe Symlink"
+    fi
+  '';
+
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];

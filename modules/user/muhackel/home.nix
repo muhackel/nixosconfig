@@ -55,19 +55,6 @@ in
     # falls Plasma sie vorher selbst angelegt hat.
     force = true;
   };
-  # Symlink ~/.claude.json -> ~/.claude/claude.json
-  # Claude Code erwartet ~/.claude.json, die eigentliche Datei liegt in ~/.claude/
-  home.activation.claudeJsonSymlink = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    src="$HOME/.claude/claude.json"
-    dst="$HOME/.claude.json"
-    if [ -f "$src" ]; then
-      echo "Claude: Symlink $dst -> $src"
-      ln -sf "$src" "$dst"
-    else
-      echo "Claude: $src nicht gefunden, überspringe Symlink"
-    fi
-  '';
-
   home.sessionVariables = {
     # DICPATH sagt Hunspell, wo die Wörterbücher liegen
     DICPATH = "${config.home.homeDirectory}/.nix-profile/share/hunspell:/run/current-system/sw/share/hunspell";
