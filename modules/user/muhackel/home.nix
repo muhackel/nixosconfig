@@ -23,7 +23,7 @@ in
     settings = {
       window = {
         opacity = 0.75;
-        blur = true;
+        #only osx? blur = true;
       };
     };
   };
