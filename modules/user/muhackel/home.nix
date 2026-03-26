@@ -4,7 +4,7 @@ let
 in
 {
   home.stateVersion = "26.05";
-  ### evaluation warning: muhackel profile: 
+  ### evaluation warning: muhackel profile:
   ### You have set either `nixpkgs.config` or `nixpkgs.overlays` while using `home-manager.useGlobalPkgs`.
   ### This will soon not be possible. Please remove all `nixpkgs` options when using `home-manager.useGlobalPkgs`
   #nixpkgs.config = {
@@ -51,14 +51,14 @@ in
       [Translations]
       LANGUAGE=en_US
     '';
-    # Force sorgt dafür, dass Home Manager die Datei überschreibt, 
+    # Force sorgt dafür, dass Home Manager die Datei überschreibt,
     # falls Plasma sie vorher selbst angelegt hat.
     force = true;
   };
   home.sessionVariables = {
     # DICPATH sagt Hunspell, wo die Wörterbücher liegen
     DICPATH = "${config.home.homeDirectory}/.nix-profile/share/hunspell:/run/current-system/sw/share/hunspell";
-    
+
     # ASPELL_CONF setzt die Standard-Sprache für Aspell
     ASPELL_CONF = "lang de_DE";
   };

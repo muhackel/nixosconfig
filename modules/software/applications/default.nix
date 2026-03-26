@@ -89,7 +89,7 @@ let
     exfatprogs
     witr # Why is this runneng?
     claude-code
-
+    (callPackage ../../../packages/mcpvault {})
   ];
   communicationpkgs = with pkgs; [
     signal-desktop
