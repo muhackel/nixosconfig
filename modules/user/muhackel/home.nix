@@ -18,6 +18,15 @@ in
       hwdec = "vaapi"; # maybe vulkan in the future
     };
   };
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      window = {
+        opacity = 0.75;
+        blur = true;
+      };
+    };
+  };
   services.syncthing = {
     enable = true;
     tray.enable = true;
