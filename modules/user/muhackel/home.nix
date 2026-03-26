@@ -60,7 +60,7 @@ in
   home.activation.claudeJsonSymlink = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     src="$HOME/.claude/claude.json"
     dst="$HOME/.claude.json"
-    if [ -f "$src" ] || [ -L "$dst" ]; then
+    if [ -f "$src" ]; then
       ln -sf "$src" "$dst"
     fi
   '';
