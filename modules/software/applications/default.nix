@@ -166,13 +166,17 @@ in
   #};
   # Claude Code erwartet ~/.claude.json, die eigentliche Datei liegt in ~/.claude/
   system.activationScripts.claudeJsonSymlink = ''
-    src="/home/muhackel/.claude/claude.json"
-    dst="/home/muhackel/.claude.json"
-    if [ -f "$src" ]; then
-      echo "Claude: Symlink $dst -> $src"
-      ln -sf "$src" "$dst"
+    if [ $(cat /proc/uptime | cut -d. -f1) -ge 30 ]; then
+      src="/home/muhackel/.claude/claude.json"
+      dst="/home/muhackel/.claude.json"
+      if [ -f "$src" ]; then
+        echo "Claude: Symlink $dst -> $src"
+        ln -sf "$src" "$dst"
+      else
+        echo "Claude: $src nicht gefunden, überspringe Symlink"
+      fi
     else
-      echo "Claude: $src nicht gefunden, überspringe Symlink"
+      echo "Claude: Symlink-Aktivierung übersprungen (uptime < 30s)"
     fi
   '';
 
