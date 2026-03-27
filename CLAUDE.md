@@ -11,8 +11,8 @@ Projekt — Git mit Branches, kein Commit auf main.
 | Host | Rolle | Hardware | GPU | Besonderheiten |
 |------|-------|----------|-----|----------------|
 | **SPIELKISTE** | Hauptrechner / Gaming-PC | Framework Desktop | AMD (RDNA) | Lanzaboote Secure Boot |
-| **HAL9000** | Notebook | Lenovo ThinkPad 25 | Nvidia (Optimus) | CPU-Undervolting, Autorandr/EDID |
-| **BFG9000** | Arbeitslaptop | Lenovo X1 Extreme G3 | Nvidia (Optimus, open) | 4K-Skalierung, Ferdium GPU-Workaround |
+| **HAL9000** | Notebook | Lenovo ThinkPad 25 | Nvidia (Optimus) | CPU-Undervolting, NFC-Reader, Autorandr/EDID |
+| **BFG9000** | Arbeitslaptop | Lenovo X1 Extreme G3 | Nvidia (Optimus, open) | 4K-Skalierung, Ferdium GPU-Workaround, kein Hamradio |
 | **datengrab** | Heimserver (WIP) | — | — | ZFS, Plex/Jellyfin/*arr, noch nicht in flake.nix |
 
 ## Architektur
@@ -45,3 +45,27 @@ Alle Desktop-Hosts teilen dieselbe `hostId`. ZFS nutzt die `hostId` als Import-G
 ### Initial-Passwörter
 
 Sind im Flake gespeichert — bewusst akzeptiert, da kein System ein Passwort länger als einen Reboot behält.
+
+### stateVersion
+
+Default ist `26.05` (gesetzt in `lib/default.nix`) — nicht ändern ohne guten Grund.
+
+## Build & Deploy
+
+```bash
+# Auf dem jeweiligen Host (erkennt Config am Hostnamen):
+nixos-rebuild switch --sudo
+
+# Mit expliziter Flake-Angabe (Neuinstallation, anderer Rechnername):
+nixos-rebuild switch --sudo --flake .#HOSTNAME
+
+# Remote-Compiling auf SPIELKISTE:
+nixos-rebuild switch --sudo --build-host spielkiste
+```
+
+## Activation Scripts
+
+- **nvd diff** — Zeigt Paketänderungen nach Rebuild (ab Uptime > 30s)
+- **GNS3-Extras** — Symlinks unter `/var/lib/gns3` bei Activation (ab Uptime > 30s)
+
+Kein toter Code — die Uptime-Prüfung verhindert Fehler beim initialen Boot.
