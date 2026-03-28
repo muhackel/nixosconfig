@@ -50,6 +50,28 @@ Sind im Flake gespeichert — bewusst akzeptiert, da kein System ein Passwort l�
 
 Default ist `26.05` (gesetzt in `lib/default.nix`) — nicht ändern ohne guten Grund.
 
+### Winboat-Overlay (`overlays/go-pin/`)
+
+Gezielter Workaround für zwei winboat-spezifische Upstream-Bugs.
+Nur winboat wird gepatcht — alle anderen Pakete behalten ihre Hydra-Cache-Hashes.
+
+1. **Go 1.26 Cross-Compilation** (Go#75734): `_cgo_stub_export: symbol not defined`
+   bei mingw32 Cross-Compilation. Lösung: `pkgsCross.mingwW64.extend` pinnt Go auf 1.25
+   im Cross-Scope.
+
+2. **Electron 41 node-abi**: `node-abi` kennt Electron 41 noch nicht, winboat-Build
+   scheitert bei `@electron/rebuild`. Lösung: `electron = electron_40`.
+
+**Deaktivieren wenn:** nixpkgs-unstable beide Fixes enthält.
+Test: Overlay-Import in `configuration.nix` auskommentieren, `nix flake check` laufen lassen.
+Das Overlay bleibt als Referenz im Repo erhalten.
+
+### SDL3 Test-Timeout Overlay (`overlays/sdl3-test-timeout/`)
+
+Verdreifacht CTest-Timeouts für SDL3 Threading-Tests (`testrwlock` etc.) die in der
+Nix-Sandbox bei parallelen Builds in Timeouts laufen. Aktuell auskommentiert in
+`configuration.nix` — bei Bedarf aktivieren wenn `nix flake check` an SDL3-Tests scheitert.
+
 ## Build & Deploy
 
 ```bash

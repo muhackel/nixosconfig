@@ -2,7 +2,9 @@
 
 let
   usedOverlays = [
-    (import overlays/osm-gps-map) 
+    (import overlays/go-pin)              # Workaround: winboat Go 1.25 + Electron 40 Pin
+    # (import overlays/sdl3-test-timeout)   # Workaround: SDL3 CTest-Timeouts in Sandbox
+    (import overlays/osm-gps-map)
     (import overlays/proxmark3)
   ];
   usedPermittedInsecurePackages = [
