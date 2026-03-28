@@ -72,6 +72,11 @@ Verdreifacht CTest-Timeouts für SDL3 Threading-Tests (`testrwlock` etc.) die in
 Nix-Sandbox bei parallelen Builds in Timeouts laufen. Aktuell auskommentiert in
 `configuration.nix` — bei Bedarf aktivieren wenn `nix flake check` an SDL3-Tests scheitert.
 
+### Build-Troubleshooting
+
+Runbook für Diagnose und Fix von Build-Fehlern nach `flake.lock`-Update:
+→ Vault-Note: `[[NixOS Build-Troubleshooting nach flake.lock Update]]`
+
 ## Build & Deploy
 
 ```bash
