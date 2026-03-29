@@ -4,7 +4,10 @@ Multi-Host NixOS-Flake unter `/home/muhackel/nixosconfig`.
 
 ## Projekttyp
 
-Projekt — Git mit Branches, kein Commit auf main.
+Projekt — Git MEIST OHNE Branches.
+Branches können für temporäre Experimente oder größere Refactorings genutzt werden. 
+User wird Branches fordern wenn sie gewünscht sind.
+Branches müssen erhalten bleiben wenn sie gemerged wurden "--no-ff" 
 
 ## Hosts
 
@@ -75,7 +78,7 @@ Nix-Sandbox bei parallelen Builds in Timeouts laufen. Aktuell auskommentiert in
 ### Build-Troubleshooting
 
 Runbook für Diagnose und Fix von Build-Fehlern nach `flake.lock`-Update:
-→ Vault-Note: `[[NixOS Build-Troubleshooting nach flake.lock Update]]`
+→ Vault-Note: `[[nix/troubleshooting/build-fehler-nach-flake-update]]`
 
 ## Build & Deploy
 
