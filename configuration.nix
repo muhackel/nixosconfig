@@ -24,6 +24,8 @@ in
     permittedInsecurePackages = usedPermittedInsecurePackages;
   };
   nixpkgs.overlays = usedOverlays;
+  environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
+  environment.variables.NIXPKGS_ALLOW_BROKEN = "1";
   nix.settings = (import ./lib/caches.nix) // {
     auto-optimise-store = true;
     experimental-features = [ "nix-command" "flakes" ];
