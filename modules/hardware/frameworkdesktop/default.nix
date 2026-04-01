@@ -7,6 +7,7 @@ let
     libva-utils
     clinfo
     sbctl
+    framework-tool
     #modem-manager-gui
   ];
   # Extra Graphics Packages
