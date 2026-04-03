@@ -1,4 +1,4 @@
-{ lib, buildNpmPackage, fetchFromGitHub, python3, nodePackages }:
+{ lib, buildNpmPackage, fetchFromGitHub, python3, node-gyp }:
 
 buildNpmPackage rec {
   pname = "better-sqlite3";
@@ -17,7 +17,7 @@ buildNpmPackage rec {
 
   npmDepsHash = "sha256-Tr1/GLm9oxUblpOZF6HvBK+XCArQsVPVKXRfg99Jxac=";
 
-  nativeBuildInputs = [ python3 nodePackages.node-gyp ];
+  nativeBuildInputs = [ python3 node-gyp ];
 
   buildPhase = ''
     runHook preBuild

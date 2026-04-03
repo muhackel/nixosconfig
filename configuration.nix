@@ -2,7 +2,8 @@
 
 let
   usedOverlays = [
-    (import overlays/go-pin)              # Workaround: winboat Go 1.25 + Electron 40 Pin
+    (import overlays/go-pin)              # Workaround: winboat Go 1.25 Pin
+    (import overlays/claude-code-pin)     # Pin: npm-Version 2.1.88 unpublished
     # (import overlays/sdl3-test-timeout)   # Workaround: SDL3 CTest-Timeouts in Sandbox
     (import overlays/osm-gps-map)
     (import overlays/proxmark3)

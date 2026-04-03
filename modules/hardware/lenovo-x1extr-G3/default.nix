@@ -96,8 +96,8 @@ in
     pkgs.modemmanager
   ];
   systemd.services = {
-    ModemManager.wantedBy = [ "multi-user.target" ];
-  };
+    #ModemManager.wantedBy = [ "multi-user.target" ];
+  };# disable modem is not properly supported by linux
 
   services.pipewire = {
     enable = true;

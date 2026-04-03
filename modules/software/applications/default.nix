@@ -102,7 +102,7 @@ let
     libsForQt5.qt5.qtwebengine # aus kompatibilitätsgründen mit collect-garbage? need to watch ... dependency von teamspeak3
     teamspeak3
   ];
-  devpackages = with pkgs; [ cmake automake python3 ghc nodePackages.nodejs ];
+  devpackages = with pkgs; [ cmake automake python3 ghc ];
 in
 {
   imports = [
