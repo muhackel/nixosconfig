@@ -55,19 +55,22 @@ Default ist `26.05` (gesetzt in `lib/default.nix`) — nicht ändern ohne guten 
 
 ### Winboat-Overlay (`overlays/go-pin/`)
 
-Gezielter Workaround für zwei winboat-spezifische Upstream-Bugs.
-Nur winboat wird gepatcht — alle anderen Pakete behalten ihre Hydra-Cache-Hashes.
+Workaround für winboat Go 1.26 Cross-Compilation Bug (Go#75734):
+`_cgo_stub_export: symbol not defined` bei mingw32 Cross-Compilation.
+Lösung: `pkgsCross.mingwW64.extend` pinnt Go auf 1.25 im Cross-Scope.
 
-1. **Go 1.26 Cross-Compilation** (Go#75734): `_cgo_stub_export: symbol not defined`
-   bei mingw32 Cross-Compilation. Lösung: `pkgsCross.mingwW64.extend` pinnt Go auf 1.25
-   im Cross-Scope.
+Electron-41-Fix wurde upstream behoben und aus dem Overlay entfernt.
 
-2. **Electron 41 node-abi**: `node-abi` kennt Electron 41 noch nicht, winboat-Build
-   scheitert bei `@electron/rebuild`. Lösung: `electron = electron_40`.
-
-**Deaktivieren wenn:** nixpkgs-unstable beide Fixes enthält.
+**Deaktivieren wenn:** nixpkgs-unstable den Go-Fix enthält.
 Test: Overlay-Import in `configuration.nix` auskommentieren, `nix flake check` laufen lassen.
 Das Overlay bleibt als Referenz im Repo erhalten.
+
+### Claude-Code-Pin (`overlays/claude-code-pin/`)
+
+Pin auf claude-code 2.1.91 — nixpkgs enthält 2.1.88, das von npm unpublished wurde (404).
+Baut das Paket via `buildNpmPackage` mit eigener `package-lock.json`.
+
+**Entfernen wenn:** nixpkgs eine aktuelle claude-code-Version hat.
 
 ### SDL3 Test-Timeout Overlay (`overlays/sdl3-test-timeout/`)
 
