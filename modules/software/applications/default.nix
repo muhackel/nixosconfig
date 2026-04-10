@@ -164,6 +164,7 @@ in
   #    configDir = "/home/muhackel/.config/syncthing";
   #    dataDir = "/home/muhackel";
   #};
+  
   # Claude Code erwartet ~/.claude.json, die eigentliche Datei liegt in ~/.claude/
   system.activationScripts.claudeJsonSymlink = ''
     if [ $(cat /proc/uptime | cut -d. -f1) -ge 30 ]; then
