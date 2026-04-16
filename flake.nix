@@ -25,13 +25,17 @@
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    claude-desktop = {
+      url = "github:aaddrick/claude-desktop-debian";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # flake-utils.url = "github:numtide/flake-utils";  # for future use (multi-arch outputs etc.)
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, ... }:
+  outputs = { self, nixpkgs, home-manager, lanzaboote, claude-desktop, ... }:
     let
       lib    = nixpkgs.lib;
-      myLib  = import ./lib { inherit lib home-manager self; };
+      myLib  = import ./lib { inherit lib home-manager self claude-desktop; };
 
       # ── Feature-Set für alle Desktop-Hosts ──
       commonFeatures = {

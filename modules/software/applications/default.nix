@@ -46,6 +46,7 @@ let
     obsidian
     veracrypt
     vlc
+    claude-desktop-fhs # Claude Desktop App (aaddrick/claude-desktop-debian)
     # qutebrowser
   ];
   clipkgs = with pkgs; [
