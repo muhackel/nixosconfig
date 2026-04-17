@@ -92,6 +92,8 @@ let
     claude-code
     (callPackage ../../../packages/mcpvault {})
     (callPackage ../../../packages/better-sqlite3 {})
+    gh
+    nh
   ];
 
   communicationpkgs = with pkgs; [
