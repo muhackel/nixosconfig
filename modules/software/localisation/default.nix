@@ -48,6 +48,7 @@ in
   };
 
   console = {
+    packages = [ pkgs.terminus_font ];
     font = "Lat2-Terminus16";
     useXkbConfig = true;
   };
