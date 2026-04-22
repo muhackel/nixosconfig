@@ -32,6 +32,9 @@ in
   # Additional Kernel Modules for the system
   boot.kernelModules = [  ];
   boot.extraModulePackages = [ ];
+  # AMD-Plattform: kvm_intel wird sonst automatisch geladen und wirft
+  # "VMX not supported by CPU" pro Core beim Boot.
+  boot.blacklistedKernelModules = [ "kvm_intel" ];
   #boot.zfs.allowHibernation = true;
 
 
