@@ -39,6 +39,8 @@ in
   };
   services.openssh.enable = true;
   security.sudo.wheelNeedsPassword = false;
+  # Pipewire/Wireplumber brauchen rtkit-daemon für Realtime-Scheduling.
+  security.rtkit.enable = true;
   programs.zsh.enable = true;
   services.fstrim.enable = true;
   services.fwupd.enable = true;
