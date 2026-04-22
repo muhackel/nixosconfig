@@ -49,7 +49,8 @@ in
 
   console = {
     packages = [ pkgs.terminus_font ];
-    font = "Lat2-Terminus16";
+    # ter-116n = Terminus 16px normal aus terminus_font (nativ, ohne kbd-Suchpfad-Probleme).
+    font = "ter-116n";
     useXkbConfig = true;
   };
 }
