@@ -48,9 +48,9 @@ in
   };
 
   console = {
-    packages = [ pkgs.terminus_font ];
-    # ter-116n = Terminus 16px normal aus terminus_font (nativ, ohne kbd-Suchpfad-Probleme).
-    font = "ter-116n";
+    # Absoluter Pfad: setfont findet ihn ohne kbd-Standardpfad-Suche
+    # (auf NixOS existieren /usr/lib/kbd/consolefonts etc. nicht).
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-116n.psf.gz";
     useXkbConfig = true;
   };
 }
