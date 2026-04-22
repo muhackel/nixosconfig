@@ -46,6 +46,14 @@ in
     enableWifi = true;
     enableModemGPS = true;
   };
+  # Upstream geoclue-demo-agent.desktop verweist auf /usr/lib/... (nicht-NixOS).
+  # Hidden=true unterdrückt den User-Service, den der xdg-autostart-generator sonst baut.
+  environment.etc."xdg/autostart/geoclue-demo-agent.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Geoclue Agent
+    Hidden=true
+  '';
 
 
   services.avahi = {
