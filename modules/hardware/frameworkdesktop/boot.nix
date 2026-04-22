@@ -10,5 +10,9 @@
       netbootxyz.enable = true;
     };
     efi.canTouchEfiVariables = true;
-  }; 
+  };
+
+  # Steam/Wine triggern massenhaft Bus-Lock-Traps (x86/split lock detection).
+  # "off" statt "warn" (Default): kein dmesg-Spam, keine Prozess-Stalls beim Traps.
+  boot.kernelParams = [ "split_lock_detect=off" ];
 }
