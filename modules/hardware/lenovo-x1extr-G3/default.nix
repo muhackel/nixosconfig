@@ -43,6 +43,7 @@ in
   services.avahi = {
     enable = true;
     openFirewall = true;
+    nssmdns4 = true;
   };
 
   hardware.graphics.enable = true;  # Before 24.11: hardware.opengl.driSupport
