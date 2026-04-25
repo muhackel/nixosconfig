@@ -6,6 +6,7 @@ let
     # (import overlays/claude-code-pin)     # Pin: npm-Version
     # (import overlays/sdl3-test-timeout)   # Workaround: SDL3 CTest-Timeouts in Sandbox
     (import overlays/spamassassin-ssl-test) # Workaround: spamd_ssl.t SSL-Test-Failure
+    (import overlays/openldap-flaky-test)   # Workaround: test017-syncreplication-refresh flaky
     (import overlays/osm-gps-map)
     (import overlays/proxmark3)
   ];
