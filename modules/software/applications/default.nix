@@ -94,6 +94,7 @@ let
     (callPackage ../../../packages/better-sqlite3 {})
     gh
     nh
+    copyparty
   ];
 
   communicationpkgs = with pkgs; [
