@@ -11,12 +11,7 @@ let
     (import overlays/proxmark3)
   ];
   usedPermittedInsecurePackages = [
-      "libxml2-2.13.8"
-      "libsoup-2.74.3"
-      "qtwebengine-5.15.19"
-      "ventoy-1.1.10"
-      "dotnet-sdk-6.0.428"
-      "dotnet-runtime-6.0.36"
+      "ventoy-1.1.12"
     ];
 in
 {

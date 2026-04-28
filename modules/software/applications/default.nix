@@ -103,8 +103,8 @@ let
     ferdium
     discord
     hexchat
-    libsForQt5.qt5.qtwebengine # aus kompatibilitätsgründen mit collect-garbage? need to watch ... dependency von teamspeak3
-    teamspeak3
+    #libsForQt5.qt5.qtwebengine # aus kompatibilitätsgründen mit collect-garbage? need to watch ... dependency von teamspeak3
+    teamspeak6-client
   ];
   devpackages = with pkgs; [ cmake automake python3 ghc ];
 in
