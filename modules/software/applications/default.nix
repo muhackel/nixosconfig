@@ -75,7 +75,7 @@ let
     nixos-generators
     pciutils
     ranger
-    glances
+    #glances BROKEN
     rclone
     hexyl
     unzip
