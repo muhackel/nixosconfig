@@ -14,6 +14,7 @@
     winboat = lib.mkEnableOption "Winboat tools";
     virtualbox = lib.mkEnableOption "VirtualBox virtualisation";
     libvirt = lib.mkEnableOption "libvirt virtualisation";
+    sound = lib.mkEnableOption "PipeWire sound stack with DeepFilterNet noise suppression";
   };
 
   options.local.userExtraGroups = lib.mkOption {

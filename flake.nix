@@ -49,6 +49,7 @@
         winboat    = true;
         virtualbox = true;
         libvirt    = true;
+        sound      = true;
       };
 
     in {

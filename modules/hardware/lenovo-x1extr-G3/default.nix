@@ -100,12 +100,6 @@ in
     #ModemManager.wantedBy = [ "multi-user.target" ];
   };# disable modem is not properly supported by linux
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    wireplumber.enable = true;
-    pulse.enable = true;
-  };
   # Fingerprint reader configuration is broken under KDE Plasma, explicitly for kwallet keyring integration, therefore disabled here
   services.fprintd.enable = false;
   users.groups.plugdev = {};

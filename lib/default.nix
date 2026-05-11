@@ -5,6 +5,7 @@ let
     "${self}/modules/options.nix"
     "${self}/configuration.nix"
     "${self}/modules/user/muhackel"
+    "${self}/modules/hardware/sound"
     "${self}/modules/software/fonts"
     "${self}/modules/software/localisation"
     "${self}/modules/software/applications"

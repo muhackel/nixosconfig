@@ -87,12 +87,5 @@ in
     #ModemManager.wantedBy = [ "multi-user.target" ];
   };
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    wireplumber.enable = true;
-    pulse.enable = true;
-  };
-
   environment.systemPackages = hwpkgs;
 }

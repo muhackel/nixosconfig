@@ -151,12 +151,6 @@ in
     ModemManager.wantedBy = [ "multi-user.target" ];
   };
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    wireplumber.enable = true;
-    pulse.enable = true;
-  };
   # Validity fingerprint reader configuration is totally broken under linux ... it needs aditional python-validity to exchange TLS Keys with the sensor
   # services.fprintd.enable = true;
   # users.groups.plugdev = {};
