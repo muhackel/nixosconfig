@@ -17,15 +17,19 @@ let
             ]
           }
           capture.props = {
-            node.name    = "capture.deepfilternet_source"
-            node.passive = true
-            audio.rate   = 48000
+            node.name      = "capture.deepfilternet_source"
+            node.passive   = true
+            audio.rate     = 48000
+            audio.channels = 1
+            audio.position = [ MONO ]
           }
           playback.props = {
             node.name        = "deepfilternet_source"
             node.description = "Noise-Suppressed Microphone"
             media.class      = "Audio/Source"
             audio.rate       = 48000
+            audio.channels   = 1
+            audio.position   = [ MONO ]
           }
         }
       }
