@@ -78,6 +78,26 @@ Verdreifacht CTest-Timeouts für SDL3 Threading-Tests (`testrwlock` etc.) die in
 Nix-Sandbox bei parallelen Builds in Timeouts laufen. Aktuell auskommentiert in
 `configuration.nix` — bei Bedarf aktivieren wenn `nix flake check` an SDL3-Tests scheitert.
 
+### Bubblewrap-Setuid Overlay (`overlays/bubblewrap-setuid/`)
+
+Baut `bubblewrap` mit `-Dsupport_setuid=true`. Seit bwrap 0.11.2 (April 2026,
+CVE-2026-41163) wird der setuid-Mode per default ausgebaut — Binaries die trotzdem
+setuid gestartet werden, brechen mit *"setuid use of bubblewrap is not supported in
+this build"* ab.
+
+Trigger: `programs.gamescope.capSysNice = true` in `modules/software/applications/games.nix`
+lässt das nixpkgs Steam-Modul einen setuid-Wrapper für `bwrap` installieren
+(`security.wrappers.bwrap`, Modul-Kommentar: *"needed or steam fails"*) — der dann
+mit dem ungepatchten bwrap crasht.
+
+**Fallback wenn upstream den setuid-Pfad endgültig killt** (Overlay baut nicht mehr):
+`capSysNice = false;` in `games.nix:32` setzen. Der setuid-Wrapper wird dann nicht mehr
+installiert, gamescope verliert `CAP_SYS_NICE` — gamemode mit `enableRenice = true`
+übernimmt das Renicing.
+
+**Entfernen wenn:** nixpkgs den setuid-Build wieder als Default anbietet, oder das
+Steam-Modul nicht mehr auf setuid-bwrap angewiesen ist.
+
 ### Build-Troubleshooting
 
 Runbook für Diagnose und Fix von Build-Fehlern nach `flake.lock`-Update:
