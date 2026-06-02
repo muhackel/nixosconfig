@@ -24,7 +24,7 @@ lib.mkIf config.local.features.hamradio {
     serviceConfig = {
       Type = "oneshot";
       ExecStart = ''
-        ${pkgs.pulseaudio}/bin/pactl load-module module-null-sink sink_name=VirtualSDR sink_properties=device.description=VirtualSDR || true
+        ${pkgs.pulseaudio}/bin/pactl load-module module-null-sink sink_name=VirtualSDR sink_properties="device.description=VirtualSDR node.virtual=true" || true
       '';
       RemainAfterExit = "yes";
     };

@@ -22,10 +22,10 @@ in
 {
   mkHost = { hostModule, stateVersion ? "26.05", features, extraModules ? [] }:
     lib.nixosSystem {
-      system = "x86_64-linux";
       modules = [
         { system.stateVersion = stateVersion;
           local.features = features;
+          nixpkgs.hostPlatform = "x86_64-linux";
         }
         hostModule
       ] ++ extraModules ++ commonModules;

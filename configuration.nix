@@ -6,6 +6,7 @@ let
     # (import overlays/claude-code-pin)     # Pin: npm-Version
     # (import overlays/sdl3-test-timeout)   # Workaround: SDL3 CTest-Timeouts in Sandbox
     (import overlays/bubblewrap-setuid)     # Workaround: bwrap >=0.11.2 ohne support_setuid (Steam-Wrapper-Crash)
+    (import overlays/ts3-legacy)            # TS3-Client aus nixos-25.11 (Qt5-Stack EOL in unstable)
     (import overlays/spamassassin-ssl-test) # Workaround: spamd_ssl.t SSL-Test-Failure
     (import overlays/openldap-flaky-test)   # Workaround: test017-syncreplication-refresh flaky
     (import overlays/osm-gps-map)
