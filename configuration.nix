@@ -2,9 +2,6 @@
 
 let
   usedOverlays = [
-    # (import overlays/go-pin)              # Workaround: winboat Go 1.25 Pin (Go#75734 gefixt in 1.26)
-    # (import overlays/claude-code-pin)     # Pin: npm-Version
-    # (import overlays/sdl3-test-timeout)   # Workaround: SDL3 CTest-Timeouts in Sandbox
     (import overlays/bubblewrap-setuid)     # Workaround: bwrap >=0.11.2 ohne support_setuid (Steam-Wrapper-Crash)
     (import overlays/ts3-legacy)            # TS3-Client aus nixos-25.11 (Qt5-Stack EOL in unstable)
     (import overlays/spamassassin-ssl-test) # Workaround: spamd_ssl.t SSL-Test-Failure
