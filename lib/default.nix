@@ -11,6 +11,7 @@ let
     "${self}/modules/software/applications"
     "${self}/modules/software/virtualisation"
     "${self}/modules/software/displaymanager"
+    "${self}/modules/software/maintenance"
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;

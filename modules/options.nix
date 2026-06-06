@@ -15,6 +15,7 @@
     virtualbox = lib.mkEnableOption "VirtualBox virtualisation";
     libvirt = lib.mkEnableOption "libvirt virtualisation";
     sound = lib.mkEnableOption "PipeWire sound stack with DeepFilterNet noise suppression";
+    bootloaderResyncAfterGc = lib.mkEnableOption "Bootloader/ESP nach automatischem nix-gc neu synchronisieren";
   };
 
   options.local.userExtraGroups = lib.mkOption {

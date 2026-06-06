@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  imports = [
+    ./bootloader-resync.nix
+  ];
+}

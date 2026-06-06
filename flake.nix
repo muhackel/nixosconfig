@@ -50,6 +50,7 @@
         virtualbox = true;
         libvirt    = true;
         sound      = true;
+        bootloaderResyncAfterGc = true;
       };
 
     in {
