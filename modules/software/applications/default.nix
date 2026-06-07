@@ -28,7 +28,7 @@ let
     github-desktop
     google-chrome
     kitty
-    kicad
+    #kicad  # via Flathub
     mpv
     meld
     freecad
