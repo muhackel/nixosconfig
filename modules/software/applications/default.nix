@@ -90,6 +90,7 @@ let
     exfatprogs
     witr # Why is this runneng?
     claude-code
+    codex
     defuddle
     (callPackage ../../../packages/mcpvault {})
     (callPackage ../../../packages/better-sqlite3 {})
