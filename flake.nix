@@ -22,7 +22,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
+      # Gepinnt auf master-Fix-Rev statt Tag v1.0.0: v1.0.0 setzt noch
+      # boot.bootspec.enable=true, das in nixpkgs-unstable (seit 11.06.2026) per
+      # mkRemovedOptionModule entfernt wurde -> Eval-Fehler. Fix: lanzaboote PR #617
+      # ("module: don't set bootspec.enable").
+      # Zurück auf ein Tag wechseln, sobald ein Release > v1.0.0 den Fix enthält.
+      url = "github:nix-community/lanzaboote/0403b4b7e8b2612657f0053a4c315e6c43eee9e6";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     claude-desktop = {

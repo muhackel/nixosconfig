@@ -40,7 +40,5 @@ in
 
   local.userExtraGroups = [ "gamemode" ];
 
-  systemd.user.extraConfig = ''
-  DefaultLimitNOFILE=524288:1048576
-  '';
+  systemd.user.settings.Manager.DefaultLimitNOFILE = "524288:1048576";
 }
