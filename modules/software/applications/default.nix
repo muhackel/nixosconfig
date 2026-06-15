@@ -135,6 +135,20 @@ in
   programs.git = {
     enable = true;
   };
+  # Google-Chrome-Policy: ssh://-Links ohne Bestätigungsdialog direkt starten.
+  # programs.chromium bedient laut nixpkgs (mkEnableOption) auch Google Chrome und Brave;
+  # extraOpts wird nach /etc/opt/chrome/policies/managed/extra.json geschrieben.
+  programs.chromium = {
+    enable = true;
+    extraOpts = {
+      AutoLaunchProtocolsFromOrigins = [
+        {
+          protocol = "ssh";
+          allowed_origins = [ "*" ];
+        }
+      ];
+    };
+  };
   programs.evolution = {
     enable = true;
   };
