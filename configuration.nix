@@ -11,6 +11,11 @@ let
   ];
   usedPermittedInsecurePackages = [
       "ventoy-1.1.12"
+      # Build-Zeit-Tool von claude-desktop (inputs.nixpkgs.follows = "nixpkgs"); nixpkgs
+      # vom 2026-06-28 markiert pnpm 10.29.2 als insecure (CVE-2026-48995/-50014/-50015/
+      # -50016/-50017/-50573/-55699). pnpm wird nur zur Build-Zeit der Electron-App genutzt.
+      # Entfernen, sobald nixpkgs ein gepatchtes pnpm liefert bzw. der claude-desktop-Rev nachzieht.
+      "pnpm-10.29.2"
     ];
 in
 {
