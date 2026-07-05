@@ -1,7 +1,7 @@
-{ lib, home-manager, self, claude-desktop }:
+{ lib, home-manager, self }:
 let
   commonModules = [
-    { nixpkgs.overlays = [ claude-desktop.overlays.default ]; }
+    #{ nixpkgs.overlays = [ claude-desktop.overlays.default ]; }
     "${self}/modules/options.nix"
     "${self}/configuration.nix"
     "${self}/modules/user/muhackel"

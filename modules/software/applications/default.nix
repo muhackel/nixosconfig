@@ -42,11 +42,11 @@ let
     virt-viewer
     remmina
     #rpi-imager
-    transmission_4-qt6
+    transmission_4-qt
     obsidian
     veracrypt
     vlc
-    claude-desktop-fhs # Claude Desktop App (aaddrick/claude-desktop-debian)
+    #claude-desktop-fhs # Claude Desktop App (aaddrick/claude-desktop-debian)
     # qutebrowser
   ];
   clipkgs = with pkgs; [
