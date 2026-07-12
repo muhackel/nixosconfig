@@ -6,6 +6,7 @@ let
     (import overlays/ts3-legacy)            # TS3-Client aus nixos-25.11 (Qt5-Stack EOL in unstable)
     (import overlays/spamassassin-ssl-test) # Workaround: spamd_ssl.t SSL-Test-Failure
     (import overlays/openldap-flaky-test)   # Workaround: test017-syncreplication-refresh flaky
+    (import overlays/patool-skip-tests)     # Workaround: python-patool 4.0.5 Test-Env-Failures (via bottles)
     (import overlays/osm-gps-map)
     (import overlays/proxmark3)
   ];

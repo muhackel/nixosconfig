@@ -64,6 +64,7 @@ Zweck importiert. Die meisten sind temporäre Workarounds für flaky Tests oder 
 | `ts3-legacy` | TS3-Client aus nixos-25.11 (Qt5-Stack EOL in unstable) |
 | `spamassassin-ssl-test` | Workaround: `spamd_ssl.t` SSL-Test-Failure |
 | `openldap-flaky-test` | Workaround: `test017-syncreplication-refresh` flaky |
+| `patool-skip-tests` | Workaround: python-patool 4.0.5 Test-Env-Failures (via bottles) |
 | `osm-gps-map`, `proxmark3` | Paket-Fixes |
 
 **Entfernen wenn:** der jeweilige Upstream-Fix in nixpkgs-unstable landet — Import in

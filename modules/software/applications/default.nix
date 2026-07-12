@@ -31,7 +31,7 @@ let
     #kicad  # via Flathub
     mpv
     meld
-    freecad
+    #freecad  # via Flatpak (zog pdal/vtk/patool, die gegen gdal 3.13 in unstable brechen)
     gpu-viewer
     gparted
     vscode
