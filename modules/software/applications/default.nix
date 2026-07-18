@@ -90,6 +90,7 @@ let
     exfatprogs
     witr # Why is this runneng?
     claude-code
+    ccusage
     codex
     defuddle
     (callPackage ../../../packages/mcpvault {})

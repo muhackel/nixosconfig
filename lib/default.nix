@@ -1,5 +1,8 @@
 { lib, home-manager, self }:
 let
+  # Zentral gepinnte stateVersion (system + home). Home Manager folgt via
+  # osConfig.system.stateVersion. Letzte stable war 26.05 (mkHost-Default unten).
+  stateVersion = "26.11";
   commonModules = [
     #{ nixpkgs.overlays = [ claude-desktop.overlays.default ]; }
     "${self}/modules/options.nix"
@@ -21,7 +24,7 @@ let
   ];
 in
 {
-  mkHost = { hostModule, stateVersion ? "26.05", features, extraModules ? [] }:
+  mkHost = { hostModule, hostStateVersion ? "26.05", features, extraModules ? [] }:
     lib.nixosSystem {
       modules = [
         { system.stateVersion = stateVersion;
