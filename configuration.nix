@@ -12,6 +12,12 @@ let
   ];
   usedPermittedInsecurePackages = [
       "ventoy-1.1.12"
+      # winboat-0.9.0 baut und läuft gegen electron_40; nixpkgs vom 2026-07-19
+      # markiert electron-40.10.5 als insecure/EOL. Anders als der pnpm-Fall unten
+      # ist das eine Laufzeit-Runtime (GUI), keine reine Build-Zeit-Abhängigkeit.
+      # Entfernen, sobald nixpkgs winboat auf ein nicht-EOL-Electron zieht
+      # (dann bricht der Build ohnehin nicht mehr an diesem Eval-Guard).
+      "electron-40.10.5"
       # Build-Zeit-Tool von claude-desktop (inputs.nixpkgs.follows = "nixpkgs"); nixpkgs
       # vom 2026-06-28 markiert pnpm 10.29.2 als insecure (CVE-2026-48995/-50014/-50015/
       # -50016/-50017/-50573/-55699). pnpm wird nur zur Build-Zeit der Electron-App genutzt.
