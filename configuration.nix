@@ -7,6 +7,7 @@ let
     (import overlays/spamassassin-ssl-test) # Workaround: spamd_ssl.t SSL-Test-Failure
     (import overlays/openldap-flaky-test)   # Workaround: test017-syncreplication-refresh flaky
     (import overlays/patool-skip-tests)     # Workaround: python-patool 4.0.5 Test-Env-Failures (via bottles)
+    (import overlays/lact-libdisplay-info)  # Workaround: lact 0.9.1 gegen libdisplay-info 0.3.0 (globale 0.4.0 bricht build.rs)
     (import overlays/osm-gps-map)
     (import overlays/proxmark3)
   ];

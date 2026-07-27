@@ -1,1 +1,3 @@
-
+# nix-build-Ergebnis-Symlinks — gehören nie ins Repo
+/result
+/result-*

@@ -76,10 +76,14 @@ Zweck importiert. Die meisten sind temporäre Workarounds für flaky Tests oder 
 | `spamassassin-ssl-test` | Workaround: `spamd_ssl.t` SSL-Test-Failure |
 | `openldap-flaky-test` | Workaround: `test017-syncreplication-refresh` flaky |
 | `patool-skip-tests` | Workaround: python-patool 4.0.5 Test-Env-Failures (via bottles) |
+| `lact-libdisplay-info` | Pinnt NUR lacts `libdisplay-info` auf 0.3.0 (globale 0.4.0 bricht `libdisplay-info-sys` build.rs, Guard `< 0.4.0`) |
 | `osm-gps-map`, `proxmark3` | Paket-Fixes |
 
 **Entfernen wenn:** der jeweilige Upstream-Fix in nixpkgs-unstable landet — Import in
 `configuration.nix` auskommentieren, `nix flake check`, dann Overlay-Verzeichnis löschen.
+Für `lact-libdisplay-info` speziell: sobald nixpkgs lact auf einen Stand zieht, der
+`libdisplay-info-sys >= 0.4` (bzw. eine 0.4-kompatible Version) bindet — oder nixpkgs
+`libdisplay-info` wieder auf `< 0.4.0` zurückzieht.
 
 ### Bubblewrap-Setuid Overlay (`overlays/bubblewrap-setuid/`)
 

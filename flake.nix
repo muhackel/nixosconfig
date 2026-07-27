@@ -50,6 +50,8 @@
         nfc        = true;
         ptls       = true;
         games      = true;
+        genesis    = false;
+        comlink6   = false;
         docker     = true;
         winboat    = true;
         virtualbox = true;
@@ -68,7 +70,7 @@
 
         SPIELKISTE = myLib.mkHost {
           hostModule   = ./modules/host/SPIELKISTE;
-          features     = commonFeatures;
+          features     = commonFeatures // { genesis = true; comlink6 = true; };
           extraModules = [
             lanzaboote.nixosModules.lanzaboote
             { boot.loader.systemd-boot.enable = lib.mkForce false;

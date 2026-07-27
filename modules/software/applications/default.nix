@@ -106,7 +106,7 @@ let
     ferdium
     discord
     hexchat
-    teamspeak6-client
+    #teamspeak6-client
     ts3-legacy # TS3-Client aus nixos-25.11 (Qt5-Stack), siehe overlays/ts3-legacy
   ];
   devpackages = with pkgs; [ cmake automake python3 ghc ];
@@ -118,6 +118,8 @@ in
     ./nfc.nix
     ./ptls.nix
     ./games.nix
+    ./genesis.nix
+    ./comlink6.nix
   ];
   environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages ++ [ javawsWrapper ];
   programs.nix-ld = {

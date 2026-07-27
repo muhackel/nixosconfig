@@ -9,6 +9,8 @@
     nfc = lib.mkEnableOption "NFC tools";
     ptls = lib.mkEnableOption "PTLS tools";
     games = lib.mkEnableOption "gaming software";
+    genesis = lib.mkEnableOption "Genesis JavaFX-App Wrapper (imperativ unter /opt)";
+    comlink6 = lib.mkEnableOption "Commlink6 JavaFX-Updater Wrapper (imperativ unter /opt)";
     vmwareHost = lib.mkEnableOption "VMware host virtualisation";
     docker = lib.mkEnableOption "Docker container runtime";
     winboat = lib.mkEnableOption "Winboat tools";
