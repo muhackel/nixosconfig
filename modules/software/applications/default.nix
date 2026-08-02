@@ -105,7 +105,6 @@ let
     element-desktop
     ferdium
     discord
-    hexchat
     #teamspeak6-client
     ts3-legacy # TS3-Client aus nixos-25.11 (Qt5-Stack), siehe overlays/ts3-legacy
   ];

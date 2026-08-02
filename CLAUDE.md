@@ -76,14 +76,21 @@ Zweck importiert. Die meisten sind temporäre Workarounds für flaky Tests oder 
 | `spamassassin-ssl-test` | Workaround: `spamd_ssl.t` SSL-Test-Failure |
 | `openldap-flaky-test` | Workaround: `test017-syncreplication-refresh` flaky |
 | `patool-skip-tests` | Workaround: python-patool 4.0.5 Test-Env-Failures (via bottles) |
-| `lact-libdisplay-info` | Pinnt NUR lacts `libdisplay-info` auf 0.3.0 (globale 0.4.0 bricht `libdisplay-info-sys` build.rs, Guard `< 0.4.0`) |
+| `libnfc-nci-ldflags` | Workaround: libnfc-nci linkt `nfcDemoApp` mit gcc statt g++ → `NIX_LDFLAGS = "-lstdc++ -lm"` |
 | `osm-gps-map`, `proxmark3` | Paket-Fixes |
 
 **Entfernen wenn:** der jeweilige Upstream-Fix in nixpkgs-unstable landet — Import in
 `configuration.nix` auskommentieren, `nix flake check`, dann Overlay-Verzeichnis löschen.
-Für `lact-libdisplay-info` speziell: sobald nixpkgs lact auf einen Stand zieht, der
-`libdisplay-info-sys >= 0.4` (bzw. eine 0.4-kompatible Version) bindet — oder nixpkgs
-`libdisplay-info` wieder auf `< 0.4.0` zurückzieht.
+Für `libnfc-nci-ldflags` speziell: sobald upstream/nixpkgs den Link-Schritt auf `CXXLD`
+(g++) umstellt. Das Paket hängt nur an HAL9000 (`hardware.nfc-nci.enable` in
+`modules/hardware/lenovo-tp25/nfc.nix`).
+
+Entfallen: `lact-libdisplay-info` (2026-08-02) — nixpkgs bietet jetzt selbst ein Attribut
+`libdisplay-info_0_3` und lact bindet es direkt; der `.override`-Parameter existiert nicht
+mehr, das Overlay brach die Evaluation.
+
+**Neue Overlay-Verzeichnisse `git add`en** — sonst sieht Nix sie im Flake nicht
+(*"Path … is not tracked by Git"*).
 
 ### Bubblewrap-Setuid Overlay (`overlays/bubblewrap-setuid/`)
 
