@@ -12,7 +12,7 @@ let
     (import overlays/proxmark3)
   ];
   usedPermittedInsecurePackages = [
-      "ventoy-1.1.12"
+      "ventoy-1.1.17"
       # winboat-0.9.0 baut und läuft gegen electron_40; nixpkgs vom 2026-07-19
       # markiert electron-40.10.5 als insecure/EOL. Anders als der pnpm-Fall unten
       # ist das eine Laufzeit-Runtime (GUI), keine reine Build-Zeit-Abhängigkeit.

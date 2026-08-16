@@ -5,5 +5,6 @@
     
   ];
   hardware.logitech.wireless.enable = true;
-  hardware.logitech.wireless.enableGraphical = true;
+  # hardware.logitech.wireless.enableGraphical 
+  programs.solaar.enable = true;
 }
