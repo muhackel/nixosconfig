@@ -20,7 +20,7 @@ let
     freefilesync
     inkscape
     # BROKEN CMAKE rclone-browser
-    libreoffice-fresh
+    libreoffice-stable
     librecad
     qcad
     qdirstat

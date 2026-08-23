@@ -115,7 +115,7 @@ Steam-Modul nicht mehr auf setuid-bwrap angewiesen ist.
 ### Auto-ESP-Resync nach GC (`bootloaderResyncAfterGc`) — UNTESTED
 
 Feature-Flag (`modules/software/maintenance/bootloader-resync.nix`), aktiviert in
-`commonFeatures`. `nix.gc` läuft täglich (`--delete-older-than 14d`), räumt aber die ESP
+`commonFeatures`. `nix.gc` läuft wöchentlich (`--delete-older-than 21d`), räumt aber die ESP
 nicht — verwaiste Bootmenü-Einträge bleiben bis zum nächsten `switch`/`boot`.
 
 Lösung: `bootloader-resync.service` (oneshot) hängt per `ExecStartPost` am `nix-gc.service`

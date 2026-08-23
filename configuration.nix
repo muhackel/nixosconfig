@@ -43,8 +43,8 @@ in
   };
   nix.gc = {
     automatic = true;
-    dates = "daily";
-    options = "--delete-older-than 14d";
+    dates = "weekly";
+    options = "--delete-older-than 21d";
   };
   services.openssh.enable = true;
   security.sudo.wheelNeedsPassword = false;
