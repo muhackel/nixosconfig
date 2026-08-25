@@ -50,8 +50,8 @@
         nfc        = true;
         ptls       = true;
         games      = true;
-        genesis    = false;
-        comlink6   = false;
+        genesis    = true;
+        comlink6   = true;
         docker     = true;
         winboat    = true;
         virtualbox = true;
@@ -70,7 +70,7 @@
 
         SPIELKISTE = myLib.mkHost {
           hostModule   = ./modules/host/SPIELKISTE;
-          features     = commonFeatures // { genesis = true; comlink6 = true; };
+          features     = commonFeatures;
           extraModules = [
             lanzaboote.nixosModules.lanzaboote
             { boot.loader.systemd-boot.enable = lib.mkForce false;
@@ -84,7 +84,10 @@
 
         BFG9000 = myLib.mkHost {
           hostModule = ./modules/host/BFG9000;
-          features   = commonFeatures // { hamradio = false; };
+          features = commonFeatures // {
+            hamradio = false;
+            kmtVpnVm = true;
+          };
         };
 
       };

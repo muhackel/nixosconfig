@@ -39,7 +39,7 @@ nixosconfig/
 |------|-------|----------|-----|----------------|
 | **SPIELKISTE** | Hauptrechner / Gaming-PC | Framework Desktop | AMD (RDNA) | Lanzaboote Secure Boot, LACT GPU-Tuning |
 | **HAL9000** | Notebook | Lenovo ThinkPad 25 | Nvidia (Optimus) | CPU-Undervolting, NFC-Reader, Autorandr/EDID |
-| **BFG9000** | Arbeitslaptop | Lenovo X1 Extreme G3 | Nvidia (Optimus, open) | 4K-Skalierung, kein Hamradio |
+| **BFG9000** | Arbeitslaptop | Lenovo X1 Extreme G3 | Nvidia (Optimus, open) | 4K-Skalierung, kein Hamradio, lokale KMT-VPN-VM |
 | **datengrab** | Heimserver (WIP) | — | — | ZFS, noch nicht in `flake.nix` |
 
 ## Feature-Flags
@@ -57,6 +57,7 @@ Features werden in `modules/options.nix` deklariert und in `flake.nix` pro Host 
 | docker | Docker Container Runtime | ✓ | ✓ | ✓ |
 | virtualbox | VirtualBox + Extension Pack | ✓ | ✓ | ✓ |
 | libvirt | libvirt/QEMU | ✓ | ✓ | ✓ |
+| kmtVpnVm | Persistentes TAP für die lokale KMT-VPN-VM | ✗ | ✗ | ✓ |
 | winboat | Winboat-Tools | ✓ | ✓ | ✓ |
 | xmonad | Xmonad X11 Desktop | ✗ | ✗ | ✗ |
 | vmwareHost | VMware Host | ✗ | ✗ | ✗ |

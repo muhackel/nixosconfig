@@ -15,7 +15,7 @@ Branches müssen erhalten bleiben wenn sie gemerged wurden "--no-ff"
 |------|-------|----------|-----|----------------|
 | **SPIELKISTE** | Hauptrechner / Gaming-PC | Framework Desktop | AMD (RDNA) | Lanzaboote Secure Boot |
 | **HAL9000** | Notebook | Lenovo ThinkPad 25 | Nvidia (Optimus) | CPU-Undervolting, NFC-Reader, Autorandr/EDID |
-| **BFG9000** | Arbeitslaptop | Lenovo X1 Extreme G3 | Nvidia (Optimus, open) | 4K-Skalierung, Ferdium GPU-Workaround, kein Hamradio |
+| **BFG9000** | Arbeitslaptop | Lenovo X1 Extreme G3 | Nvidia (Optimus, open) | 4K-Skalierung, Ferdium GPU-Workaround, kein Hamradio, lokale KMT-VPN-VM |
 | **datengrab** | Heimserver (WIP) | — | — | ZFS, Plex/Jellyfin/*arr, noch nicht in flake.nix |
 
 ## Architektur
@@ -63,6 +63,14 @@ irrelevant, sobald die endgültige `hostId` im Pool-Label steht (Import-Guard gr
 hostid-Mismatch auf einem unclean Pool, also praktisch nur direkt nach der Erstinstallation).
 
 Nicht ohne guten Grund ändern.
+
+### Lokale KMT-VPN-VM auf BFG9000
+
+Das Feature `kmtVpnVm` erzeugt das persistente TAP `kmt-bue` für die vorhandene
+libvirt-Session-VM `R2001-neu`. NetworkManager ignoriert das TAP; systemd-networkd
+verwaltet ausschließlich dieses Interface. Es setzt bei Carrier die statische Adresse
+`90.101.0.158/24` sowie Routen für `90.0.0.0/8` und `224.0.0.0/4`. Ohne laufende VM
+entfernt networkd Adresse und Routen. Die VM startet weiterhin manuell.
 
 ### Overlays
 

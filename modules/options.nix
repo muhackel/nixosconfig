@@ -16,6 +16,7 @@
     winboat = lib.mkEnableOption "Winboat tools";
     virtualbox = lib.mkEnableOption "VirtualBox virtualisation";
     libvirt = lib.mkEnableOption "libvirt virtualisation";
+    kmtVpnVm = lib.mkEnableOption "lokale KMT-VPN-VM mit persistentem TAP";
     sound = lib.mkEnableOption "PipeWire sound stack with DeepFilterNet noise suppression";
     bootloaderResyncAfterGc = lib.mkEnableOption "Bootloader/ESP nach automatischem nix-gc neu synchronisieren";
   };

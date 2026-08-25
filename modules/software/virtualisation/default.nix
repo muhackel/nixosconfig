@@ -6,6 +6,10 @@ let
   ];
 in
 {
+  imports = [
+    ./kmt-vpn.nix
+  ];
+
   local.userExtraGroups =
     lib.optionals cfg.docker [ "docker" ]
     ++ lib.optionals cfg.libvirt [ "libvirtd" ]
