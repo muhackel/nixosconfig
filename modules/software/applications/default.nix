@@ -117,8 +117,6 @@ in
     ./nfc.nix
     ./ptls.nix
     ./games.nix
-    ./genesis.nix
-    ./comlink6.nix
   ];
   environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages ++ [ javawsWrapper ];
   programs.nix-ld = {

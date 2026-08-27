@@ -50,8 +50,6 @@
         nfc        = true;
         ptls       = true;
         games      = true;
-        genesis    = true;
-        comlink6   = true;
         docker     = true;
         winboat    = true;
         virtualbox = true;

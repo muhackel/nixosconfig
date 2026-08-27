@@ -72,6 +72,42 @@ verwaltet ausschließlich dieses Interface. Es setzt bei Carrier die statische A
 `90.101.0.158/24` sowie Routen für `90.0.0.0/8` und `224.0.0.0/4`. Ohne laufende VM
 entfernt networkd Adresse und Routen. Die VM startet weiterhin manuell.
 
+### Rollenspiel-Software als eigene Pakete (statt /opt-Wrapper)
+
+`genesis`, `commlink6` und `helden-software` liegen unter `packages/` und hängen am
+Feature-Flag `games` (Liste `wantedGames` in `modules/software/applications/games.nix`).
+Eigene Feature-Flags gibt es nicht mehr — die früheren `local.features.genesis` /
+`.comlink6` samt ihrer Wrapper-Module sind entfallen.
+
+Alle drei ziehen das offizielle Hersteller-`.deb` und entpacken es mit `dpkg-deb -x`;
+die Debs bringen neben der Anwendung auch die Icons für den Menüeintrag mit.
+
+| Paket | Aufbau | Start |
+|-------|--------|-------|
+| `helden-software` | reines Swing-JAR, kein JavaFX, keine nativen Libs | `jre` direkt, Argumente wie der Hersteller-Launcher (`-hsDebianMode`) |
+| `genesis` | jpackage-Bundle mit eigener Java-17-Runtime + JavaFX | `steam-run` + `LD_LIBRARY_PATH` (GTK3/X11) |
+| `commlink6` | jpackage-Bundle, nur der **Updater** | `steam-run` + `LD_LIBRARY_PATH` (GTK3/X11) |
+
+Warum bei den jpackage-Bundles weiterhin `steam-run` statt `autoPatchelfHook`: JavaFX
+entpackt seine nativen Libs erst zur Laufzeit aus den `javafx-*-linux.jar`, autoPatchelf
+erreicht sie also gar nicht. Deshalb `dontPatchELF` + `dontStrip` — die RPATHs des
+Bundles dürfen nicht angefasst werden. Der Launcher leitet sein `$ROOTDIR` aus dem
+eigenen Pfad ab, das Bundle läuft daher unverändert aus dem Store.
+
+Bei Commlink6 wird nur der Bootstrap deklarativ: der Updater lädt die eigentliche
+Anwendung zur Laufzeit nach `~/CommLink6` und hält sie dort aktuell. Upstream liefert
+nichts anderes aus. Der Launcher heißt mit Leerzeichen `Commlink6 Updater` und muss so
+heißen — jpackage sucht die zugehörige `.cfg` über den eigenen Programmnamen.
+
+**Platzbedarf:** genesis ~152 MB, commlink6 ~173 MB pro Generation. Bei
+`--delete-older-than 21d` entsprechend einplanen.
+
+**`curlOptsList = [ "--insecure" ]` in `packages/genesis` und `packages/comlink6`
+entfernen, sobald das Zertifikat von `www.rpgframework.de` erneuert ist** (abgelaufen
+am 2026-08-20, einziger Downloadserver, kein Alternativhost). Die Integrität sichert
+der Hash der Fixed-Output-Derivation; der Workaround betrifft nur die
+Transport-Validierung.
+
 ### Overlays
 
 Aktive Overlays werden in `configuration.nix` (`usedOverlays`) mit Inline-Kommentar zum

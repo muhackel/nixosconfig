@@ -2,10 +2,16 @@
 
 let 
   crossover = pkgs.callPackage ../../../packages/crossover { };
+  helden-software = pkgs.callPackage ../../../packages/helden-software { };
+  genesis = pkgs.callPackage ../../../packages/genesis { };
+  commlink6 = pkgs.callPackage ../../../packages/comlink6 { };
   cfg = config.local.features;
   wantedGames = with pkgs; [
     (bottles.override { removeWarningPopup = true; })
+    commlink6
+    genesis
     ioquake3
+    helden-software
     heroic
     mangohud
     openra
