@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.local.features;
+  libvirtpkgs = with pkgs; [
+      passt
+  ];
   winboatpkgs = with pkgs; [
     winboat
   ];
@@ -25,5 +28,5 @@ in
   virtualisation.libvirtd.enable = cfg.libvirt;
 
   virtualisation.docker.enable = cfg.docker;
-  environment.systemPackages = lib.mkIf cfg.winboat winboatpkgs;
+  environment.systemPackages = lib.optionals cfg.libvirt libvirtpkgs ++ lib.optionals cfg.winboat winboatpkgs;
 }
