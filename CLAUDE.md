@@ -132,8 +132,15 @@ für ThinkPads vor Sandy Bridge. Verifiziert auf HAL9000 mit `tlp-stat -b`.
 **`/etc/tlp.conf` ist Pflicht, obwohl kein Dienst läuft.** Fehlt die Datei, meldet
 `read_config` (in `share/tlp/tlp-func-base`) rc=5 und überspringt das `. "$_conf_tmp"` —
 die zusammengeführte Runtime-Config wird dann gar nicht gesourct und die Vendor-Presets
-fehlen, auf denen `fullcharge` und `recalibrate` beruhen. Das Modul legt sie mit
-`TLP_ENABLE=0` an.
+fehlen, auf denen `fullcharge` und `recalibrate` beruhen.
+
+**Und darin muss `TLP_ENABLE=1` stehen.** `check_tlp_enabled` (ebenfalls
+`tlp-func-base`) bricht sonst *jedes* Kommando mit *"TLP power save is disabled"* ab —
+die Variable steuert nicht nur den Dienststart, sondern gibt die Kommandos überhaupt
+erst frei. Scharf geschaltet wird dadurch nichts: ohne `services.tlp.enable` existieren
+weder `tlp.service`/`tlp-sleep.service` noch die udev-Regeln aus `lib/udev/rules.d`, die
+`tlp start` auslösen würden — verifiziert mit `systemctl list-unit-files | grep tlp`
+(leer) auf HAL9000.
 
 **Konflikt mit Plasma beachten:** PowerDevil verwaltet die Ladeschwellen ebenfalls
 (Systemeinstellungen → Energieverwaltung, via `org.kde.powerdevil.chargethresholdhelper`)

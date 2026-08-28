@@ -19,7 +19,13 @@
       # übernimmt die Power-Verwaltung). Diese Datei existiert nur, damit die
       # Batteriepflege-Kommandos (tlp setcharge/fullcharge/recalibrate) ihre
       # Defaults und Vendor-Presets laden.
-      TLP_ENABLE=0
+      #
+      # TLP_ENABLE=1 ist dafür zwingend: check_tlp_enabled (tlp-func-base) bricht
+      # sonst JEDES Kommando mit "TLP power save is disabled" ab, nicht nur den
+      # Dienststart. Es schaltet hier nichts automatisch scharf — ohne
+      # services.tlp.enable existieren weder tlp.service/tlp-sleep.service noch
+      # die udev-Regeln, die tlp start auslösen würden.
+      TLP_ENABLE=1
     '';
   };
 }
