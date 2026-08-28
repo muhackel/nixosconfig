@@ -108,6 +108,55 @@ am 2026-08-20, einziger Downloadserver, kein Alternativhost). Die Integrität si
 der Hash der Fixed-Output-Derivation; der Workaround betrifft nur die
 Transport-Validierung.
 
+### ThinkPad-Akkuwerkzeug (`thinkpadBattery`)
+
+Feature-Flag für HAL9000 und BFG9000 (nicht in `commonFeatures` — SPIELKISTE hat keinen
+Akku). Installiert `pkgs.tlp` plus das eigene GUI `packages/thinkpad-battery`.
+
+**`services.tlp.enable` bleibt bewusst aus.** power-profiles-daemon behält die
+Power-Verwaltung (beide schließen sich in NixOS gegenseitig aus); tlp wird nur als
+Werkzeug für die Batteriepflege-Kommandos installiert:
+
+| Kommando | Wirkung |
+|----------|---------|
+| `tlp setcharge <start> <stop> [BAT]` | Ladeschwellen temporär setzen |
+| `tlp fullcharge [BAT]` | einmalig auf 100 % laden (hebt die Schwellen temporär an) |
+| `tlp discharge [BAT] [ziel%]` | erzwungene Entladung am Netzteil |
+| `tlp recalibrate [BAT]` | vollständig entladen, dann auf 100 % laden |
+
+Backend ist `natacpi` — seit Kernel 5.17 exportiert `thinkpad_acpi` pro Akku
+`charge_control_{start,end}_threshold` und `charge_behaviour` (`auto`,
+`inhibit-charge`, `force-discharge`). Weder `tp_smapi` noch `acpi_call` nötig; das galt
+für ThinkPads vor Sandy Bridge. Verifiziert auf HAL9000 mit `tlp-stat -b`.
+
+**`/etc/tlp.conf` ist Pflicht, obwohl kein Dienst läuft.** Fehlt die Datei, meldet
+`read_config` (in `share/tlp/tlp-func-base`) rc=5 und überspringt das `. "$_conf_tmp"` —
+die zusammengeführte Runtime-Config wird dann gar nicht gesourct und die Vendor-Presets
+fehlen, auf denen `fullcharge` und `recalibrate` beruhen. Das Modul legt sie mit
+`TLP_ENABLE=0` an.
+
+**Konflikt mit Plasma beachten:** PowerDevil verwaltet die Ladeschwellen ebenfalls
+(Systemeinstellungen → Energieverwaltung, via `org.kde.powerdevil.chargethresholdhelper`)
+und setzt sie bei Profilwechseln neu. Über das GUI oder `tlp setcharge` gesetzte Werte
+können dadurch wieder überschrieben werden. Vollladen und Kalibrieren kann Plasma nicht —
+dafür existiert das Werkzeug.
+
+Das GUI (PySide6, passt zu Plasma) findet die Akkus dynamisch über
+`/sys/class/power_supply/BAT*` — HAL9000 hat zwei (intern + Wechselakku), BFG9000 einen.
+Lesen läuft ohne Rechte, alle Eingriffe über `pkexec` (`/run/wrappers/bin/pkexec`, der
+setuid-Wrapper) und den KDE-Polkit-Agenten.
+
+**Platzbedarf:** PySide6 zieht den Bindings-Stack (shiboken6, qtcharts, qt3d, …) nach —
+rund 1 GB, aber nur einmal im Store. Alle Generationen teilen sich dieselben Pfade; ein
+zweites Mal belegt wird er erst, wenn ein nixpkgs-Bump den Qt-/PySide6-Stack ändert und
+daneben noch Generationen mit dem alten Stand gehalten werden.
+
+Die Kalibrierung läuft als transiente Unit `tlp-recalibrate-<BAT>.service`
+(`systemd-run --collect`), überlebt also das Schließen des Fensters; das GUI zeigt sie als
+laufend an und bietet Abbruch. Weil ein harter Abbruch `charge_behaviour` auf
+`force-discharge` stehen lassen kann, blendet das GUI in dem Fall
+„Laden zurücksetzen“ ein — das setzt die Schwellen neu und schreibt `auto` zurück.
+
 ### Overlays
 
 Aktive Overlays werden in `configuration.nix` (`usedOverlays`) mit Inline-Kommentar zum

@@ -117,6 +117,7 @@ in
     ./nfc.nix
     ./ptls.nix
     ./games.nix
+    ./thinkpad-battery.nix
   ];
   environment.systemPackages = apppkgs ++ clipkgs ++ communicationpkgs ++ devpackages ++ [ javawsWrapper ];
   programs.nix-ld = {

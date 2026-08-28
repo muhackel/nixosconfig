@@ -63,7 +63,9 @@
 
         HAL9000 = myLib.mkHost {
           hostModule = ./modules/host/HAL9000;
-          features   = commonFeatures;
+          features   = commonFeatures // {
+            thinkpadBattery = true;
+          };
         };
 
         SPIELKISTE = myLib.mkHost {
@@ -85,6 +87,7 @@
           features = commonFeatures // {
             hamradio = false;
             kmtVpnVm = true;
+            thinkpadBattery = true;
           };
         };
 
