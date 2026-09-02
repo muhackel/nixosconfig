@@ -113,6 +113,7 @@ Alle Desktop-Hosts teilen folgende Hardware-Konfiguration:
 
 | Paket | Beschreibung |
 |-------|-------------|
+| **codexbar-plasma** | Plasma-6-Widget mit CodexBar-CLI und Laufzeitabhängigkeiten |
 | **mcpvault** | MCP-Server für Obsidian-Vault-Zugriff |
 | **better-sqlite3** | Native Node.js SQLite-Modul |
 | **crossover** | Wine-basierter Windows-Runner (für Gaming) |

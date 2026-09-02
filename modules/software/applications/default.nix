@@ -93,6 +93,7 @@ let
     ccusage
     codex
     defuddle
+    (callPackage ../../../packages/codexbar-plasma {})
     (callPackage ../../../packages/mcpvault {})
     (callPackage ../../../packages/better-sqlite3 {})
     gh
