@@ -124,6 +124,7 @@ Alle Desktop-Hosts teilen folgende Hardware-Konfiguration:
 
 | Overlay | Beschreibung |
 |---------|-------------|
+| **pyqt5-abi12** | PyQt5 5.15.11 mit SIP 6.15.3 für ABI v12 |
 | **ts3-legacy** | TeamSpeak 3.6.2 aus nixos-25.11 mit bewusst akzeptierter EOL-Qt5-WebEngine |
 | **proxmark3** | RFID/NFC-Tool (HF_COLIN-Firmware + Blueshark-Addon) |
 

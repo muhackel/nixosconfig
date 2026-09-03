@@ -171,6 +171,7 @@ Zweck importiert:
 
 | Overlay | Zweck |
 |---------|-------|
+| `pyqt5-abi12` | PyQt5 5.15.11 mit SIP 6.15.3 für ABI v12 |
 | `ts3-legacy` | Bewusster TS3-Pin aus nixos-25.11 mit EOL-Qt5-WebEngine |
 | `proxmark3` | Gewünschte HF_COLIN-Firmware mit BlueShark/BTADDON für das „Knopf“-Script |
 
@@ -203,6 +204,14 @@ Qt5-WebEngine verfügbar ist oder die Paketliste auf `teamspeak6-client` umgeste
 Die Variante baut für `PM3RDV4` die Standalone-Firmware `HF_COLIN` und aktiviert
 BlueShark über `BTADDON`. Sie wird für das „Knopf“-Script benötigt. Behalten, solange
 nixpkgs diese Kombination nicht als Standard oder eigenes Paketattribut liefert.
+
+### PyQt5-SIP-ABI-v12-Fix (`overlays/pyqt5-abi12/`)
+
+SIP 6.16.1 baut PyQt5 unter Python 3.14 nicht mit der angeforderten ABI v12.
+Das Overlay aktualisiert PyQt5 auf 5.15.11 und pinnt ausschließlich dessen
+SIP-Buildabhängigkeit auf 6.15.3. Damit bauen unter anderem HPLIP und Asymptote
+aus `texliveFull` wieder. Entfernen, sobald nixpkgs wieder eine kompatible
+PyQt5/SIP-Kombination liefert.
 
 ### Auto-ESP-Resync nach GC (`bootloaderResyncAfterGc`) — UNTESTED
 
