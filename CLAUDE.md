@@ -167,50 +167,42 @@ laufend an und bietet Abbruch. Weil ein harter Abbruch `charge_behaviour` auf
 ### Overlays
 
 Aktive Overlays werden in `configuration.nix` (`usedOverlays`) mit Inline-Kommentar zum
-Zweck importiert. Die meisten sind temporäre Workarounds für flaky Tests oder EOL-Pakete:
+Zweck importiert:
 
 | Overlay | Zweck |
 |---------|-------|
-| `bubblewrap-setuid` | bwrap mit `support_setuid` — siehe Detailsektion unten |
-| `ts3-legacy` | TS3-Client aus nixos-25.11 (Qt5-Stack EOL in unstable) |
-| `spamassassin-ssl-test` | Workaround: `spamd_ssl.t` SSL-Test-Failure |
-| `openldap-flaky-test` | Workaround: `test017-syncreplication-refresh` flaky |
-| `patool-skip-tests` | Workaround: python-patool 4.0.5 Test-Env-Failures (via bottles) |
-| `libnfc-nci-ldflags` | Workaround: libnfc-nci linkt `nfcDemoApp` mit gcc statt g++ → `NIX_LDFLAGS = "-lstdc++ -lm"` |
-| `osm-gps-map`, `proxmark3` | Paket-Fixes |
+| `ts3-legacy` | Bewusster TS3-Pin aus nixos-25.11 mit EOL-Qt5-WebEngine |
+| `proxmark3` | Gewünschte HF_COLIN-Firmware mit BlueShark/BTADDON für das „Knopf“-Script |
 
-**Entfernen wenn:** der jeweilige Upstream-Fix in nixpkgs-unstable landet — Import in
-`configuration.nix` auskommentieren, `nix flake check`, dann Overlay-Verzeichnis löschen.
-Für `libnfc-nci-ldflags` speziell: sobald upstream/nixpkgs den Link-Schritt auf `CXXLD`
-(g++) umstellt. Das Paket hängt nur an HAL9000 (`hardware.nfc-nci.enable` in
-`modules/hardware/lenovo-tp25/nfc.nix`).
+Entfallen:
 
-Entfallen: `lact-libdisplay-info` (2026-08-02) — nixpkgs bietet jetzt selbst ein Attribut
-`libdisplay-info_0_3` und lact bindet es direkt; der `.override`-Parameter existiert nicht
-mehr, das Overlay brach die Evaluation.
+- `lact-libdisplay-info` (2026-08-02): nixpkgs bietet `libdisplay-info_0_3` selbst an.
+- `bubblewrap-setuid` (2026-09-03): nixpkgs erzeugt den Steam-`bwrap`-Wrapper nicht mehr.
+- `spamassassin-ssl-test` (2026-09-03): nixpkgs überspringt `spamd_ssl.t` selbst.
+- `patool-skip-tests` (2026-09-03): der nixpkgs-Landlock-Fix lässt alle 82 Tests bestehen.
+- `libnfc-nci-ldflags` (2026-09-03): der gelockte Maintainer-Fork baut ohne Zusatzflags.
+- `osm-gps-map` (2026-09-03): nixpkgs enthält den vollständigen Autotools-Aufbau.
+- `openldap-flaky-test` (2026-09-04): der globale Overlay verhinderte Binärcache-Treffer für OpenLDAP und Reverse-Abhängigkeiten wie LibreOffice, GnuPG, SpamAssassin und Evolution.
 
 **Neue Overlay-Verzeichnisse `git add`en** — sonst sieht Nix sie im Flake nicht
 (*"Path … is not tracked by Git"*).
 
-### Bubblewrap-Setuid Overlay (`overlays/bubblewrap-setuid/`)
+### TeamSpeak-3-Legacy-Pin (`overlays/ts3-legacy/`)
 
-Baut `bubblewrap` mit `-Dsupport_setuid=true`. Seit bwrap 0.11.2 (April 2026,
-CVE-2026-41163) wird der setuid-Mode per default ausgebaut — Binaries die trotzdem
-setuid gestartet werden, brechen mit *"setuid use of bubblewrap is not supported in
-this build"* ab.
+TeamSpeak 3.6.2 stammt aus dem gepinnten nixos-25.11-Commit
+`25f538306313eae3927264466c70d7001dcea1df`. nixpkgs entfernte `teamspeak3` am
+2026-04-26 bewusst aus unstable, weil der Client von der nicht mehr regulär gewarteten
+Qt5-WebEngine abhängt. Der isolierte Paketbaum erlaubt ausschließlich `teamspeak3` als
+unfreies Paket und `qtwebengine-5.15.19` als unsichere Laufzeitabhängigkeit.
 
-Trigger: `programs.gamescope.capSysNice = true` in `modules/software/applications/games.nix`
-lässt das nixpkgs Steam-Modul einen setuid-Wrapper für `bwrap` installieren
-(`security.wrappers.bwrap`, Modul-Kommentar: *"needed or steam fails"*) — der dann
-mit dem ungepatchten bwrap crasht.
+Der Pin bleibt, solange TeamSpeak 3 benötigt wird. Entfernen, wenn TeamSpeak 3 ohne
+Qt5-WebEngine verfügbar ist oder die Paketliste auf `teamspeak6-client` umgestellt wird.
 
-**Fallback wenn upstream den setuid-Pfad endgültig killt** (Overlay baut nicht mehr):
-`capSysNice = false;` in `games.nix:32` setzen. Der setuid-Wrapper wird dann nicht mehr
-installiert, gamescope verliert `CAP_SYS_NICE` — gamemode mit `enableRenice = true`
-übernimmt das Renicing.
+### Proxmark3-Paketvariante (`overlays/proxmark3/`)
 
-**Entfernen wenn:** nixpkgs den setuid-Build wieder als Default anbietet, oder das
-Steam-Modul nicht mehr auf setuid-bwrap angewiesen ist.
+Die Variante baut für `PM3RDV4` die Standalone-Firmware `HF_COLIN` und aktiviert
+BlueShark über `BTADDON`. Sie wird für das „Knopf“-Script benötigt. Behalten, solange
+nixpkgs diese Kombination nicht als Standard oder eigenes Paketattribut liefert.
 
 ### Auto-ESP-Resync nach GC (`bootloaderResyncAfterGc`) — UNTESTED
 

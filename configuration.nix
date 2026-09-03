@@ -2,14 +2,8 @@
 
 let
   usedOverlays = [
-    (import overlays/bubblewrap-setuid)     # Workaround: bwrap >=0.11.2 ohne support_setuid (Steam-Wrapper-Crash)
-    (import overlays/ts3-legacy)            # TS3-Client aus nixos-25.11 (Qt5-Stack EOL in unstable)
-    (import overlays/spamassassin-ssl-test) # Workaround: spamd_ssl.t SSL-Test-Failure
-    (import overlays/openldap-flaky-test)   # Workaround: test017-syncreplication-refresh flaky
-    (import overlays/patool-skip-tests)     # Workaround: python-patool 4.0.5 Test-Env-Failures (via bottles)
-    (import overlays/libnfc-nci-ldflags)    # Workaround: libnfc-nci linkt nfcDemoApp ohne libstdc++/libm
-    (import overlays/osm-gps-map)
-    (import overlays/proxmark3)
+    (import overlays/ts3-legacy)          # Bewusster TS3-Pin mit EOL-Qt5-WebEngine
+    (import overlays/proxmark3)           # HF_COLIN-Firmware mit BlueShark/BTADDON
   ];
   usedPermittedInsecurePackages = [
       "ventoy-1.1.17"
@@ -76,4 +70,3 @@ in
   };
   #system.stateVersion = config.system.stateVersion;
 }
-

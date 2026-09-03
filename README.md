@@ -124,8 +124,8 @@ Alle Desktop-Hosts teilen folgende Hardware-Konfiguration:
 
 | Overlay | Beschreibung |
 |---------|-------------|
+| **ts3-legacy** | TeamSpeak 3.6.2 aus nixos-25.11 mit bewusst akzeptierter EOL-Qt5-WebEngine |
 | **proxmark3** | RFID/NFC-Tool (HF_COLIN-Firmware + Blueshark-Addon) |
-| **osm-gps-map** | OpenStreetMap-Kartenrendering |
 
 (`ciscoPacketTracer8` ist vorhanden aber aktuell nicht aktiv eingebunden.)
 
