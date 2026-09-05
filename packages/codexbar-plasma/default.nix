@@ -17,7 +17,7 @@
 }:
 
 let
-  cliVersion = "0.56.3";
+  cliVersion = "0.56.5";
 
   codexbarCli = stdenv.mkDerivation {
     pname = "codexbar-cli";
@@ -25,7 +25,7 @@ let
 
     src = fetchurl {
       url = "https://github.com/steipete/CodexBar/releases/download/v${cliVersion}/CodexBarCLI-v${cliVersion}-linux-x86_64.tar.gz";
-      hash = "sha256-I06XMPYJy9igApa2WXc6UKPlEmrPo97Kkf5uPq2PfRw=";
+      hash = "sha256-yKq9HD6/VUOSH79vCEIdHIVBJPsfVxtwXblwpgSAlOA=";
     };
 
     sourceRoot = ".";
@@ -59,13 +59,13 @@ let
 in
 stdenvNoCC.mkDerivation rec {
   pname = "codexbar-plasma";
-  version = "0.2.24";
+  version = "0.2.27";
 
   src = fetchFromGitHub {
     owner = "Lucenx9";
     repo = "codexbar-plasma";
     rev = "v${version}";
-    hash = "sha256-2cTabBTzLiZF+6Ra3N92716VxKiKDEcATNqRmDY79Ao=";
+    hash = "sha256-2gcRUgSsK96CM/HKuDqNO22hpQd4S09Hgkbn2JZcnZU=";
   };
 
   dontBuild = true;
