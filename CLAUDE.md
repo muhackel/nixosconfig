@@ -234,6 +234,15 @@ ist damit frei, und `Meta+L` sperrt wieder. Ohne dieses Zusammenspiel (Hostflag 
 plasma-manager am Leben, Projektmodul schreibt den Aus-Zustand) bliebe der Controller
 faktisch eingeschaltet.
 
+**Live-Abnahme auf HAL9000 (2026-09-06):** Die Fälle 24–24e bestanden gegen den
+Projekt-Pin `8f287d9`. Das Skript lief aus dem Store mit zwölf registrierten Kürzeln;
+alle zwölf Aktionen wurden per `/dev/uinput` ausgelöst. Die umgelegten KDE-Kürzel,
+die sechs gesetzten Einstellungen, das Entfernen von `gapOuter` sowie der Aus-Zustand
+mit freigegebenen `xml-*`-Tasten funktionierten wie vorgesehen. Anschließend wurde
+HAL9000 vollständig auf Generation 584 zurückgebaut. Der Branch ist damit mergefähig.
+Der nachgezogene Branch pinnt den gemergten Re-Audit-Stand; der vollständige
+`nix flake check` war grün.
+
 `modules/options.nix` verwirft `kwinXmonadLite = true`, wenn `plasma6` oder
 `plasmaManager` fehlt. `checks.x86_64-linux.kwinXmonadLite-disabled` wertet HAL9000
 zusätzlich mit abgeschaltetem Controller aus und prüft Plugin-Flag, alle zwölf
@@ -243,6 +252,11 @@ freigegebenen `xml-*`-Tasten sowie die zurückgestellten KDE-Kürzel.
 sechs Schlüssel (`gapOuter`, `gapInner`, `excludes`, `masterRatio`, `defaultLayout`,
 `debug`) nach `[Script-kwin-xmonad-lite]` in `kwinrc`, weil plasma-manager mit
 `overrideConfig = false` läuft und nicht mehr deklarierte Schlüssel nicht löscht.
+
+Beim Abschalten bleibt `[Script-kwin-xmonad-lite]` mit den zuletzt geschriebenen Werten
+in `kwinrc` stehen. Das ist wirkungslos, weil das Plugin deaktiviert ist und seine zwölf
+Tasten auf `none` stehen. Beim erneuten Aktivieren überschreibt das Modul alle sechs
+Werte.
 
 **Änderungen werden erst nach erneuter Anmeldung wirksam.** `nixos-rebuild switch`
 schreibt `kwinrc`, startet den laufenden Controller aber nicht neu, und KWin lädt eine

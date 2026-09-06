@@ -106,6 +106,18 @@ Werte sind der vor der Registrierung gemessene Ist-Stand, nicht geraten.
 Änderungen an `settings` werden erst nach erneuter Anmeldung wirksam: `switch` schreibt
 zwar `kwinrc`, KWin lädt ein bereits geladenes Skript aber nicht neu.
 
+Die Live-Abnahme auf HAL9000 vom 2026-09-06 bestand die Fälle 24–24e gegen den
+Projekt-Pin `8f287d9`: alle zwölf Aktionen funktionierten per echtem Tastendruck, die
+KDE-Kürzel und Einstellungen wurden korrekt umgelegt, und der Aus-Zustand gab die
+Tasten wieder frei. Danach wurde HAL9000 vollständig auf Generation 584 zurückgebaut.
+Der Branch ist mergefähig und pinnt den gemergten Re-Audit-Stand; der vollständige
+`nix flake check` war grün.
+
+Beim Abschalten bleiben die zuletzt geschriebenen Werte unter
+`[Script-kwin-xmonad-lite]` in `kwinrc` stehen. Sie sind wirkungslos, solange das Plugin
+deaktiviert ist und die zwölf `xml-*`-Tasten auf `none` stehen. Beim erneuten Aktivieren
+überschreibt das Modul alle sechs Werte.
+
 ## Build & Deploy
 
 ### System neu bauen
