@@ -32,6 +32,8 @@ nixosconfig/
 | nixpkgs | `nixos-unstable` | Rolling-Release Paketbasis |
 | home-manager | `nix-community/home-manager` | User-Konfiguration (follows nixpkgs) |
 | lanzaboote | `nix-community/lanzaboote` v1.0.0 | Secure Boot (nur SPIELKISTE, follows nixpkgs) |
+| plasma-manager | `nix-community/plasma-manager` | Deklarative Plasma-Konfiguration (follows nixpkgs, home-manager) |
+| kwin-xmonad-lite | `muhackel/kwin-xmonad-lite` | KWin-Layout-Controller (follows nixpkgs, home-manager, plasma-manager) |
 
 ## Hosts
 
@@ -58,9 +60,34 @@ Features werden in `modules/options.nix` deklariert und in `flake.nix` pro Host 
 | virtualbox | VirtualBox + Extension Pack | ✓ | ✓ | ✓ |
 | libvirt | libvirt/QEMU | ✓ | ✓ | ✓ |
 | kmtVpnVm | Persistentes TAP für die lokale KMT-VPN-VM | ✗ | ✗ | ✓ |
+| kwinXmonadLite | KWin-Layout-Controller im XMonad-Stil | ✗ | ✓ | ✗ |
 | winboat | Winboat-Tools | ✓ | ✓ | ✓ |
 | xmonad | Xmonad X11 Desktop | ✗ | ✗ | ✗ |
 | vmwareHost | VMware Host | ✗ | ✗ | ✗ |
+
+### KWin-Layout-Controller (`kwinXmonadLite`)
+
+Das Flag bindet [`kwin-xmonad-lite`](https://github.com/muhackel/kwin-xmonad-lite) als
+KWin-Skript ein — Tall- und Full-Layout mit Tastensteuerung, im Stil der früheren
+XMonad-Konfiguration. Aktiv **nur auf HAL9000**; SPIELKISTE bleibt Entwicklungsmaschine
+und lädt das Skript weiterhin von Hand über `nix run`.
+
+Eingebunden wird es über das Home-Manager-Modul des Projekts, das in
+`lib/default.nix` unter `home-manager.sharedModules` liegt. Eingeschaltet wird es in
+`modules/user/muhackel/kwin-xmonad-lite.nix`, sobald `plasma6` **und** `kwinXmonadLite`
+gesetzt sind. Die Konfiguration landet über plasma-manager in `kwinrc`, Gruppe
+`[Script-kwin-xmonad-lite]` (alle sechs Schlüssel werden immer geschrieben).
+
+**KDE-Shortcut-Politik:** Auf Hosts mit dem Flag ist „Sitzung sperren" von `Meta+L` auf
+`Ctrl+Alt+L` umgelegt und „Kachelung bearbeiten" (`Meta+T`) auf keine Taste gesetzt.
+Grund: `registerShortcut` in KWin ruft `KGlobalAccel::setShortcut` ohne `NoAutoloading`
+und meldet trotzdem immer Erfolg — ein bereits in `kglobalshortcutsrc` stehender Eintrag
+gewinnt also gegen die Erstbelegung des Skripts. Live gemessen: ohne die Umlegung sperrte
+`Meta+L` die Sitzung und `Meta+T` öffnete den Kachel-Editor, statt `xml-expand` und
+`xml-sink` auszulösen. Ohne Flag bleibt `Meta+L` unverändert die Sperrtaste.
+
+Änderungen an `settings` werden erst nach erneuter Anmeldung wirksam: `switch` schreibt
+zwar `kwinrc`, KWin lädt ein bereits geladenes Skript aber nicht neu.
 
 ## Build & Deploy
 
@@ -145,6 +172,11 @@ Trusted Users: `root`, `muhackel`
 ## Home Manager
 
 User-spezifische Konfiguration läuft über Home Manager (`modules/user/muhackel/home.nix`). Wird als NixOS-Modul eingebunden — `useGlobalPkgs` und `useUserPackages` sind aktiviert, d.h. Home Manager nutzt die gleichen nixpkgs wie das System.
+
+Über `home-manager.sharedModules` (in `lib/default.nix`) kommen zusätzlich die Module von
+plasma-manager und kwin-xmonad-lite dazu. Beide bleiben wirkungslos, solange nichts sie
+einschaltet — `programs.plasma.enable` ist auf Hosts ohne `kwinXmonadLite` weiterhin
+`false`, verifiziert per drvPath-Vergleich (SPIELKISTE und BFG9000 bit-identisch zu vorher).
 
 ## Neuen Host anlegen
 

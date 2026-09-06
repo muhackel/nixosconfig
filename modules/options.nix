@@ -16,6 +16,7 @@
     libvirt = lib.mkEnableOption "libvirt virtualisation";
     kmtVpnVm = lib.mkEnableOption "lokale KMT-VPN-VM mit persistentem TAP";
     thinkpadBattery = lib.mkEnableOption "ThinkPad-Akkuwerkzeug (tlp + GUI)";
+    kwinXmonadLite = lib.mkEnableOption "kwin-xmonad-lite Layout-Controller (KWin-Skript)";
     sound = lib.mkEnableOption "PipeWire sound stack with DeepFilterNet noise suppression";
     bootloaderResyncAfterGc = lib.mkEnableOption "Bootloader/ESP nach automatischem nix-gc neu synchronisieren";
   };

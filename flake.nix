@@ -21,6 +21,24 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # plasma-manager steht hier als eigener Input, damit der Pin dieses Flakes
+    # und der des kwin-xmonad-lite-Flakes zusammenfallen. Ohne das `follows`
+    # unten wertete der Projektcheck eine andere plasma-manager-Version aus als
+    # der Host tatsächlich importiert.
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+    # Layout-Controller als KWin-Skript, eingebunden über sein
+    # Home-Manager-Modul (lib/default.nix -> home-manager.sharedModules).
+    # Aktiv nur, wo local.features.kwinXmonadLite gesetzt ist.
+    kwin-xmonad-lite = {
+      url = "github:muhackel/kwin-xmonad-lite";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.plasma-manager.follows = "plasma-manager";
+    };
     lanzaboote = {
       # Gepinnt auf master-Fix-Rev statt Tag v1.0.0: v1.0.0 setzt noch
       # boot.bootspec.enable=true, das in nixpkgs-unstable (seit 11.06.2026) per
@@ -37,10 +55,10 @@
     # flake-utils.url = "github:numtide/flake-utils";  # for future use (multi-arch outputs etc.)
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, ... }:
+  outputs = { self, nixpkgs, home-manager, lanzaboote, plasma-manager, kwin-xmonad-lite, ... }:
     let
       lib    = nixpkgs.lib;
-      myLib  = import ./lib { inherit lib home-manager self; };
+      myLib  = import ./lib { inherit lib home-manager plasma-manager kwin-xmonad-lite self; };
 
       # ── Feature-Set für alle Desktop-Hosts ──
       commonFeatures = {
@@ -65,6 +83,7 @@
           hostModule = ./modules/host/HAL9000;
           features   = commonFeatures // {
             thinkpadBattery = true;
+            kwinXmonadLite  = true;
           };
         };
 

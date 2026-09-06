@@ -1,4 +1,4 @@
-{ lib, home-manager, self }:
+{ lib, home-manager, plasma-manager, kwin-xmonad-lite, self }:
 let
   # Zentral gepinnte stateVersion (system + home). Home Manager folgt via
   # osConfig.system.stateVersion. Letzte stable war 26.05 (mkHost-Default unten).
@@ -20,6 +20,16 @@ let
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.muhackel = import "${self}/modules/user/muhackel/home.nix";
+      # Module, die jede Home-Manager-Konfiguration dieses Hosts bekommt.
+      # `homeModules`, nicht `homeManagerModules`: bei plasma-manager ist der
+      # alte Name nur noch ein lib.warn-Wrapper (Deprecation-Warnung bei jeder
+      # Auswertung), und Nix 2.34 kennt ihn gar nicht mehr als Flake-Output.
+      # Beide Module bleiben ohne Wirkung, solange nichts sie einschaltet —
+      # kwin-xmonad-lite hängt an local.features.kwinXmonadLite.
+      home-manager.sharedModules = [
+        plasma-manager.homeModules.plasma-manager
+        kwin-xmonad-lite.homeModules.default
+      ];
     }
   ];
 in

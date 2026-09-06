@@ -164,6 +164,57 @@ laufend an und bietet Abbruch. Weil ein harter Abbruch `charge_behaviour` auf
 `force-discharge` stehen lassen kann, blendet das GUI in dem Fall
 „Laden zurücksetzen“ ein — das setzt die Schwellen neu und schreibt `auto` zurück.
 
+### KWin-Layout-Controller (`kwinXmonadLite`)
+
+Feature-Flag, aktiv **nur auf HAL9000** (nicht in `commonFeatures`). SPIELKISTE bleibt
+Arbeits- und Entwicklungsmaschine und lädt `kwin-xmonad-lite` weiterhin von Hand über
+`nix run` aus dem Projektrepo; BFG9000 bekommt es (noch) nicht.
+
+Der Weg ist vollständig deklarativ und läuft über drei Stellen:
+
+| Stelle | Aufgabe |
+|--------|---------|
+| `flake.nix` | Inputs `plasma-manager` und `kwin-xmonad-lite`; letzterer folgt `nixpkgs`, `home-manager` **und** `plasma-manager` |
+| `lib/default.nix` | `home-manager.sharedModules` — der einzige strukturelle Zusatz; liefert beide Home-Manager-Module an jede HM-Konfiguration |
+| `modules/user/muhackel/kwin-xmonad-lite.nix` | schaltet `programs.kwin-xmonad-lite.enable` unter `lib.mkIf (features.plasma6 && features.kwinXmonadLite)` und legt die kollidierenden KDE-Kürzel um |
+
+**Beide plasma-manager-Pins müssen zusammenfallen.** Das Projektflake führt einen eigenen
+`plasma-manager`-Input für seinen `checks.home-module`. Ohne das `follows` wertete der
+Projektcheck eine andere Version aus als der Host tatsächlich importiert.
+
+**`homeModules`, nicht `homeManagerModules`.** Bei plasma-manager ist der alte Name nur
+noch ein `lib.warn`-Wrapper (Deprecation-Warnung bei jeder Auswertung), und Nix 2.34 kennt
+ihn gar nicht mehr als Flake-Output. Das Projektflake exportiert `homeModules.default` als
+Definition und hält `homeManagerModules.default` nur als Alias.
+
+**KDE-Shortcut-Politik — nur dort, wo das Flag gesetzt ist.** `Meta+L` („Sitzung sperren")
+wird auf `Ctrl+Alt+L` umgelegt, `Meta+T` („Kachelung bearbeiten") auf keine Taste. Grund
+ist ein gemessener Livebefund vom 2026-09-06 auf SPIELKISTE: beim Registrieren der zwölf
+`xml-*`-Aktionen standen beide Einträge bereits in `kglobalshortcutsrc`, und in **beiden**
+Fällen gewann der vorhandene Eintrag — `Meta+L` sperrte die Sitzung, `Meta+T` öffnete den
+Kachel-Editor. `registerShortcut` ruft `KGlobalAccel::setShortcut` ohne `NoAutoloading`
+und liefert trotzdem immer `true`, meldet die Kollision also nicht. Die Umlegung ist damit
+Voraussetzung dafür, dass `xml-expand` und `xml-sink` ihre Taste überhaupt bekommen; die
+zehn konfliktfreien Tasten funktionierten im selben Lauf alle.
+
+Die Umlegung steht bewusst **hier** und nicht im Projektmodul — dessen
+`relocateKdeShortcuts` bleibt aus, die Shortcut-Politik gehört in die Host-Konfiguration.
+
+**`settings` bleibt bei den Vorgabewerten.** Das Projektmodul schreibt ohnehin immer alle
+sechs Schlüssel (`gapOuter`, `gapInner`, `excludes`, `masterRatio`, `defaultLayout`,
+`debug`) nach `[Script-kwin-xmonad-lite]` in `kwinrc`, weil plasma-manager mit
+`overrideConfig = false` läuft und nicht mehr deklarierte Schlüssel nicht löscht.
+
+**Änderungen werden erst nach erneuter Anmeldung wirksam.** `nixos-rebuild switch`
+schreibt `kwinrc`, startet den laufenden Controller aber nicht neu, und KWin lädt eine
+bereits geladene Plugin-Id nicht erneut.
+
+**Negativnachweis, dass die anderen Hosts unberührt bleiben:** der drvPath von
+`system.build.toplevel` ist für SPIELKISTE und BFG9000 bit-identisch zu dem vor der
+Einbindung; nur HAL9000 ändert sich. Dazu ergeben sich dort
+`programs.kwin-xmonad-lite.enable = false`, `programs.plasma.enable = false`, kein
+`configFile.kwinrc`, leere `programs.plasma.shortcuts` und kein Paket in `home.packages`.
+
 ### Overlays
 
 Aktive Overlays werden in `configuration.nix` (`usedOverlays`) mit Inline-Kommentar zum
