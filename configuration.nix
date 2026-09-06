@@ -2,7 +2,7 @@
 
 let
   usedOverlays = [
-    (import overlays/pyqt5-abi12)         # PyQt5 5.15.11 mit SIP 6.15.3 für ABI v12
+    #(import overlays/pyqt5-abi12)         # PyQt5 5.15.11 mit SIP 6.15.3 für ABI v12
     (import overlays/ts3-legacy)          # Bewusster TS3-Pin mit EOL-Qt5-WebEngine
     (import overlays/proxmark3)           # HF_COLIN-Firmware mit BlueShark/BTADDON
   ];
