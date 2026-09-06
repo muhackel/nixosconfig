@@ -222,10 +222,17 @@ Die Umlegung steht bewusst **hier** und nicht im Projektmodul — dessen
 
 **Der Aus-Zweig stellt beide Kürzel zurück.** Ist `plasmaManager` gesetzt und
 `kwinXmonadLite` nicht, schreibt das Modul `Lock Session = [ "Screensaver" "Meta+L" ]` und
-`Edit Tiles = "Meta+T"`. Das sind keine erfundenen Vorgaben, sondern der am 2026-09-06 auf
+`Edit Tiles = [ "Meta+T" ]`. Das sind keine erfundenen Vorgaben, sondern der am 2026-09-06 auf
 SPIELKISTE gelesene Ist-Stand aus `kglobalshortcutsrc` **vor** der Registrierung der
 `xml-*`-Aktionen. Ohne diesen Zweig gäbe es kein Zurück: `overrideConfig = false` löscht
 nicht mehr deklarierte Schlüssel nicht.
+
+Das Projektmodul zieht im selben Zug seinen eigenen Teil zurück: es setzt
+`kwin-xmonad-liteEnabled = false` und schreibt die zwölf `xml-*`-Tasten auf `none`.
+Die Zeilen bleiben stehen — ein `unregisterShortcut` gibt es nicht —, aber die Taste
+ist damit frei, und `Meta+L` sperrt wieder. Ohne dieses Zusammenspiel (Hostflag hält
+plasma-manager am Leben, Projektmodul schreibt den Aus-Zustand) bliebe der Controller
+faktisch eingeschaltet.
 
 **`settings` bleibt bei den Vorgabewerten.** Das Projektmodul schreibt ohnehin immer alle
 sechs Schlüssel (`gapOuter`, `gapInner`, `excludes`, `masterRatio`, `defaultLayout`,
