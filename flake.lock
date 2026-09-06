@@ -86,11 +86,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788699601,
-        "narHash": "sha256-5dYi0UxOmiGuZlNWwhPbk0TYQWDw3WUteqIwlhJ4pdc=",
+        "lastModified": 1788702562,
+        "narHash": "sha256-ewke0hhWh1t4rVdwjQKZgpCJQu3eSm7pU1CrIkuyk9E=",
         "owner": "muhackel",
         "repo": "kwin-xmonad-lite",
-        "rev": "b6e2c4ddd1395412b5c887bb0d25b452a4cdb148",
+        "rev": "8f287d932cbb6eeff316cdf3d37254034c62c5fc",
         "type": "github"
       },
       "original": {
