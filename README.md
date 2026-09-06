@@ -32,6 +32,8 @@ nixosconfig/
 | nixpkgs | `nixos-unstable` | Rolling-Release Paketbasis |
 | home-manager | `nix-community/home-manager` | User-Konfiguration (follows nixpkgs) |
 | lanzaboote | `nix-community/lanzaboote` v1.0.0 | Secure Boot (nur SPIELKISTE, follows nixpkgs) |
+| plasma-manager | `nix-community/plasma-manager` | Deklarative Plasma-Konfiguration (follows nixpkgs, home-manager) |
+| kwin-xmonad-lite | `muhackel/kwin-xmonad-lite` | KWin-Layout-Controller (follows nixpkgs, home-manager, plasma-manager) |
 
 ## Hosts
 
@@ -58,9 +60,63 @@ Features werden in `modules/options.nix` deklariert und in `flake.nix` pro Host 
 | virtualbox | VirtualBox + Extension Pack | ✓ | ✓ | ✓ |
 | libvirt | libvirt/QEMU | ✓ | ✓ | ✓ |
 | kmtVpnVm | Persistentes TAP für die lokale KMT-VPN-VM | ✗ | ✗ | ✓ |
+| plasmaManager | plasma-manager verwaltet die Plasma-Konfiguration | ✗ | ✓ | ✗ |
+| kwinXmonadLite | KWin-Layout-Controller im XMonad-Stil (braucht `plasmaManager`) | ✗ | ✓ | ✗ |
 | winboat | Winboat-Tools | ✓ | ✓ | ✓ |
 | xmonad | Xmonad X11 Desktop | ✗ | ✗ | ✗ |
 | vmwareHost | VMware Host | ✗ | ✗ | ✗ |
+
+### Deklarative Plasma-Konfiguration (`plasmaManager`)
+
+Schaltet `programs.plasma.enable`: plasma-manager schreibt die Plasma-Konfiguration.
+Aktiv nur auf HAL9000. Das Flag ist bewusst **vom Controller getrennt** — plasma-manager
+an heißt nicht Controller an. Nur so gibt es einen verwalteten Aus-Zustand: hinge
+`programs.plasma.enable` am Controller-Flag, schriebe plasma-manager nach dessen
+Abschalten gar nichts mehr (sein Schreibvorgang hängt an einem `home.activation`-Skript
+unter `mkIf plasmaCfg.enable`), und mit `overrideConfig = false` bliebe der alte Stand
+inklusive umgelegtem `Meta+L` einfach stehen.
+
+An diesem Flag hängt auch das Standard-Suchkürzel
+(`programs.plasma.searchPlugins.webSearchKeywords`) — plasma-manager schreibt
+`kuriikwsfilterrc` ungefragt, sobald es läuft.
+
+### KWin-Layout-Controller (`kwinXmonadLite`)
+
+Das Flag bindet [`kwin-xmonad-lite`](https://github.com/muhackel/kwin-xmonad-lite) als
+KWin-Skript ein — Tall- und Full-Layout mit Tastensteuerung, im Stil der früheren
+XMonad-Konfiguration. Aktiv **nur auf HAL9000**; SPIELKISTE bleibt Entwicklungsmaschine
+und lädt das Skript weiterhin von Hand über `nix run`.
+
+Eingebunden wird es über das Home-Manager-Modul des Projekts, das in
+`lib/default.nix` unter `home-manager.sharedModules` liegt. Eingeschaltet wird es in
+`modules/user/muhackel/kwin-xmonad-lite.nix`, sobald `plasma6`, `plasmaManager` **und**
+`kwinXmonadLite` gesetzt sind. Die Konfiguration landet über plasma-manager in `kwinrc`, Gruppe
+`[Script-kwin-xmonad-lite]` (alle sechs Schlüssel werden immer geschrieben).
+
+**KDE-Shortcut-Politik:** Auf Hosts mit dem Flag ist „Sitzung sperren“ von `Meta+L` auf
+`Ctrl+Alt+L` umgelegt und „Kachelung bearbeiten“ (`Meta+T`) auf keine Taste gesetzt.
+Grund: `registerShortcut` in KWin ruft `KGlobalAccel::setShortcut` ohne `NoAutoloading`
+und meldet trotzdem immer Erfolg — ein bereits in `kglobalshortcutsrc` stehender Eintrag
+gewinnt also gegen die Erstbelegung des Skripts. Live gemessen: ohne die Umlegung sperrte
+`Meta+L` die Sitzung und `Meta+T` öffnete den Kachel-Editor, statt `xml-expand` und
+`xml-sink` auszulösen. Ohne das Controller-Flag stellt derselbe Modulzweig die
+KDE-Vorgaben `Meta+L` (Sperren) und `Meta+T` (Kachelung bearbeiten) wieder her — die
+Werte sind der vor der Registrierung gemessene Ist-Stand, nicht geraten.
+
+Änderungen an `settings` werden erst nach erneuter Anmeldung wirksam: `switch` schreibt
+zwar `kwinrc`, KWin lädt ein bereits geladenes Skript aber nicht neu.
+
+Die Live-Abnahme auf HAL9000 vom 2026-09-06 bestand die Fälle 24–24e gegen den
+Projekt-Pin `8f287d9`: alle zwölf Aktionen funktionierten per echtem Tastendruck, die
+KDE-Kürzel und Einstellungen wurden korrekt umgelegt, und der Aus-Zustand gab die
+Tasten wieder frei. Danach wurde HAL9000 vollständig auf Generation 584 zurückgebaut.
+Der Branch ist mergefähig und pinnt den gemergten Re-Audit-Stand; der vollständige
+`nix flake check` war grün.
+
+Beim Abschalten bleiben die zuletzt geschriebenen Werte unter
+`[Script-kwin-xmonad-lite]` in `kwinrc` stehen. Sie sind wirkungslos, solange das Plugin
+deaktiviert ist und die zwölf `xml-*`-Tasten auf `none` stehen. Beim erneuten Aktivieren
+überschreibt das Modul alle sechs Werte.
 
 ## Build & Deploy
 
@@ -82,7 +138,9 @@ Nach dem Rebuild zeigt ein **nvd-Diff** automatisch die Paketänderungen an.
 nix flake check
 ```
 
-Die Checks bauen die `system.build.toplevel`-Derivation jedes Hosts — damit ist sichergestellt, dass alle Konfigurationen evaluierbar sind.
+Die Checks bauen die `system.build.toplevel`-Derivation jedes Hosts. Der zusätzliche
+Check `kwinXmonadLite-disabled` wertet HAL9000 mit abgeschaltetem Controller aus und
+prüft den verwalteten Aus-Zustand einschließlich Plugin-Flag und Tastenkürzeln.
 
 ## Designentscheidungen
 
@@ -145,6 +203,11 @@ Trusted Users: `root`, `muhackel`
 ## Home Manager
 
 User-spezifische Konfiguration läuft über Home Manager (`modules/user/muhackel/home.nix`). Wird als NixOS-Modul eingebunden — `useGlobalPkgs` und `useUserPackages` sind aktiviert, d.h. Home Manager nutzt die gleichen nixpkgs wie das System.
+
+Über `home-manager.sharedModules` (in `lib/default.nix`) kommen zusätzlich die Module von
+plasma-manager und kwin-xmonad-lite dazu. Beide bleiben wirkungslos, solange nichts sie
+einschaltet — `programs.plasma.enable` hängt an `plasmaManager`, der Controller
+zusätzlich an `kwinXmonadLite`; auf Hosts ohne diese Flags ist beides `false`.
 
 ## Neuen Host anlegen
 

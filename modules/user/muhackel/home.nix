@@ -3,6 +3,10 @@ let
 
 in
 {
+  imports = [
+    ./kwin-xmonad-lite.nix
+  ];
+
   home.stateVersion = osConfig.system.stateVersion;
   ### evaluation warning: muhackel profile:
   ### You have set either `nixpkgs.config` or `nixpkgs.overlays` while using `home-manager.useGlobalPkgs`.

@@ -73,6 +73,32 @@
         "type": "github"
       }
     },
+    "kwin-xmonad-lite": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "plasma-manager": [
+          "plasma-manager"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788705215,
+        "narHash": "sha256-xIxmxhhZsV2TvuZsSb1BZf/YNaMXyoHRPYeYiJdqgwU=",
+        "owner": "muhackel",
+        "repo": "kwin-xmonad-lite",
+        "rev": "4595056c62f89b97500b1f594246a6619da2200a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "muhackel",
+        "repo": "kwin-xmonad-lite",
+        "type": "github"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
@@ -111,6 +137,29 @@
         "type": "indirect"
       }
     },
+    "plasma-manager": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785762349,
+        "narHash": "sha256-jZhZkzAwc7f3exzcTDJWP2WCAchCv0iNC3UF/QsahdQ=",
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "rev": "a19a2a029fa180911bd89c554dca1616e10f4c1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "type": "github"
+      }
+    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -137,8 +186,10 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "kwin-xmonad-lite": "kwin-xmonad-lite",
         "lanzaboote": "lanzaboote",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "plasma-manager": "plasma-manager"
       }
     },
     "rust-overlay": {
