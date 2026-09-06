@@ -32,7 +32,10 @@
     };
     # Layout-Controller als KWin-Skript, eingebunden über sein
     # Home-Manager-Modul (lib/default.nix -> home-manager.sharedModules).
-    # Aktiv nur, wo local.features.kwinXmonadLite gesetzt ist.
+    # Aktiv nur, wo local.features.plasmaManager und local.features.kwinXmonadLite
+    # zusammen gesetzt sind. plasma-manager selbst hängt allein am ersten Flag —
+    # so bleibt die Plasma-Konfiguration auch bei abgeschaltetem Controller
+    # verwaltet und die KDE-Vorgaben werden zurückgeschrieben.
     kwin-xmonad-lite = {
       url = "github:muhackel/kwin-xmonad-lite";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -83,6 +86,7 @@
           hostModule = ./modules/host/HAL9000;
           features   = commonFeatures // {
             thinkpadBattery = true;
+            plasmaManager   = true;
             kwinXmonadLite  = true;
           };
         };

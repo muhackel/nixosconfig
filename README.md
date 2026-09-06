@@ -60,10 +60,25 @@ Features werden in `modules/options.nix` deklariert und in `flake.nix` pro Host 
 | virtualbox | VirtualBox + Extension Pack | ✓ | ✓ | ✓ |
 | libvirt | libvirt/QEMU | ✓ | ✓ | ✓ |
 | kmtVpnVm | Persistentes TAP für die lokale KMT-VPN-VM | ✗ | ✗ | ✓ |
-| kwinXmonadLite | KWin-Layout-Controller im XMonad-Stil | ✗ | ✓ | ✗ |
+| plasmaManager | plasma-manager verwaltet die Plasma-Konfiguration | ✗ | ✓ | ✗ |
+| kwinXmonadLite | KWin-Layout-Controller im XMonad-Stil (braucht `plasmaManager`) | ✗ | ✓ | ✗ |
 | winboat | Winboat-Tools | ✓ | ✓ | ✓ |
 | xmonad | Xmonad X11 Desktop | ✗ | ✗ | ✗ |
 | vmwareHost | VMware Host | ✗ | ✗ | ✗ |
+
+### Deklarative Plasma-Konfiguration (`plasmaManager`)
+
+Schaltet `programs.plasma.enable`: plasma-manager schreibt die Plasma-Konfiguration.
+Aktiv nur auf HAL9000. Das Flag ist bewusst **vom Controller getrennt** — plasma-manager
+an heißt nicht Controller an. Nur so gibt es einen verwalteten Aus-Zustand: hinge
+`programs.plasma.enable` am Controller-Flag, schriebe plasma-manager nach dessen
+Abschalten gar nichts mehr (sein Schreibvorgang hängt an einem `home.activation`-Skript
+unter `mkIf plasmaCfg.enable`), und mit `overrideConfig = false` bliebe der alte Stand
+inklusive umgelegtem `Meta+L` einfach stehen.
+
+An diesem Flag hängt auch das Standard-Suchkürzel
+(`programs.plasma.searchPlugins.webSearchKeywords`) — plasma-manager schreibt
+`kuriikwsfilterrc` ungefragt, sobald es läuft.
 
 ### KWin-Layout-Controller (`kwinXmonadLite`)
 
@@ -74,8 +89,8 @@ und lädt das Skript weiterhin von Hand über `nix run`.
 
 Eingebunden wird es über das Home-Manager-Modul des Projekts, das in
 `lib/default.nix` unter `home-manager.sharedModules` liegt. Eingeschaltet wird es in
-`modules/user/muhackel/kwin-xmonad-lite.nix`, sobald `plasma6` **und** `kwinXmonadLite`
-gesetzt sind. Die Konfiguration landet über plasma-manager in `kwinrc`, Gruppe
+`modules/user/muhackel/kwin-xmonad-lite.nix`, sobald `plasma6`, `plasmaManager` **und**
+`kwinXmonadLite` gesetzt sind. Die Konfiguration landet über plasma-manager in `kwinrc`, Gruppe
 `[Script-kwin-xmonad-lite]` (alle sechs Schlüssel werden immer geschrieben).
 
 **KDE-Shortcut-Politik:** Auf Hosts mit dem Flag ist „Sitzung sperren“ von `Meta+L` auf
@@ -84,7 +99,9 @@ Grund: `registerShortcut` in KWin ruft `KGlobalAccel::setShortcut` ohne `NoAutol
 und meldet trotzdem immer Erfolg — ein bereits in `kglobalshortcutsrc` stehender Eintrag
 gewinnt also gegen die Erstbelegung des Skripts. Live gemessen: ohne die Umlegung sperrte
 `Meta+L` die Sitzung und `Meta+T` öffnete den Kachel-Editor, statt `xml-expand` und
-`xml-sink` auszulösen. Ohne Flag bleibt `Meta+L` unverändert die Sperrtaste.
+`xml-sink` auszulösen. Ohne das Controller-Flag stellt derselbe Modulzweig die
+KDE-Vorgaben `Meta+L` (Sperren) und `Meta+T` (Kachelung bearbeiten) wieder her — die
+Werte sind der vor der Registrierung gemessene Ist-Stand, nicht geraten.
 
 Änderungen an `settings` werden erst nach erneuter Anmeldung wirksam: `switch` schreibt
 zwar `kwinrc`, KWin lädt ein bereits geladenes Skript aber nicht neu.
@@ -175,8 +192,8 @@ User-spezifische Konfiguration läuft über Home Manager (`modules/user/muhackel
 
 Über `home-manager.sharedModules` (in `lib/default.nix`) kommen zusätzlich die Module von
 plasma-manager und kwin-xmonad-lite dazu. Beide bleiben wirkungslos, solange nichts sie
-einschaltet — `programs.plasma.enable` ist auf Hosts ohne `kwinXmonadLite` weiterhin
-`false`, verifiziert per drvPath-Vergleich (SPIELKISTE und BFG9000 bit-identisch zu vorher).
+einschaltet — `programs.plasma.enable` hängt an `plasmaManager`, der Controller
+zusätzlich an `kwinXmonadLite`; auf Hosts ohne diese Flags ist beides `false`.
 
 ## Neuen Host anlegen
 
