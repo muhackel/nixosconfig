@@ -126,7 +126,9 @@ Nach dem Rebuild zeigt ein **nvd-Diff** automatisch die Paketänderungen an.
 nix flake check
 ```
 
-Die Checks bauen die `system.build.toplevel`-Derivation jedes Hosts — damit ist sichergestellt, dass alle Konfigurationen evaluierbar sind.
+Die Checks bauen die `system.build.toplevel`-Derivation jedes Hosts. Der zusätzliche
+Check `kwinXmonadLite-disabled` wertet HAL9000 mit abgeschaltetem Controller aus und
+prüft den verwalteten Aus-Zustand einschließlich Plugin-Flag und Tastenkürzeln.
 
 ## Designentscheidungen
 

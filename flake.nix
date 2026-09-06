@@ -120,6 +120,35 @@
         HAL9000    = self.nixosConfigurations.HAL9000.config.system.build.toplevel;
         SPIELKISTE = self.nixosConfigurations.SPIELKISTE.config.system.build.toplevel;
         BFG9000    = self.nixosConfigurations.BFG9000.config.system.build.toplevel;
+
+        kwinXmonadLite-disabled =
+          let
+            hal9000 = self.nixosConfigurations.HAL9000.extendModules {
+              modules = [
+                { local.features.kwinXmonadLite = lib.mkForce false; }
+              ];
+            };
+            home = hal9000.config.home-manager.users.muhackel;
+            controllerPackage = toString home.programs.kwin-xmonad-lite.package;
+            installedPackages = map toString home.home.packages;
+            shortcuts = home.programs.plasma.configFile."kglobalshortcutsrc";
+            xmlShortcuts = lib.filterAttrs (name: _: lib.hasPrefix "xml-" name) shortcuts.kwin;
+            xmlNames = builtins.attrNames xmlShortcuts;
+            allXmlShortcutsDisabled = lib.all (
+              name: xmlShortcuts.${name}.value == "none,,"
+            ) xmlNames;
+          in
+          assert home.programs.plasma.enable;
+          assert !home.programs.kwin-xmonad-lite.enable;
+          assert !builtins.elem controllerPackage installedPackages;
+          assert home.programs.plasma.configFile."kwinrc".Plugins."kwin-xmonad-liteEnabled".value == false;
+          assert builtins.length xmlNames == 12;
+          assert allXmlShortcutsDisabled;
+          assert home.programs.plasma.shortcuts.ksmserver."Lock Session" == [ "Screensaver" "Meta+L" ];
+          assert home.programs.plasma.shortcuts.kwin."Edit Tiles" == [ "Meta+T" ];
+          nixpkgs.legacyPackages.x86_64-linux.runCommand "kwin-xmonad-lite-disabled" { } ''
+            touch "$out"
+          '';
       };
     };
 }

@@ -234,6 +234,11 @@ ist damit frei, und `Meta+L` sperrt wieder. Ohne dieses Zusammenspiel (Hostflag 
 plasma-manager am Leben, Projektmodul schreibt den Aus-Zustand) bliebe der Controller
 faktisch eingeschaltet.
 
+`modules/options.nix` verwirft `kwinXmonadLite = true`, wenn `plasma6` oder
+`plasmaManager` fehlt. `checks.x86_64-linux.kwinXmonadLite-disabled` wertet HAL9000
+zusätzlich mit abgeschaltetem Controller aus und prüft Plugin-Flag, alle zwölf
+freigegebenen `xml-*`-Tasten sowie die zurückgestellten KDE-Kürzel.
+
 **`settings` bleibt bei den Vorgabewerten.** Das Projektmodul schreibt ohnehin immer alle
 sechs Schlüssel (`gapOuter`, `gapInner`, `excludes`, `masterRatio`, `defaultLayout`,
 `debug`) nach `[Script-kwin-xmonad-lite]` in `kwinrc`, weil plasma-manager mit

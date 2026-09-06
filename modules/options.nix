@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 {
   options.local.features = {
@@ -27,4 +27,13 @@
     default = [];
     description = "Additional groups for user muhackel contributed by feature modules.";
   };
+
+  config.assertions = [
+    {
+      assertion =
+        !config.local.features.kwinXmonadLite
+        || (config.local.features.plasma6 && config.local.features.plasmaManager);
+      message = "local.features.kwinXmonadLite erfordert local.features.plasma6 und local.features.plasmaManager";
+    }
+  ];
 }
