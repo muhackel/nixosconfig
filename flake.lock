@@ -86,10 +86,12 @@
         ]
       },
       "locked": {
-        "lastModified": 1788697111,
-        "narHash": "sha256-2DNPg1tEIwDXgXZjxDsAnh5HmF+oky6g7xZIpDPn63M=",
-        "path": "/home/muhackel/Documents/Projects/kwin-xmonad-lite",
-        "type": "path"
+        "lastModified": 1788699601,
+        "narHash": "sha256-5dYi0UxOmiGuZlNWwhPbk0TYQWDw3WUteqIwlhJ4pdc=",
+        "owner": "muhackel",
+        "repo": "kwin-xmonad-lite",
+        "rev": "b6e2c4ddd1395412b5c887bb0d25b452a4cdb148",
+        "type": "github"
       },
       "original": {
         "owner": "muhackel",
