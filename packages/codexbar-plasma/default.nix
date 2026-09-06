@@ -60,13 +60,13 @@ let
 in
 stdenvNoCC.mkDerivation rec {
   pname = "codexbar-plasma";
-  version = "0.2.30";
+  version = "0.2.31";
 
   src = fetchFromGitHub {
     owner = "Lucenx9";
     repo = "codexbar-plasma";
     rev = "v${version}";
-    hash = "sha256-6oDqatLQZSFQ4uTf58sNVaM5faJQUbcLg/ahw/Ri+MM=";
+    hash = "sha256-P3/YU6gFg+fMM6l5rRXw3IVSaavDVHUvdixWOol2/3U=";
   };
 
   dontBuild = true;
