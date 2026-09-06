@@ -5,7 +5,7 @@
 # `lib/default.nix` und bleibt ohne dieses `enable` wirkungslos. Gelesen wird
 # `osConfig.local.features` — dasselbe Muster wie `home.stateVersion` in
 # `home.nix`.
-{ config, lib, pkgs, osConfig, ... }:
+{ lib, osConfig, ... }:
 
 let
   features = osConfig.local.features;

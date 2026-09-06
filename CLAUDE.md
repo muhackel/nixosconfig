@@ -187,8 +187,8 @@ noch ein `lib.warn`-Wrapper (Deprecation-Warnung bei jeder Auswertung), und Nix 
 ihn gar nicht mehr als Flake-Output. Das Projektflake exportiert `homeModules.default` als
 Definition und hält `homeManagerModules.default` nur als Alias.
 
-**KDE-Shortcut-Politik — nur dort, wo das Flag gesetzt ist.** `Meta+L` („Sitzung sperren")
-wird auf `Ctrl+Alt+L` umgelegt, `Meta+T` („Kachelung bearbeiten") auf keine Taste. Grund
+**KDE-Shortcut-Politik — nur dort, wo das Flag gesetzt ist.** `Meta+L` („Sitzung sperren“)
+wird auf `Ctrl+Alt+L` umgelegt, `Meta+T` („Kachelung bearbeiten“) auf keine Taste. Grund
 ist ein gemessener Livebefund vom 2026-09-06 auf SPIELKISTE: beim Registrieren der zwölf
 `xml-*`-Aktionen standen beide Einträge bereits in `kglobalshortcutsrc`, und in **beiden**
 Fällen gewann der vorhandene Eintrag — `Meta+L` sperrte die Sitzung, `Meta+T` öffnete den

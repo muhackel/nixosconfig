@@ -78,8 +78,8 @@ Eingebunden wird es über das Home-Manager-Modul des Projekts, das in
 gesetzt sind. Die Konfiguration landet über plasma-manager in `kwinrc`, Gruppe
 `[Script-kwin-xmonad-lite]` (alle sechs Schlüssel werden immer geschrieben).
 
-**KDE-Shortcut-Politik:** Auf Hosts mit dem Flag ist „Sitzung sperren" von `Meta+L` auf
-`Ctrl+Alt+L` umgelegt und „Kachelung bearbeiten" (`Meta+T`) auf keine Taste gesetzt.
+**KDE-Shortcut-Politik:** Auf Hosts mit dem Flag ist „Sitzung sperren“ von `Meta+L` auf
+`Ctrl+Alt+L` umgelegt und „Kachelung bearbeiten“ (`Meta+T`) auf keine Taste gesetzt.
 Grund: `registerShortcut` in KWin ruft `KGlobalAccel::setShortcut` ohne `NoAutoloading`
 und meldet trotzdem immer Erfolg — ein bereits in `kglobalshortcutsrc` stehender Eintrag
 gewinnt also gegen die Erstbelegung des Skripts. Live gemessen: ohne die Umlegung sperrte
