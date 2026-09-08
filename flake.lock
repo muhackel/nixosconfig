@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "codexbar-plasma-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788871550,
+        "narHash": "sha256-EVAymXmdJ/+7eGS32UhUpyf5B+8JmNlZE+k2k0cMfA8=",
+        "owner": "muhackel",
+        "repo": "codexbar-plasma-nix",
+        "rev": "b89d191234b5bd36c61751ee3ca88c2e4e48ecc9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "muhackel",
+        "repo": "codexbar-plasma-nix",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1780532242,
@@ -136,6 +156,7 @@
     },
     "root": {
       "inputs": {
+        "codexbar-plasma-nix": "codexbar-plasma-nix",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs"
