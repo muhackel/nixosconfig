@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788871550,
-        "narHash": "sha256-EVAymXmdJ/+7eGS32UhUpyf5B+8JmNlZE+k2k0cMfA8=",
+        "lastModified": 1788899045,
+        "narHash": "sha256-QU4LBgXrbSmuH8gpyMBO2Ynbdh3Y92eNT/tOdhSI//4=",
         "owner": "muhackel",
         "repo": "codexbar-plasma-nix",
-        "rev": "b89d191234b5bd36c61751ee3ca88c2e4e48ecc9",
+        "rev": "4f83616926d03535e3ad13644d0cbfa223950e60",
         "type": "github"
       },
       "original": {
