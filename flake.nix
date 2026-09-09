@@ -42,6 +42,10 @@
       inputs.home-manager.follows = "home-manager";
       inputs.plasma-manager.follows = "plasma-manager";
     };
+    codexbar-plasma-nix = {
+      url = "github:muhackel/codexbar-plasma-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     lanzaboote = {
       # Gepinnt auf master-Fix-Rev statt Tag v1.0.0: v1.0.0 setzt noch
       # boot.bootspec.enable=true, das in nixpkgs-unstable (seit 11.06.2026) per
@@ -58,10 +62,10 @@
     # flake-utils.url = "github:numtide/flake-utils";  # for future use (multi-arch outputs etc.)
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, plasma-manager, kwin-xmonad-lite, ... }:
+  outputs = { self, nixpkgs, home-manager, lanzaboote, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, ... }:
     let
       lib    = nixpkgs.lib;
-      myLib  = import ./lib { inherit lib home-manager plasma-manager kwin-xmonad-lite self; };
+      myLib  = import ./lib { inherit lib home-manager plasma-manager kwin-xmonad-lite codexbar-plasma-nix self; };
 
       # ── Feature-Set für alle Desktop-Hosts ──
       commonFeatures = {

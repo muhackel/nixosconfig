@@ -34,6 +34,7 @@ nixosconfig/
 | lanzaboote | `nix-community/lanzaboote` v1.0.0 | Secure Boot (nur SPIELKISTE, follows nixpkgs) |
 | plasma-manager | `nix-community/plasma-manager` | Deklarative Plasma-Konfiguration (follows nixpkgs, home-manager) |
 | kwin-xmonad-lite | `muhackel/kwin-xmonad-lite` | KWin-Layout-Controller (follows nixpkgs, home-manager, plasma-manager) |
+| codexbar-plasma-nix | `github:muhackel/codexbar-plasma-nix` | Plasma-6-Widget und Laufzeitabhängigkeiten via `overlays.default` |
 
 ## Hosts
 
@@ -171,12 +172,20 @@ Alle Desktop-Hosts teilen folgende Hardware-Konfiguration:
 
 | Paket | Beschreibung |
 |-------|-------------|
-| **codexbar-plasma** | Plasma-6-Widget mit CodexBar-CLI und Laufzeitabhängigkeiten |
 | **mcpvault** | MCP-Server für Obsidian-Vault-Zugriff |
 | **better-sqlite3** | Native Node.js SQLite-Modul |
 | **crossover** | Wine-basierter Windows-Runner (für Gaming) |
 | **gns3extras** | Symlink-Manager für GNS3-Pfade |
 | **configtool** | Konfigurationstool |
+
+`codexbar-plasma` stammt inzwischen aus dem externen Flake-Input
+`github:muhackel/codexbar-plasma-nix` und wird über dessen `overlays.default` in
+`lib/default.nix` in `commonModules` eingebunden. Die Pflege des Upstreams läuft
+automatisiert im externen Repository: Ein neuer Release landet dort zuerst als
+geprüfter, automatisch erzeugter Update-Pull-Request. Erst die Übernahme dieses
+Pull-Requests bewegt den Stand im externen Repository; anschließend holt ein
+manuelles `nix flake update codexbar-plasma-nix` diesen Stand hierher. Der Befehl
+zieht keine neue Upstream-Version direkt.
 
 ## Overlays (`overlays/`)
 

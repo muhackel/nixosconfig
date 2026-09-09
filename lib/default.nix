@@ -1,10 +1,10 @@
-{ lib, home-manager, plasma-manager, kwin-xmonad-lite, self }:
+{ lib, home-manager, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, self }:
 let
   # Zentral gepinnte stateVersion (system + home). Home Manager folgt via
   # osConfig.system.stateVersion. Letzte stable war 26.05 (mkHost-Default unten).
   stateVersion = "26.11";
   commonModules = [
-    #{ nixpkgs.overlays = [ claude-desktop.overlays.default ]; }
+    { nixpkgs.overlays = [ codexbar-plasma-nix.overlays.default ]; }
     "${self}/modules/options.nix"
     "${self}/configuration.nix"
     "${self}/modules/user/muhackel"

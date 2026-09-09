@@ -1,3 +1,6 @@
 # nix-build-Ergebnis-Symlinks — gehören nie ins Repo
 /result
 /result-*
+
+# Philharmonie-Missionszustand — lokal, gehört nicht ins Repo
+/.philharmonie/

@@ -31,6 +31,18 @@ Branches müssen erhalten bleiben wenn sie gemerged wurden "--no-ff"
 - **`overlays/`** — Paket-Overlays
 - **`packages/`** — Eigene Paket-Definitionen
 
+`codexbar-plasma` wird nicht mehr lokal gepflegt. Das Paket liegt im externen
+Flake-Input `github:muhackel/codexbar-plasma-nix`; dessen `overlays.default` wird in
+`lib/default.nix` in `commonModules` eingebunden. Dadurch bleiben Versions- und
+Hashpflege beim externen Projekt, während `configuration.nix` keine Flake-Inputs
+sehen muss. Das externe Overlay gehört nicht zum lokalen Verzeichnis `overlays/`.
+
+Die Upstream-Pflege läuft automatisiert im externen Repository. Ein neuer Release
+landet dort zuerst als geprüfter, automatisch erzeugter Update-Pull-Request. Erst
+die Übernahme dieses Pull-Requests bewegt den Stand im externen Repository;
+anschließend holt ein manuelles `nix flake update codexbar-plasma-nix` diesen Stand
+hierher. Der Befehl zieht keine neue Upstream-Version direkt.
+
 ### Feature-Flag-System
 
 Hosts werden über `commonFeatures` in `flake.nix` konfiguriert. Einzelne Hosts können Features überschreiben (z.B. `commonFeatures // { hamradio = false; }`). Module unter `modules/software/` prüfen `config.local.features.<flag>`.
@@ -270,7 +282,7 @@ Einbindung; nur HAL9000 ändert sich. Dazu ergeben sich dort
 
 ### Overlays
 
-Aktive Overlays werden in `configuration.nix` (`usedOverlays`) mit Inline-Kommentar zum
+Aktive lokale Overlays werden in `configuration.nix` (`usedOverlays`) mit Inline-Kommentar zum
 Zweck importiert:
 
 | Overlay | Zweck |
