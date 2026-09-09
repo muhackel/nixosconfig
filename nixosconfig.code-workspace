@@ -2,6 +2,12 @@
 	"folders": [
 		{
 			"path": "../nixosconfig"
+		},
+		{
+			"path": "../Documents/Projects/kwin-xmonad-lite"
+		},
+		{
+			"path": "../Documents/Projects/codexbar-plasma-nix"
 		}
 	],
 	"settings": {
