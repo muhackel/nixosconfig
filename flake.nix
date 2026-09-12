@@ -97,7 +97,9 @@
 
         SPIELKISTE = myLib.mkHost {
           hostModule   = ./modules/host/SPIELKISTE;
-          features     = commonFeatures;
+          features     = commonFeatures // {
+            kmtVpnVm = true;
+          };
           extraModules = [
             lanzaboote.nixosModules.lanzaboote
             { boot.loader.systemd-boot.enable = lib.mkForce false;
