@@ -290,8 +290,8 @@ Feature-Flag in `commonFeatures`, Modul `modules/software/applications/ai.nix`. 
 
 | Liste | Inhalt |
 |-------|--------|
-| `aipkgs` | Agents und ihr direktes Zubehör: `claude-code`, `codex`, `ccusage`, `codexbar-plasma`, `defuddle`, `bun`, `mcpvault`, `better-sqlite3`, `obsidian` |
-| `aisupportpkgs` | Werkzeuge, die Agents auf der Shell aufrufen (`jq`, `sqlite`, `sshpass`, `ripgrep`, `shellcheck`, `mermaid-cli`, `poppler-utils`, …) |
+| `aipkgs` | Agents und ihr direktes Zubehör: `claude-code`, `codex`, `ccusage`, `codexbar-plasma`, `t3code`, `defuddle`, `bun`, `mcpvault`, `better-sqlite3`, `obsidian` |
+| `aisupportpkgs` | Werkzeuge, die Agents auf der Shell aufrufen (`jq`, `sqlite`, `sshpass`, `ripgrep`, `shellcheck`, `gh`, `glab`, `mermaid-cli`, `poppler-utils`, …) |
 
 **Doppelungen sind gewollt.** Allgemein nützliche Pakete (`obsidian`, `git`, `gh`, `wget`,
 `unzip`, `plantuml`, `nixfmt`, `python3`) stehen zusätzlich in `apppkgs`/`clipkgs`/

@@ -5,6 +5,7 @@ let
     ccusage
     codex
     codexbar-plasma
+    t3code
     defuddle
     obsidian # auch in apppkgs
     bun # JavaScript runtime depency for many claude-code 3rd party tools ... examples: bunx ccstatusline@lastest bunx get-shit-done-cc --claude --local
@@ -31,6 +32,7 @@ let
     git
     git-lfs
     gh
+    glab
     rsync
     # Runtimes und Formatierung
     nodejs
