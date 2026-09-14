@@ -89,13 +89,6 @@ let
     exfat
     exfatprogs
     witr # Why is this runneng?
-    claude-code
-    ccusage
-    codex
-    defuddle
-    codexbar-plasma
-    (callPackage ../../../packages/mcpvault {})
-    (callPackage ../../../packages/better-sqlite3 {})
     gh
     nh
     copyparty
@@ -113,6 +106,7 @@ let
 in
 {
   imports = [
+    ./ai.nix
     ./hamradio.nix
     ./networking.nix
     ./nfc.nix
@@ -186,22 +180,6 @@ in
   #    configDir = "/home/muhackel/.config/syncthing";
   #    dataDir = "/home/muhackel";
   #};
-  
-  # Claude Code erwartet ~/.claude.json, die eigentliche Datei liegt in ~/.claude/
-  system.activationScripts.claudeJsonSymlink = ''
-    if [ $(cat /proc/uptime | cut -d. -f1) -ge 30 ]; then
-      src="/home/muhackel/.claude/claude.json"
-      dst="/home/muhackel/.claude.json"
-      if [ -f "$src" ]; then
-        echo "Claude: Symlink $dst -> $src"
-        ln -sf "$src" "$dst"
-      else
-        echo "Claude: $src nicht gefunden, überspringe Symlink"
-      fi
-    else
-      echo "Claude: Symlink-Aktivierung übersprungen (uptime < 30s)"
-    fi
-  '';
 
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {

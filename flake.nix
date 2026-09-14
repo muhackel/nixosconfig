@@ -70,6 +70,7 @@
       # ── Feature-Set für alle Desktop-Hosts ──
       commonFeatures = {
         plasma6    = true;
+        ai         = true;
         hamradio   = true;
         networking = true;
         nfc        = true;

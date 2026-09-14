@@ -4,6 +4,7 @@
   options.local.features = {
     xmonad = lib.mkEnableOption "xmonad X11/Xserver desktop environment";
     plasma6 = lib.mkEnableOption "KDE Plasma 6 Wayland desktop environment";
+    ai = lib.mkEnableOption "KI-Agents (Claude Code, Codex) samt Shell-Werkzeugen für Agents";
     hamradio = lib.mkEnableOption "ham radio software";
     networking = lib.mkEnableOption "networking tools";
     nfc = lib.mkEnableOption "NFC tools";
