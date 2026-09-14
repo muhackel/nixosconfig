@@ -358,6 +358,28 @@ SIP-Buildabhängigkeit auf 6.15.3. Damit bauen unter anderem HPLIP und Asymptote
 aus `texliveFull` wieder. Entfernen, sobald nixpkgs wieder eine kompatible
 PyQt5/SIP-Kombination liefert.
 
+### ZFS-ARC auf BFG9000 begrenzt (2 GiB, nur Metadaten)
+
+`zroot` ist ein Stripe aus zwei NVMe-SSDs; ein großer Lesecache im RAM bringt dort nichts.
+Ohne Limit nimmt sich der ARC laut `zfs(4)` das Größere aus „RAM − 1 GiB“ und „5/8 des
+RAM“. Deshalb zwei Stellschrauben, die zusammengehören:
+
+| Stelle | Wirkung |
+|--------|---------|
+| `boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ]` in `modules/hardware/lenovo-x1extr-G3/default.nix` | Obergrenze 2 GiB, deklarativ |
+| `zfs set primarycache=metadata zroot` (einmalig, **Pool-Property**, nicht in der Flake) | ARC hält nur Metadaten, keine Nutzdaten; vererbt sich auf alle Datasets |
+
+Der Kernel-Parameter ist bewusst kein `extraModprobeConfig`: `zfs_arc_max` lässt sich zur
+Laufzeit nicht auf `0` zurücksetzen und schrumpft nach unten nur unter Memory-Pressure —
+sauber greift der Wert nur beim Modulstart im initrd.
+
+Die Pool-Property liegt im Pool selbst und überlebt jeden Rebuild, **nicht** aber eine
+Neuanlage des Pools. Bei Neuinstallation nachziehen; Kontrolle mit
+`zfs get -r primarycache zroot` (alle Datasets `inherited from zroot`).
+
+Folge: ZFS umgeht den Linux-Page-Cache, Dateiinhalte werden also gar nicht mehr im RAM
+gehalten. Wiederholte Reads gehen auf die NVMe — bewusst akzeptiert.
+
 ### Auto-ESP-Resync nach GC (`bootloaderResyncAfterGc`) — UNTESTED
 
 Feature-Flag (`modules/software/maintenance/bootloader-resync.nix`), aktiviert in

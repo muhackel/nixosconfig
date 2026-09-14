@@ -22,6 +22,9 @@ in
   ];
   # Additional filesystems supported by the system
   #boot.supportedFilesystems = [ "zfs" ];
+  # ARC auf 2 GiB begrenzen: Pool ist ein NVMe-Stripe, ARC hält nur noch Metadaten
+  # (primarycache=metadata liegt als Pool-Property auf zroot, nicht hier).
+  boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ];
   # Additional Kernel Modules for the initrd (available during boot)
   boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod"];
