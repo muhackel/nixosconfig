@@ -284,6 +284,31 @@ Einbindung; nur HAL9000 ändert sich. Dazu ergeben sich dort
 `programs.kwin-xmonad-lite.enable = false`, `programs.plasma.enable = false`, kein
 `configFile.kwinrc`, leere `programs.plasma.shortcuts` und kein Paket in `home.packages`.
 
+### KI-Pakete (`ai`)
+
+Feature-Flag in `commonFeatures`, Modul `modules/software/applications/ai.nix`. Zwei Listen:
+
+| Liste | Inhalt |
+|-------|--------|
+| `aipkgs` | Agents und ihr direktes Zubehör: `claude-code`, `codex`, `ccusage`, `codexbar-plasma`, `defuddle`, `bun`, `mcpvault`, `better-sqlite3`, `obsidian` |
+| `aisupportpkgs` | Werkzeuge, die Agents auf der Shell aufrufen (`jq`, `sqlite`, `sshpass`, `ripgrep`, `shellcheck`, `mermaid-cli`, `poppler-utils`, …) |
+
+**Doppelungen sind gewollt.** Allgemein nützliche Pakete (`obsidian`, `git`, `gh`, `wget`,
+`unzip`, `plantuml`, `nixfmt`, `python3`) stehen zusätzlich in `apppkgs`/`clipkgs`/
+`devpackages`, damit ein Host mit `ai = false` sie behält. Identische Store-Pfade
+kollidieren in `environment.systemPackages` nicht.
+
+`aisupportpkgs` beruht auf der Auswertung der Claude-Code- und Codex-Transkripte vom
+2026-09-14: aufgenommen sind die Pakete, die Agents am häufigsten ad hoc per `nix shell` /
+`nix-shell -p` nachluden, sowie die meistgenutzten Befehle ohne Basissystem-Abdeckung.
+`ripgrep` und `jq` waren vorher **nicht** systemweit vorhanden — sie standen nur im PATH des
+`claude-code`-Wrappers. Projektspezifisches (`biome`, `tsc`, `nginx`, `gcc`) gehört weiter
+in die devShells der Projekte.
+
+Der Aktivierungsschritt `claudeJsonSymlink` (`~/.claude.json` → `~/.claude/claude.json`)
+liegt in `modules/user/muhackel/default.nix`, weil er den User betrifft, läuft aber nur
+unter `local.features.ai`.
+
 ### Overlays
 
 Aktive lokale Overlays werden in `configuration.nix` (`usedOverlays`) mit Inline-Kommentar zum

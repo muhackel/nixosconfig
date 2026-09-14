@@ -52,6 +52,7 @@ Features werden in `modules/options.nix` deklariert und in `flake.nix` pro Host 
 | Flag | Beschreibung | SPIELKISTE | HAL9000 | BFG9000 |
 |------|-------------|:---:|:---:|:---:|
 | plasma6 | KDE Plasma 6 (Wayland) | ✓ | ✓ | ✓ |
+| ai | Claude Code, Codex, MCP-Pakete und Shell-Werkzeuge für Agents (`aipkgs`, `aisupportpkgs`) | ✓ | ✓ | ✓ |
 | games | Steam, GameMode, Wine, Heroic | ✓ | ✓ | ✓ |
 | hamradio | SDR-Software (gqrx, HackRF, WSJTX) | ✓ | ✓ | ✗ |
 | networking | GNS3, Wireshark, nmap, Winbox | ✓ | ✓ | ✓ |
