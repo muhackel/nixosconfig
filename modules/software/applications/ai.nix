@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   aipkgs = with pkgs; [
+    opencode
     claude-code
     ccusage
     codex
