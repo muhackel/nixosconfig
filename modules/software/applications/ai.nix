@@ -41,7 +41,7 @@ let
     nixfmt
     # Dokumente und Diagramme
     poppler-utils
-    mermaid-cli
+    # mermaid-cli zu viel abhängigkeiten
     plantuml
     pandoc
     tesseract
