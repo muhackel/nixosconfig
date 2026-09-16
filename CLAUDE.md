@@ -319,6 +319,7 @@ Zweck importiert:
 | `pyqt5-abi12` | PyQt5 5.15.11 mit SIP 6.15.3 für ABI v12 |
 | `ts3-legacy` | Bewusster TS3-Pin aus nixos-25.11 mit EOL-Qt5-WebEngine |
 | `proxmark3` | Gewünschte HF_COLIN-Firmware mit BlueShark/BTADDON für das „Knopf“-Script |
+| `opencode-bun142` | opencode ohne Bundle-Splitting — sonst crasht jeder Prompt |
 
 Entfallen:
 
@@ -357,6 +358,28 @@ Das Overlay aktualisiert PyQt5 auf 5.15.11 und pinnt ausschließlich dessen
 SIP-Buildabhängigkeit auf 6.15.3. Damit bauen unter anderem HPLIP und Asymptote
 aus `texliveFull` wieder. Entfernen, sobald nixpkgs wieder eine kompatible
 PyQt5/SIP-Kombination liefert.
+
+### opencode-Bundle-Splitting abgeschaltet (`overlays/opencode-bun142/`)
+
+nixpkgs baut opencode mit bun 1.4.2, obwohl upstream bun `^1.3.14` verlangt — die
+Versionsprüfung patcht nixpkgs bewusst zur bloßen Warnung herunter. Der Bundler von
+bun 1.4.x erzeugt zusammen mit `splitting: true` (in `packages/opencode/script/build.ts`)
+eine kaputte Chunk-Initialisierungsreihenfolge: im Layer-Graph
+(`packages/core/src/effect/layer-node.ts`) ist eine Dependency zur Auswertungszeit
+`undefined`.
+
+Folge: **jeder** Prompt scheitert schon beim Aufbau des System-Prompts
+(`SystemPrompt.environment`) mit `TypeError: undefined is not an object (evaluating
+'a.name')`, nach außen sichtbar als `UnknownError: Unexpected server error`. Das Modell
+ist dabei egal, die Anmeldung auch. Das Overlay setzt `splitting: false`.
+
+Verifiziert auf SPIELKISTE (2026-09-16): das offizielle Upstream-Binary derselben
+Version 1.18.30 läuft mit derselben Auth fehlerfrei, das nixpkgs-Binär crasht — nach dem
+Overlay antwortet auch das gebaute Paket wieder.
+
+Bekannt als NixOS/nixpkgs#563241. Ein Versions-Bump hilft nicht, 1.18.31 enthält den Fix
+nicht. Entfernen, sobald nixpkgs den Fix übernimmt (Splitting aus oder der Upstream-PR
+anomalyco/opencode#48397) oder wieder mit bun < 1.4 baut.
 
 ### ZFS-ARC auf BFG9000 begrenzt (2 GiB, nur Metadaten)
 
