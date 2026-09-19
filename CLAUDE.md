@@ -290,8 +290,21 @@ Feature-Flag in `commonFeatures`, Modul `modules/software/applications/ai.nix`. 
 
 | Liste | Inhalt |
 |-------|--------|
-| `aipkgs` | Agents und ihr direktes Zubehör: `claude-code`, `codex`, `ccusage`, `codexbar-plasma`, `t3code`, `defuddle`, `bun`, `mcpvault`, `better-sqlite3`, `obsidian` |
+| `aipkgs` | Agents und ihr direktes Zubehör: `llm-agents.{claude-code,codex,opencode,ccusage,t3code,t3code-desktop}`, `codexbar-plasma`, `defuddle`, `bun`, `mcpvault`, `better-sqlite3`, `obsidian` |
 | `aisupportpkgs` | Werkzeuge, die Agents auf der Shell aufrufen (`jq`, `sqlite`, `sshpass`, `ripgrep`, `shellcheck`, `gh`, `glab`, `mermaid-cli`, `poppler-utils`, …) |
+
+**Agents aus `llm-agents.nix`.** Der Flake-Input `llm-agents` (`github:numtide/llm-agents.nix`)
+wird täglich aktualisiert, claude-code teils mehrmals am Tag. So bekommen die Agents neue
+Versionen, ohne dass nixpkgs dafür bewegt werden muss. Aktualisieren mit
+`nix flake update llm-agents`.
+
+Eingebunden über ein eigenes Overlay in `lib/default.nix`: `pkgs.llm-agents` zeigt direkt
+auf `llm-agents.packages.<system>`. Bewusst **nicht** über das `overlays.shared-nixpkgs` des
+Projekts und **ohne** `inputs.nixpkgs.follows`: Nur gegen den eigenen nixpkgs-Pin des
+Projekts treffen die Pakete den Cache `cache.numtide.com` (in `lib/caches.nix` und
+`flake.nix:nixConfig`). Der Preis ist eine zweite nixpkgs-Closure im Store. Lokal gebaut
+wird nur `t3code-desktop`, ein `symlinkJoin` über `t3code.desktop`. `t3code` selbst
+liefert `t3`, `t3code-desktop` die Desktop-App mit Menüeintrag.
 
 **Doppelungen sind gewollt.** Allgemein nützliche Pakete (`obsidian`, `git`, `gh`, `wget`,
 `unzip`, `plantuml`, `nixfmt`, `python3`) stehen zusätzlich in `apppkgs`/`clipkgs`/
@@ -319,7 +332,6 @@ Zweck importiert:
 | `pyqt5-abi12` | PyQt5 5.15.11 mit SIP 6.15.3 für ABI v12 |
 | `ts3-legacy` | Bewusster TS3-Pin aus nixos-25.11 mit EOL-Qt5-WebEngine |
 | `proxmark3` | Gewünschte HF_COLIN-Firmware mit BlueShark/BTADDON für das „Knopf“-Script |
-| `opencode-bun142` | opencode ohne Bundle-Splitting — sonst crasht jeder Prompt |
 
 Entfallen:
 
@@ -330,6 +342,7 @@ Entfallen:
 - `libnfc-nci-ldflags` (2026-09-03): der gelockte Maintainer-Fork baut ohne Zusatzflags.
 - `osm-gps-map` (2026-09-03): nixpkgs enthält den vollständigen Autotools-Aufbau.
 - `openldap-flaky-test` (2026-09-04): der globale Overlay verhinderte Binärcache-Treffer für OpenLDAP und Reverse-Abhängigkeiten wie LibreOffice, GnuPG, SpamAssassin und Evolution.
+- `opencode-bun142` (2026-09-19): opencode kommt jetzt aus `llm-agents` als offizielles Upstream-Binary, das den Bun-1.4-Splitting-Crash (NixOS/nixpkgs#563241) nicht hat.
 
 **Neue Overlay-Verzeichnisse `git add`en** — sonst sieht Nix sie im Flake nicht
 (*"Path … is not tracked by Git"*).
@@ -358,28 +371,6 @@ Das Overlay aktualisiert PyQt5 auf 5.15.11 und pinnt ausschließlich dessen
 SIP-Buildabhängigkeit auf 6.15.3. Damit bauen unter anderem HPLIP und Asymptote
 aus `texliveFull` wieder. Entfernen, sobald nixpkgs wieder eine kompatible
 PyQt5/SIP-Kombination liefert.
-
-### opencode-Bundle-Splitting abgeschaltet (`overlays/opencode-bun142/`)
-
-nixpkgs baut opencode mit bun 1.4.2, obwohl upstream bun `^1.3.14` verlangt — die
-Versionsprüfung patcht nixpkgs bewusst zur bloßen Warnung herunter. Der Bundler von
-bun 1.4.x erzeugt zusammen mit `splitting: true` (in `packages/opencode/script/build.ts`)
-eine kaputte Chunk-Initialisierungsreihenfolge: im Layer-Graph
-(`packages/core/src/effect/layer-node.ts`) ist eine Dependency zur Auswertungszeit
-`undefined`.
-
-Folge: **jeder** Prompt scheitert schon beim Aufbau des System-Prompts
-(`SystemPrompt.environment`) mit `TypeError: undefined is not an object (evaluating
-'a.name')`, nach außen sichtbar als `UnknownError: Unexpected server error`. Das Modell
-ist dabei egal, die Anmeldung auch. Das Overlay setzt `splitting: false`.
-
-Verifiziert auf SPIELKISTE (2026-09-16): das offizielle Upstream-Binary derselben
-Version 1.18.30 läuft mit derselben Auth fehlerfrei, das nixpkgs-Binär crasht — nach dem
-Overlay antwortet auch das gebaute Paket wieder.
-
-Bekannt als NixOS/nixpkgs#563241. Ein Versions-Bump hilft nicht, 1.18.31 enthält den Fix
-nicht. Entfernen, sobald nixpkgs den Fix übernimmt (Splitting aus oder der Upstream-PR
-anomalyco/opencode#48397) oder wieder mit bun < 1.4 baut.
 
 ### ZFS-ARC auf BFG9000 begrenzt (2 GiB, nur Metadaten)
 

@@ -1,12 +1,13 @@
 { config, lib, pkgs, ... }:
 let
   aipkgs = with pkgs; [
-    opencode
-    claude-code
-    ccusage
-    codex
+    llm-agents.opencode
+    llm-agents.claude-code
+    llm-agents.ccusage
+    llm-agents.codex
     codexbar-plasma
-    t3code
+    llm-agents.t3code # t3
+    llm-agents.t3code-desktop
     defuddle
     obsidian # auch in apppkgs
     bun # JavaScript runtime depency for many claude-code 3rd party tools ... examples: bunx ccstatusline@lastest bunx get-shit-done-cc --claude --local
