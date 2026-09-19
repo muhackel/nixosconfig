@@ -1,10 +1,16 @@
-{ lib, home-manager, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, self }:
+{ lib, home-manager, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, llm-agents, self }:
 let
   # Zentral gepinnte stateVersion (system + home). Home Manager folgt via
   # osConfig.system.stateVersion. Letzte stable war 26.05 (mkHost-Default unten).
   stateVersion = "26.11";
   commonModules = [
-    { nixpkgs.overlays = [ codexbar-plasma-nix.overlays.default ]; }
+    { nixpkgs.overlays = [
+        codexbar-plasma-nix.overlays.default
+        # pkgs.llm-agents.<name> aus den fertigen Paketen des Flakes, nicht über
+        # overlays.shared-nixpkgs — sonst gäbe es nur bei gleichem nixpkgs-Pin Cache-Treffer.
+        (final: prev: { llm-agents = llm-agents.packages.${prev.stdenv.hostPlatform.system}; })
+      ];
+    }
     "${self}/modules/options.nix"
     "${self}/configuration.nix"
     "${self}/modules/user/muhackel"

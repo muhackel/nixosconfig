@@ -6,11 +6,13 @@
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
       "https://numtide.cachix.org"
+      "https://cache.numtide.com"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
     ];
     trusted-users = [ "root" "muhackel" ];
   };
@@ -46,6 +48,11 @@
       url = "github:muhackel/codexbar-plasma-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # KI-Agents (claude-code, codex, opencode, t3code, ccusage) mit täglichen
+    # Updates, unabhängig vom nixpkgs-Kanal. Bewusst OHNE nixpkgs.follows: nur
+    # gegen den eigenen nixpkgs-Pin treffen die Pakete cache.numtide.com.
+    # Aktualisieren: nix flake update llm-agents
+    llm-agents.url = "github:numtide/llm-agents.nix";
     lanzaboote = {
       # Gepinnt auf master-Fix-Rev statt Tag v1.0.0: v1.0.0 setzt noch
       # boot.bootspec.enable=true, das in nixpkgs-unstable (seit 11.06.2026) per
@@ -62,10 +69,10 @@
     # flake-utils.url = "github:numtide/flake-utils";  # for future use (multi-arch outputs etc.)
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, ... }:
+  outputs = { self, nixpkgs, home-manager, lanzaboote, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, llm-agents, ... }:
     let
       lib    = nixpkgs.lib;
-      myLib  = import ./lib { inherit lib home-manager plasma-manager kwin-xmonad-lite codexbar-plasma-nix self; };
+      myLib  = import ./lib { inherit lib home-manager plasma-manager kwin-xmonad-lite codexbar-plasma-nix llm-agents self; };
 
       # ── Feature-Set für alle Desktop-Hosts ──
       commonFeatures = {
