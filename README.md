@@ -169,6 +169,20 @@ Alle Desktop-Hosts teilen folgende Hardware-Konfiguration:
 - **Maus:** Logitech G502 + Wireless-Support (Solaar)
 - **Speichermedien:** USB-Automount via udisks2 (mountet unter `/media/`)
 
+### Audio mit DeepFilterNet
+
+DeepFilterNet erhält auf allen Hosts mit aktiviertem `sound` einen eigenen
+PipeWire-Datenthread. Beide Filterstreams
+laufen auf `data-loop.deepfilter`, die übrigen Nodes auf `data-loop.0`. Das Drop-in
+`92-deepfilter-loop.conf` wird vom gemeinsamen Audiomodul erzeugt und soll Wiedergabeaussetzer unter
+Filterlast untersuchen. Quantum und Sampleraten bleiben unverändert. Im ersten
+Hörvergleich trat weiterhin Knacken auf, gefühlt seltener; der Versuch behebt das
+Problem bisher nicht vollständig.
+
+Auf SPIELKISTE wurde der Versuch mit `nixos-rebuild test` aktiviert. Die Thread-Zuordnung
+ist dort zur Laufzeit bestätigt; der Boot-Standard bleibt beim bisherigen System.
+HAL9000 und BFG9000 übernehmen die Einstellung beim nächsten Rebuild.
+
 ## Eigene Pakete (`packages/`)
 
 | Paket | Beschreibung |
@@ -178,6 +192,10 @@ Alle Desktop-Hosts teilen folgende Hardware-Konfiguration:
 | **crossover** | Wine-basierter Windows-Runner (für Gaming) |
 | **gns3extras** | Symlink-Manager für GNS3-Pfade |
 | **configtool** | Konfigurationstool |
+| **ts3-legacy** | TeamSpeak 3.6.2 aus gepinntem nixos-25.11 mit bewusst akzeptierter EOL-Qt5-WebEngine |
+
+`ts3-legacy` wird wie die anderen eigenen Pakete per `pkgs.callPackage` eingebunden;
+Quelle und Freigaben für den isolierten Qt5-Paketbaum liegen im Paket selbst.
 
 `codexbar-plasma` stammt inzwischen aus dem externen Flake-Input
 `github:muhackel/codexbar-plasma-nix` und wird über dessen `overlays.default` in
@@ -192,11 +210,10 @@ zieht keine neue Upstream-Version direkt.
 
 | Overlay | Beschreibung |
 |---------|-------------|
-| **pyqt5-abi12** | PyQt5 5.15.11 mit SIP 6.15.3 für ABI v12 |
-| **ts3-legacy** | TeamSpeak 3.6.2 aus nixos-25.11 mit bewusst akzeptierter EOL-Qt5-WebEngine |
 | **proxmark3** | RFID/NFC-Tool (HF_COLIN-Firmware + Blueshark-Addon) |
 
-(`ciscoPacketTracer8` ist vorhanden aber aktuell nicht aktiv eingebunden.)
+Der bisherige PyQt5-Workaround ist durch einen SIP-Fix im gelockten nixpkgs ersetzt.
+Das unbenutzte Packet-Tracer-Overlay samt lokalem Debian-Archiv wurde entfernt.
 
 ## Binary Caches
 
