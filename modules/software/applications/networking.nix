@@ -10,7 +10,6 @@ let
   gnspkgs = with pkgs; [
     gns3-gui
     inetutils
-    #ciscoPacketTracer8
     gns3extras
   ];
   networkingpkgs = with pkgs; [
@@ -32,9 +31,6 @@ let
  in
 lib.mkIf config.local.features.networking
 {
-  #nixpkgs.overlays = [ 
-  #  (import ../../../overlays/ciscoPacketTracer8) 
-  #];
   environment.systemPackages = gnspkgs ++ networkingpkgs;
 
   # Run the gns3extras activation script on system activation so the
@@ -88,4 +84,3 @@ lib.mkIf config.local.features.networking
     package = pkgs.winbox4;
   };
 }
-

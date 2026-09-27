@@ -11,6 +11,28 @@ lib.mkIf config.local.features.sound {
       (pkgs.callPackage ../../../packages/pipewire-deepfilternet { })
     ];
 
+    extraConfig.pipewire."92-deepfilter-loop" = {
+      "context.properties"."context.data-loops" = [
+        {
+          "thread.name" = "data-loop.0";
+          "loop.class" = [ "data.rt" ];
+        }
+        {
+          "thread.name" = "data-loop.deepfilter";
+          "loop.class" = [ "data.deepfilter" ];
+        }
+      ];
+      "stream.rules" = [
+        {
+          matches = [
+            { "node.name" = "capture.deepfilternet_source"; }
+            { "node.name" = "deepfilternet_source"; }
+          ];
+          actions.update-props."node.loop.name" = "data-loop.deepfilter";
+        }
+      ];
+    };
+
     # Avantree DG60P (Full-Speed USB, aptX-LL) underrunt bei <10ms Quantum unter DeepFilterNet-Last
     wireplumber.extraConfig."51-avantree-quantum" = {
       "monitor.alsa.rules" = [

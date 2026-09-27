@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 let
+  ts3-legacy = pkgs.callPackage ../../../packages/ts3-legacy { };
   jnlpApp = pkgs.adoptopenjdk-icedtea-web;
   javawsWrapper = pkgs.writeScriptBin "javaws" ''
     #!${pkgs.bash}/bin/bash
@@ -100,7 +101,7 @@ let
     ferdium
     discord
     #teamspeak6-client
-    ts3-legacy # TS3-Client aus nixos-25.11 (Qt5-Stack), siehe overlays/ts3-legacy
+    ts3-legacy # TS3-Client aus nixos-25.11 (Qt5-Stack), siehe packages/ts3-legacy
   ];
   devpackages = with pkgs; [ cmake automake python3 ghc ];
 in

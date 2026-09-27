@@ -329,8 +329,6 @@ Zweck importiert:
 
 | Overlay | Zweck |
 |---------|-------|
-| `pyqt5-abi12` | PyQt5 5.15.11 mit SIP 6.15.3 für ABI v12 |
-| `ts3-legacy` | Bewusster TS3-Pin aus nixos-25.11 mit EOL-Qt5-WebEngine |
 | `proxmark3` | Gewünschte HF_COLIN-Firmware mit BlueShark/BTADDON für das „Knopf“-Script |
 
 Entfallen:
@@ -343,17 +341,23 @@ Entfallen:
 - `osm-gps-map` (2026-09-03): nixpkgs enthält den vollständigen Autotools-Aufbau.
 - `openldap-flaky-test` (2026-09-04): der globale Overlay verhinderte Binärcache-Treffer für OpenLDAP und Reverse-Abhängigkeiten wie LibreOffice, GnuPG, SpamAssassin und Evolution.
 - `opencode-bun142` (2026-09-19): opencode kommt jetzt aus `llm-agents` als offizielles Upstream-Binary, das den Bun-1.4-Splitting-Crash (NixOS/nixpkgs#563241) nicht hat.
+- `pyqt5-abi12` (2026-09-27): bereits deaktiviert; der gelockte nixpkgs-Stand enthält den [SIP-Backport für Legacy-ABIs](https://github.com/NixOS/nixpkgs/blob/e158d9ed9b51c98974c5e66e1ba1c9e0255fecaa/pkgs/development/python-modules/sip/default.nix).
+- `ciscoPacketTracer8` (2026-09-27): unbenutztes Overlay samt lokalem Debian-Archiv und auskommentierten Verweisen entfernt.
+- `ts3-legacy` (2026-09-27): als eigenes Paket nach `packages/ts3-legacy/` überführt, Pin und Laufzeitabhängigkeiten unverändert.
 
 **Neue Overlay-Verzeichnisse `git add`en** — sonst sieht Nix sie im Flake nicht
 (*"Path … is not tracked by Git"*).
 
-### TeamSpeak-3-Legacy-Pin (`overlays/ts3-legacy/`)
+### TeamSpeak-3-Legacy-Pin (`packages/ts3-legacy/`)
 
 TeamSpeak 3.6.2 stammt aus dem gepinnten nixos-25.11-Commit
 `25f538306313eae3927264466c70d7001dcea1df`. nixpkgs entfernte `teamspeak3` am
 2026-04-26 bewusst aus unstable, weil der Client von der nicht mehr regulär gewarteten
 Qt5-WebEngine abhängt. Der isolierte Paketbaum erlaubt ausschließlich `teamspeak3` als
 unfreies Paket und `qtwebengine-5.15.19` als unsichere Laufzeitabhängigkeit.
+
+`modules/software/applications/default.nix` bindet das Paket per `pkgs.callPackage`
+direkt in `communicationpkgs` ein. Es erweitert den globalen Paketbaum nicht.
 
 Der Pin bleibt, solange TeamSpeak 3 benötigt wird. Entfernen, wenn TeamSpeak 3 ohne
 Qt5-WebEngine verfügbar ist oder die Paketliste auf `teamspeak6-client` umgestellt wird.
@@ -364,13 +368,40 @@ Die Variante baut für `PM3RDV4` die Standalone-Firmware `HF_COLIN` und aktivier
 BlueShark über `BTADDON`. Sie wird für das „Knopf“-Script benötigt. Behalten, solange
 nixpkgs diese Kombination nicht als Standard oder eigenes Paketattribut liefert.
 
-### PyQt5-SIP-ABI-v12-Fix (`overlays/pyqt5-abi12/`)
+### DeepFilterNet: eigener Datenthread auf allen Audio-Hosts
 
-SIP 6.16.1 baut PyQt5 unter Python 3.14 nicht mit der angeforderten ABI v12.
-Das Overlay aktualisiert PyQt5 auf 5.15.11 und pinnt ausschließlich dessen
-SIP-Buildabhängigkeit auf 6.15.3. Damit bauen unter anderem HPLIP und Asymptote
-aus `texliveFull` wieder. Entfernen, sobald nixpkgs wieder eine kompatible
-PyQt5/SIP-Kombination liefert.
+`modules/hardware/sound/default.nix` erzeugt bei aktivem `sound` das PipeWire-Drop-in
+`92-deepfilter-loop.conf`. Es definiert den normalen `data-loop.0` für `data.rt` und
+`data-loop.deepfilter` für die Filterverarbeitung. `stream.rules` ordnet beide Streams
+`capture.deepfilternet_source` und `deepfilternet_source` vor der Node-Erzeugung dem
+Filterthread zu. Quantum, Sampleraten und der Avantree-Workaround bleiben unverändert.
+Die Einstellung gilt gemeinsam für SPIELKISTE, HAL9000 und BFG9000; bei deaktiviertem
+`sound` wird das Drop-in nicht erzeugt.
+
+Anlass sind gemessene Wiedergabefehler bei aktivem DeepFilterNet: Der Filter belegte
+den gemeinsamen Thread in Stichproben bis zu 8,3 ms bei 5,33 ms Ausgabeperiode.
+Die Threadtrennung ist ein Vergleichstest. Der erste Höreindruck meldet weiterhin
+Knacken, gefühlt seltener; ein vollständiger Fix ist sie damit bisher nicht.
+
+**Laufzeittest auf SPIELKISTE vom 27.09.2026:** Zunächst nur im Hostmodul mit
+`nixos-rebuild test` aktiviert und die drei
+User-Dienste `pipewire`, `pipewire-pulse`, `wireplumber` neu gestartet. `pw-dump`
+bestätigt die Loop-Zuordnung, `ps` beide Datenthreads. Nach dem Neustart laufen beide
+mit `SCHED_RR`/Priorität 20, während vor dem Test Echtzeitprioritäten fehlten.
+Ein besserer Höreindruck wäre deshalb nicht allein der Threadtrennung zuzuordnen.
+Der Boot-Standard wurde nicht verändert.
+Anschließend wurde die unveränderte Einstellung ins gemeinsame Audiomodul übernommen.
+HAL9000 und BFG9000 erhalten sie beim nächsten Rebuild; dort steht der Laufzeittest aus.
+
+Im durchgehenden fünfminütigen Nachlauf entstanden zwei neue Fehler an der internen
+Ausgabe, keine bei Chrome, TeamSpeak oder der Aufnahmeseite. Die vorherige
+Fünfminutenmessung hatte sechs, elf beziehungsweise zwölf neue Wiedergabefehler.
+Einzelne Vergleichsläufe und die zugleich wieder aktive Echtzeitpriorität erlauben
+keinen eindeutigen Wirksamkeitsnachweis; die Ausgabe blieb bei 256 Samples.
+
+Quellen: [PipeWire-Konfiguration](https://docs.pipewire.org/page_man_pipewire_conf_5.html),
+[Loop-Zuordnung](https://docs.pipewire.org/page_man_pipewire-props_7.html).
+Messbefunde: `[[recherche/pipewire-deepfilternet-knistern-quantum]]` im Vault.
 
 ### ZFS-ARC auf BFG9000 begrenzt (2 GiB, nur Metadaten)
 
