@@ -318,6 +318,25 @@ kollidieren in `environment.systemPackages` nicht.
 `claude-code`-Wrappers. Projektspezifisches (`biome`, `tsc`, `nginx`, `gcc`) gehört weiter
 in die devShells der Projekte.
 
+**`t3code-desktop` braucht einen libstdc++-Wrapper** (`t3codeDesktop` in `ai.nix`). Seit
+t3code 0.0.44 liefert Upstream `node-pty` (1.2.0-beta.15) nur noch als eigenes Prebuild
+unter `prebuilds/linux-x64/pty.node` aus; bis 0.0.42 (node-pty 1.1.0) baute Nix das Modul
+selbst nach `build/Release/` und patchte dabei den RPATH. Das Prebuild hat keinen — `ldd`
+meldet `libstdc++.so.6 => not found`.
+
+Die CLI merkt davon nichts: `nodejs` ist gegen `libstdc++` gelinkt, die Bibliothek ist im
+Prozess also schon geladen und `dlopen` findet sie über den SONAME. Electron bringt ein
+statisches libc++ mit und lädt nur `libgcc_s`/`libssp` dynamisch — dort scheitert
+`dlopen(pty.node)`. Folge: der Backend-Child stirbt mit `code=1`, die App startet ihn im
+30-Sekunden-Takt neu und das Fenster erscheint nie. Diagnose steht in
+`~/.t3/userdata/logs/server-child.log` (`NodePtyModuleLoadError`); die Meldung nennt nur
+den letzten Ladeversuch und verschweigt die fehlende Bibliothek.
+
+Der Wrapper legt `--prefix LD_LIBRARY_PATH` mit `stdenv.cc.cc.lib` vor den vorhandenen
+Upstream-Wrapper und behält dessen `--inherit-argv0`. Er hängt bewusst an `ai.nix` statt am
+Overlay in `lib/default.nix`: kein Rebuild des `t3code`-Pakets, nur ein `symlinkJoin`.
+Entfernen, sobald `llm-agents.nix` das Prebuild selbst patcht.
+
 Der Aktivierungsschritt `claudeJsonSymlink` (`~/.claude.json` → `~/.claude/claude.json`)
 liegt in `modules/user/muhackel/default.nix`, weil er den User betrifft, läuft aber nur
 unter `local.features.ai`.
