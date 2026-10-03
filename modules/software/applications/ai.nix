@@ -1,13 +1,17 @@
 { config, lib, pkgs, ... }:
 let
+  # Upstream legt alle Provider-CLIs in den PATH-Wrapper, grok und cursor-agent werden nicht gebraucht
+  t3code = pkgs.llm-agents.t3code.override {
+    providerPackages = with pkgs.llm-agents; [ codex claude-code opencode ];
+  };
   aipkgs = with pkgs; [
     llm-agents.opencode
     llm-agents.claude-code
     llm-agents.ccusage
     llm-agents.codex
     codexbar-plasma
-    llm-agents.t3code # t3
-    llm-agents.t3code-desktop
+    t3code # t3
+    t3code.desktop
     defuddle
     obsidian # auch in apppkgs
     bun # JavaScript runtime depency for many claude-code 3rd party tools ... examples: bunx ccstatusline@lastest bunx get-shit-done-cc --claude --local
