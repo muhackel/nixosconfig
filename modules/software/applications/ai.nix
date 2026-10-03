@@ -12,7 +12,6 @@ let
     codexbar-plasma
     t3code # t3
     t3code.desktop
-    llm-agents.cli-proxy-api
     defuddle
     obsidian # auch in apppkgs
     bun # JavaScript runtime depency for many claude-code 3rd party tools ... examples: bunx ccstatusline@lastest bunx get-shit-done-cc --claude --local

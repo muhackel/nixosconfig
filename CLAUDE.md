@@ -290,7 +290,7 @@ Feature-Flag in `commonFeatures`, Modul `modules/software/applications/ai.nix`. 
 
 | Liste | Inhalt |
 |-------|--------|
-| `aipkgs` | Agents und ihr direktes Zubehör: `llm-agents.{claude-code,codex,opencode,ccusage,cli-proxy-api}`, `t3code` + `t3code.desktop` (Override, siehe unten), `codexbar-plasma`, `defuddle`, `bun`, `mcpvault`, `better-sqlite3`, `obsidian` |
+| `aipkgs` | Agents und ihr direktes Zubehör: `llm-agents.{claude-code,codex,opencode,ccusage}`, `t3code` + `t3code.desktop` (Override, siehe unten), `codexbar-plasma`, `defuddle`, `bun`, `mcpvault`, `better-sqlite3`, `obsidian` |
 | `aisupportpkgs` | Werkzeuge, die Agents auf der Shell aufrufen (`jq`, `sqlite`, `sshpass`, `ripgrep`, `shellcheck`, `gh`, `glab`, `mermaid-cli`, `poppler-utils`, …) |
 
 **Agents aus `llm-agents.nix`.** Der Flake-Input `llm-agents` (`github:numtide/llm-agents.nix`)
