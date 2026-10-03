@@ -333,27 +333,6 @@ der Desktop-Backend-Child stirbt dann mit `code=1` und das Fenster erscheint nie
 das Prebuild seit [`ba967e4`](https://github.com/numtide/llm-agents.nix/commit/ba967e4fd9bc9390acd5d02da328665a8a707bae)
 selbst per `autoPatchelf` (RUNPATH auf `gcc-lib`, mit `readelf -d` geprüft).
 
-**`cli-proxy-api` als Systemdienst.** `ai.nix` schaltet das nixpkgs-Modul
-`services.cliproxyapi` ein, aber mit `package = pkgs.llm-agents.cli-proxy-api` statt dem
-älteren nixpkgs-Paket `cliproxyapi`. Der Dienst lauscht nur auf `127.0.0.1:8317`, die
-Firewall bleibt zu. Er läuft als Systembenutzer `cliproxyapi`; Konfiguration und
-OAuth-Tokens liegen unter `/var/lib/cliproxyapi`.
-
-Webinterface (Management Center) ohne Key: `http://127.0.0.1:8318/management.html`, im
-Login-Feld einen beliebigen Wert eingeben. CLIProxyAPI verlangt für jede Management-Anfrage
-einen Key, auch von localhost (`AuthenticateManagementKey` in
-`internal/api/handlers/management/handler.go`), ein leerer Key schaltet die Management-API
-ganz ab. Deshalb sitzt davor `cliproxyapi-panel.service`, ein Caddy auf `127.0.0.1:8318`,
-der bei `/v0/management/*` und `/v8/management/*` den `Authorization`-Header durch den
-echten Key ersetzt. Direkt auf 8317 bleibt der Key Pflicht. Den Key erzeugt der Oneshot
-`cliproxyapi-management-key` beim ersten Start pro Host unter
-`/var/lib/cliproxyapi-secrets/management-key` (root, 0600, daneben `.env` für Caddy), damit
-er nicht im Store landet. Das Panel lädt CLIProxyAPI zur Laufzeit von GitHub
-(`router-for-me/Cli-Proxy-API-Management-Center`), nixpkgs hat dafür kein Paket.
-**Im Webinterface geänderte Einstellungen gehen beim nächsten Dienststart verloren** — das
-`preStart` des nixpkgs-Moduls schreibt `config.yaml` jedes Mal neu aus `settings`.
-Anmeldungen (OAuth-Dateien im `auth-dir`) bleiben erhalten.
-
 Der Aktivierungsschritt `claudeJsonSymlink` (`~/.claude.json` → `~/.claude/claude.json`)
 liegt in `modules/user/muhackel/default.nix`, weil er den User betrifft, läuft aber nur
 unter `local.features.ai`.
