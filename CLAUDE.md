@@ -290,7 +290,7 @@ Feature-Flag in `commonFeatures`, Modul `modules/software/applications/ai.nix`. 
 
 | Liste | Inhalt |
 |-------|--------|
-| `aipkgs` | Agents und ihr direktes Zubehör: `llm-agents.{claude-code,codex,opencode,ccusage,t3code,t3code-desktop}`, `codexbar-plasma`, `defuddle`, `bun`, `mcpvault`, `better-sqlite3`, `obsidian` |
+| `aipkgs` | Agents und ihr direktes Zubehör: `llm-agents.{claude-code,codex,opencode,ccusage}`, `t3code` + `t3code.desktop` (Override, siehe unten), `codexbar-plasma`, `defuddle`, `bun`, `mcpvault`, `better-sqlite3`, `obsidian` |
 | `aisupportpkgs` | Werkzeuge, die Agents auf der Shell aufrufen (`jq`, `sqlite`, `sshpass`, `ripgrep`, `shellcheck`, `gh`, `glab`, `mermaid-cli`, `poppler-utils`, …) |
 
 **Agents aus `llm-agents.nix`.** Der Flake-Input `llm-agents` (`github:numtide/llm-agents.nix`)
@@ -302,9 +302,16 @@ Eingebunden über ein eigenes Overlay in `lib/default.nix`: `pkgs.llm-agents` ze
 auf `llm-agents.packages.<system>`. Bewusst **nicht** über das `overlays.shared-nixpkgs` des
 Projekts und **ohne** `inputs.nixpkgs.follows`: Nur gegen den eigenen nixpkgs-Pin des
 Projekts treffen die Pakete den Cache `cache.numtide.com` (in `lib/caches.nix` und
-`flake.nix:nixConfig`). Der Preis ist eine zweite nixpkgs-Closure im Store. Lokal gebaut
-wird nur `t3code-desktop`, ein `symlinkJoin` über `t3code.desktop`. `t3code` selbst
-liefert `t3`, `t3code-desktop` die Desktop-App mit Menüeintrag.
+`flake.nix:nixConfig`). Der Preis ist eine zweite nixpkgs-Closure im Store. `t3code`
+liefert `t3`, der Output `t3code.desktop` die Desktop-App mit Menüeintrag.
+
+**t3code nur mit den genutzten Providern.** Upstream legt per `makeWrapper --prefix PATH`
+alle Provider-CLIs (`codex`, `claude-code`, `cursor-agent`, `grok`, `opencode`) in die
+Closure von `t3` und `t3code-desktop`. `ai.nix` überschreibt `providerPackages` auf
+`codex`, `claude-code` und `opencode` aus `llm-agents`; `grok` und `cursor-agent` entfallen.
+Lokal gebaut wird dadurch nur der dünne Wrapper, `t3code.unwrapped` bleibt derselbe
+Store-Pfad und kommt aus dem Cache. Statt `llm-agents.t3code-desktop` (ein `symlinkJoin`
+über das nicht überschriebene `t3code.desktop`) wird direkt `t3code.desktop` installiert.
 
 **Doppelungen sind gewollt.** Allgemein nützliche Pakete (`obsidian`, `git`, `gh`, `wget`,
 `unzip`, `plantuml`, `nixfmt`, `python3`) stehen zusätzlich in `apppkgs`/`clipkgs`/
