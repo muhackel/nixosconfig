@@ -333,6 +333,16 @@ der Desktop-Backend-Child stirbt dann mit `code=1` und das Fenster erscheint nie
 das Prebuild seit [`ba967e4`](https://github.com/numtide/llm-agents.nix/commit/ba967e4fd9bc9390acd5d02da328665a8a707bae)
 selbst per `autoPatchelf` (RUNPATH auf `gcc-lib`, mit `readelf -d` geprüft).
 
+Ein zweiter lokaler Wrapper (Commit `7d65a7b`, 2026-10-05) tauschte das Electron des
+llm-agents-Pakets gegen `pkgs.electron_44` aus dem System-nixpkgs: Das llm-agents-Electron
+hing damals an einer älteren glibc und konnte das System-Mesa nicht laden (`GLIBC_2.43`
+fehlte); ohne Mesa griff glvnd auf Optimus-Hosts zur Nvidia-EGL und t3code-desktop starb
+mit einem Wayland-Protokollfehler. Entfallen am 2026-10-18: beide nixpkgs stehen auf
+glibc 2.44, und `t3code.unwrapped.desktop` aus `llm-agents` referenziert denselben
+Store-Pfad `electron-44.7.2` wie `pkgs.electron_44` (mit `nix-store -q --references`
+geprüft). Driftet der llm-agents-nixpkgs wieder hinter das System zurück, kehrt das
+Symptom zurück; dann den Wrapper aus `7d65a7b` wiederherstellen.
+
 Der Aktivierungsschritt `claudeJsonSymlink` (`~/.claude.json` → `~/.claude/claude.json`)
 liegt in `modules/user/muhackel/default.nix`, weil er den User betrifft, läuft aber nur
 unter `local.features.ai`.
