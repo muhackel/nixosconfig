@@ -5,6 +5,7 @@ in
 {
   imports = [
     ./kwin-xmonad-lite.nix
+    ./steam.nix
   ];
 
   home.stateVersion = osConfig.system.stateVersion;
