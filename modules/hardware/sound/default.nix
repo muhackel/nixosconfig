@@ -11,6 +11,12 @@ lib.mkIf config.local.features.sound {
       (pkgs.callPackage ../../../packages/pipewire-deepfilternet { })
     ];
 
+    # Gesamten Prozessspeicher sperren: ausgelagerte Seiten blockieren sonst den RT-Thread
+    # per Page-Fault und reißen am USB-Headset Underruns (Ausfälle 2026-10-24, siehe CLAUDE.md).
+    extraConfig.pipewire."93-mlock-all"."context.properties"."mem.mlock-all" = true;
+    extraConfig.pipewire-pulse."93-mlock-all"."context.properties"."mem.mlock-all" = true;
+    wireplumber.extraConfig."93-mlock-all"."context.properties"."mem.mlock-all" = true;
+
     extraConfig.pipewire."92-deepfilter-loop" = {
       "context.properties"."context.data-loops" = [
         {
@@ -49,5 +55,12 @@ lib.mkIf config.local.features.sound {
         }
       ];
     };
+  };
+
+  # mlockall braucht ein RLIMIT_MEMLOCK oberhalb der Prozessgröße; Upstream-Unit gibt 8 MiB.
+  systemd.user.services = {
+    pipewire.serviceConfig.LimitMEMLOCK = "infinity";
+    pipewire-pulse.serviceConfig.LimitMEMLOCK = "infinity";
+    wireplumber.serviceConfig.LimitMEMLOCK = "infinity";
   };
 }

@@ -29,6 +29,15 @@
     };
   };
 
+  # Baloo indexierte das ganze Home samt versteckter Ordner (Steam, .cache, Worktrees):
+  # 23 GB Index, 11,7 GB RAM, über 1 GB Swap. Der Speicherdruck lagerte PipeWire-Seiten
+  # aus und löste am USB-Headset harte Tonausfälle aus (2026-10-24, siehe CLAUDE.md).
+  # ~/.config/baloofilerc setzt den Schlüssel nicht, daher greift dieser Systemdefault.
+  environment.etc."xdg/baloofilerc".text = ''
+    [Basic Settings]
+    Indexing-Enabled=false
+  '';
+
   networking = {
     hostName = "SPIELKISTE";
     hostId = "DEADBEEF";
