@@ -43,6 +43,18 @@ in
   security.sudo.wheelNeedsPassword = false;
   # Pipewire/Wireplumber brauchen rtkit-daemon für Realtime-Scheduling.
   security.rtkit.enable = true;
+  # Durch linger startet PipeWire beim Boot vor der grafischen Session. Ohne
+  # Display-Session lehnt polkit die rtkit-Anfragen ab (allow_any = no); PipeWire
+  # schickt sie fire-and-forget, merkt die Ablehnung nicht und läuft dann ohne
+  # Echtzeitpriorität bis zum nächsten Neustart der User-Dienste.
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id.indexOf("org.freedesktop.RealtimeKit1.") === 0 &&
+          subject.user === "muhackel") {
+        return polkit.Result.YES;
+      }
+    });
+  '';
   programs.zsh.enable = true;
   services.fstrim.enable = true;
   services.fwupd.enable = true;
