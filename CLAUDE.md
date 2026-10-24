@@ -453,6 +453,41 @@ Quellen: [PipeWire-Konfiguration](https://docs.pipewire.org/page_man_pipewire_co
 [Loop-Zuordnung](https://docs.pipewire.org/page_man_pipewire-props_7.html).
 Messbefunde: `[[recherche/pipewire-deepfilternet-knistern-quantum]]` im Vault.
 
+### Harte Tonausfälle am USB-Headset: Speicherdruck, nicht Linger
+
+Zwei Ausfälle am 2026-10-24 auf SPIELKISTE (Dota 2 um 18:08, Mechabellum um 23:48), jeweils
+am Full-Speed-USB-Headset ATH-M50xSTS mit identischem Fehlerbild: `spa.mixer-dsp: out of
+buffers`, `spa.alsa: buffer 0 in use`, dann `snd_pcm_mmap_commit error: Broken pipe`. Keine
+Kernel- oder USB-Fehler, keine Disconnects zum Zeitpunkt.
+
+**Der rtkit-Fix aus PR #16 (Polkit-Regel für `linger`) wirkt und bleibt.** Im zweiten Boot
+hatte PipeWire ab Start RT-Priorität 20 (rtkit-Journal, PID des Bootstarts), der Ausfall
+kam trotzdem. RT war also nie die Ursache; `linger` zu entfernen brächte nichts.
+
+**Gemeinsamer Faktor war Baloo.** In beiden Boots 11,7 GB RAM-Peak und über 1 GB Swap für
+`kde-baloo.service`, Hunderte Extractor-Starts pro Stunde, Index 23 GB bei 1,85 Mio Dateien,
+`index hidden folders=true` über das ganze Home (Steam, `.cache`, T3-Worktrees). Der
+User-Slice erreichte 44,3 GB von 46 GB; PipeWire selbst lag mit 1,3 MB im Swap. Hypothese
+mit starken Indizien, ohne Pressure-Messung vom Ausfallzeitpunkt: Der RT-Thread fasst eine
+ausgelagerte Seite an, der Page-Fault wartet unter Baloo-I/O auf die NVMe, das Headset läuft
+leer. RT-Priorität schützt vor CPU-Konkurrenz, nicht vor Page-Faults.
+
+Zwei Maßnahmen:
+
+| Stelle | Wirkung |
+|--------|---------|
+| `modules/host/SPIELKISTE/default.nix`: `environment.etc."xdg/baloofilerc"` mit `[Basic Settings] Indexing-Enabled=false` | Baloo startet und beendet sich sofort (`baloo_file` prüft `indexingEnabled()` vor allem anderen). Schlüssel und Gruppe aus `share/config.kcfg/baloosettings.kcfg` des Pakets; `/etc/xdg` steht in `XDG_CONFIG_DIRS`. Einmalig wurden `balooctl6 disable` und `balooctl6 purge` ausgeführt, der Index ist weg. |
+| `modules/hardware/sound/default.nix`: `mem.mlock-all = true` für pipewire, pipewire-pulse und wireplumber plus `LimitMEMLOCK=infinity` an den drei User-Units | libpipewire ruft `mlockall(MCL_CURRENT \| MCL_FUTURE)` (`context.c`), der Prozessspeicher ist nicht mehr auslagerbar. Upstream-Unit gibt nur 8 MiB MEMLOCK, deshalb das Limit. Gilt für alle Audio-Hosts. |
+
+Dolphin- und KRunner-Dateisuche laufen auf SPIELKISTE ohne Index. Auf HAL9000 und BFG9000
+bleibt Baloo an; bei vergleichbaren Symptomen dort zuerst `balooctl6 status` und
+`journalctl --user -u kde-baloo` ansehen.
+
+**Beim nächsten Ausfall nicht sofort neu starten**, sondern erst sichern:
+`pw-top -b -n 3`, `cat /proc/pressure/memory`, `grep VmSwap /proc/$(pidof pipewire)/status`,
+`free -h`. Ein `systemctl --user restart pipewire …` kappt die Pulse-Verbindung laufender
+Steam-Spiele; die bauen sie nicht neu auf und bleiben stumm.
+
 ### ZFS-ARC auf BFG9000 begrenzt (2 GiB, nur Metadaten)
 
 `zroot` ist ein Stripe aus zwei NVMe-SSDs; ein großer Lesecache im RAM bringt dort nichts.
