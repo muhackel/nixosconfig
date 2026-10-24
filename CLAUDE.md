@@ -393,6 +393,31 @@ Die Variante baut für `PM3RDV4` die Standalone-Firmware `HF_COLIN` und aktivier
 BlueShark über `BTADDON`. Sie wird für das „Knopf“-Script benötigt. Behalten, solange
 nixpkgs diese Kombination nicht als Standard oder eigenes Paketattribut liefert.
 
+### NFC-Treiber `nxp-pn5xx` auf HAL9000 über `modules_install`
+
+`hardware.nfc-nci` (in `modules/hardware/lenovo-tp25/nfc.nix`) bringt
+`linuxPackages.nxp-pn5xx` mit dem Modul `pn5xx_i2c` in `extraModulePackages`. Seit
+[NixOS/nixpkgs#571181](https://github.com/NixOS/nixpkgs/pull/571181) (gemergt 2026-10-19)
+signiert Kbuild jedes Modul per `kmodigest` und legt daneben eine `.ko.cer` ab. Der
+Modul-Aggregator (`pkgs/os-specific/linux/kmod/aggregator.nix`) hängt die `.ko.cer` aller
+externen Module an `modules.cer` an. Das `install`-Target des pn5xx-Makefiles kopiert die
+`.ko` nur per `install -m 644`, ohne Signatur. `linux-<ver>-modules` brach deshalb mit
+`cat: kernel/drivers/nfc/pn5xx_i2c.ko.cer: No such file or directory` ab.
+
+`nfc.nix` setzt deshalb `boot.kernelPackages = pkgs.linuxPackages.extend (…)` und ersetzt
+die `installPhase` von `nxp-pn5xx`: `make -C <kernel.dev>/…/build M=$PWD modules_install`
+mit `kernelModuleMakeFlags`, `INSTALL_MOD_PATH=$out`, `INSTALL_MOD_DIR=kernel/drivers/nfc`
+und `DEPMOD=true`, nach dem Muster des Upstream-Fixes für `acpi_call` (#575394). Ergebnis:
+`pn5xx_i2c.ko.xz` plus `pn5xx_i2c.ko.cer`, udev-Regel aus `postInstall` unverändert. Der
+Kernel selbst wird nicht neu gebaut, SPIELKISTE und BFG9000 bleiben bit-identisch.
+
+**Konflikt beachten:** `boot.kernelPackages` ist damit im HAL9000-Hardwaremodul gesetzt.
+Wechselt HAL9000 auf einen anderen Kernel (z. B. `linuxPackages_latest` in
+`modules/host/HAL9000/default.nix`), muss das `.extend` auf diesen Kernel umziehen.
+
+**Entfernen, sobald [NixOS/nixpkgs#578004](https://github.com/NixOS/nixpkgs/pull/578004)
+(`kernelModuleInstallHook`, deckt `nxp-pn5xx` ab) gemergt und im Lock ist.**
+
 ### DeepFilterNet: eigener Datenthread auf allen Audio-Hosts
 
 `modules/hardware/sound/default.nix` erzeugt bei aktivem `sound` das PipeWire-Drop-in
