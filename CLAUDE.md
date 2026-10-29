@@ -347,6 +347,35 @@ Der Aktivierungsschritt `claudeJsonSymlink` (`~/.claude.json` → `~/.claude/cla
 liegt in `modules/user/muhackel/default.nix`, weil er den User betrifft, läuft aber nur
 unter `local.features.ai`.
 
+### ArtCraft Launcher (`artcraft-launcher`) — vorbereitet, auskommentiert
+
+Die ArtCraft-Apps (PhotoCraft, GridCraft, …) gibt es nur als einzelne `.flatpak`-Dateien
+in GitHub-Releases, ohne Flatpak-Repo und ohne `--repo-url`. Ein Remote für Discover
+existiert also nicht. Stattdessen soll der ArtCraft Launcher ins System, der die Apps
+selbst installiert und aktualisiert.
+
+Eingebunden wie `llm-agents`: Flake-Input `artcraft-launcher`
+(`github:storytold/craft-launcher`), ein Overlay in `lib/default.nix` legt
+`packages.<system>.default` als `pkgs.artcraft-launcher` ab (Upstream liefert kein Overlay).
+In `apppkgs` steht das Paket **auskommentiert**, weil der Upstream-Build (Stand `b827fed`,
+2026-10-29) scheitert. Solange es auskommentiert ist, bleiben die drvPaths aller drei
+Hosts bit-identisch zum Stand ohne Input (geprüft).
+
+| nixpkgs | Abbruch |
+|---------|---------|
+| Upstream-Pin (2026-10-10) | Vendoring: `crates/menu/Cargo.toml` aus `craft-libs` `92d392c` setzt `default-features = false` auf eine Workspace-Dependency, Cargo bricht ab. Upstream in `craft-libs` `e11f9d9` behoben, der Launcher pinnt aber noch `92d392c`. |
+| System (`follows`) | Vendoring läuft durch. `cargo build --offline` scheitert an `[patch.crates-io]`: `egui_demo_lib`, `egui_inspection`, `egui_system_font_provider` stehen im Lock nur als `[[patch.unused]]`, `importCargoLock` vendort sie nicht. |
+
+Deshalb `inputs.nixpkgs.follows = "nixpkgs"`; zusätzlich folgt das nixpkgs von
+`rust-overlay` dem System (dort nur für die devShell genutzt, sonst ein nixpkgs-Knoten von
+2025-04 im Lock).
+
+**Aktivieren:** `nix flake update artcraft-launcher`, dann
+`nix build .#nixosConfigurations.<host>.pkgs.artcraft-launcher`. Baut das durch,
+Zeile in `apppkgs` einkommentieren. Offener Punkt danach: Upstream installiert nur
+`bin/artcraft-launcher`, die vorhandene `packaging/linux/ai.storyteller.artcraft-launcher.desktop`
+samt Icon landet nicht im Paket — kein Menüeintrag.
+
 ### Overlays
 
 Aktive lokale Overlays werden in `configuration.nix` (`usedOverlays`) mit Inline-Kommentar zum

@@ -53,6 +53,15 @@
     # gegen den eigenen nixpkgs-Pin treffen die Pakete cache.numtide.com.
     # Aktualisieren: nix flake update llm-agents
     llm-agents.url = "github:numtide/llm-agents.nix";
+    # ArtCraft Launcher (installiert und aktualisiert die *Craft-Apps selbst).
+    # Vorbereitet, Paket in apppkgs noch auskommentiert: der Upstream-Build
+    # (b827fed) scheitert, Details in CLAUDE.md. nixpkgs.follows ist dabei
+    # Voraussetzung, mit dem eigenen nixpkgs-Pin bricht schon das Vendoring.
+    artcraft-launcher = {
+      url = "github:storytold/craft-launcher";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,10 +73,10 @@
     # flake-utils.url = "github:numtide/flake-utils";  # for future use (multi-arch outputs etc.)
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, llm-agents, ... }:
+  outputs = { self, nixpkgs, home-manager, lanzaboote, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, llm-agents, artcraft-launcher, ... }:
     let
       lib    = nixpkgs.lib;
-      myLib  = import ./lib { inherit lib home-manager plasma-manager kwin-xmonad-lite codexbar-plasma-nix llm-agents self; };
+      myLib  = import ./lib { inherit lib home-manager plasma-manager kwin-xmonad-lite codexbar-plasma-nix llm-agents artcraft-launcher self; };
 
       # ── Feature-Set für alle Desktop-Hosts ──
       commonFeatures = {
