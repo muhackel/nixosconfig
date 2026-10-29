@@ -31,10 +31,12 @@ nixosconfig/
 |-------|--------|--------------|
 | nixpkgs | `nixos-unstable` | Rolling-Release Paketbasis |
 | home-manager | `nix-community/home-manager` | User-Konfiguration (follows nixpkgs) |
-| lanzaboote | `nix-community/lanzaboote` v1.0.0 | Secure Boot (nur SPIELKISTE, follows nixpkgs) |
+| lanzaboote | `nix-community/lanzaboote` v1.2.0 | Secure Boot (nur SPIELKISTE, follows nixpkgs) |
 | plasma-manager | `nix-community/plasma-manager` | Deklarative Plasma-Konfiguration (follows nixpkgs, home-manager) |
 | kwin-xmonad-lite | `muhackel/kwin-xmonad-lite` | KWin-Layout-Controller (follows nixpkgs, home-manager, plasma-manager) |
 | codexbar-plasma-nix | `github:muhackel/codexbar-plasma-nix` | Plasma-6-Widget und Laufzeitabhängigkeiten via `overlays.default` |
+| llm-agents | `github:numtide/llm-agents.nix` | KI-Agents mit täglichen Updates (bewusst ohne follows, Cache-Treffer) |
+| artcraft-launcher | `github:storytold/craft-launcher` | ArtCraft Launcher (follows nixpkgs), vorbereitet, Paket noch auskommentiert |
 
 ## Hosts
 

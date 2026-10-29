@@ -1,4 +1,4 @@
-{ lib, home-manager, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, llm-agents, self }:
+{ lib, home-manager, plasma-manager, kwin-xmonad-lite, codexbar-plasma-nix, llm-agents, artcraft-launcher, self }:
 let
   # Zentral gepinnte stateVersion (system + home). Home Manager folgt via
   # osConfig.system.stateVersion. Letzte stable war 26.05 (mkHost-Default unten).
@@ -9,6 +9,8 @@ let
         # pkgs.llm-agents.<name> aus den fertigen Paketen des Flakes, nicht über
         # overlays.shared-nixpkgs — sonst gäbe es nur bei gleichem nixpkgs-Pin Cache-Treffer.
         (final: prev: { llm-agents = llm-agents.packages.${prev.stdenv.hostPlatform.system}; })
+        # Upstream-Flake liefert kein Overlay, nur packages.<system>.default.
+        (final: prev: { artcraft-launcher = artcraft-launcher.packages.${prev.stdenv.hostPlatform.system}.default; })
       ];
     }
     "${self}/modules/options.nix"

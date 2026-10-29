@@ -11,6 +11,7 @@ let
     exec "$JAVAWS_BIN" "$@"
   '';
   apppkgs = with pkgs; [
+    #artcraft-launcher # BROKEN Upstream-Build, Overlay aus Flake-Input, siehe CLAUDE.md
     # BROKEN CMAKE bambu-studio
     # BROKEN cura
     audacity
