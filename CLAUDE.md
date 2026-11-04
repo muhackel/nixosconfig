@@ -124,6 +124,25 @@ am 2026-08-20, einziger Downloadserver, kein Alternativhost). Die Integrität si
 der Hash der Fixed-Output-Derivation; der Workaround betrifft nur die
 Transport-Validierung.
 
+### BKM ConfigTool (`packages/configtool`, Feature `ptls`)
+
+Seit 2.0.1 ist das ConfigTool ein Python-/PySide6-Port des Xojo-Tools 1.45, ausgeliefert
+als Nuitka-Onefile (`pyConfigTool_2.0.1_Linux_x64_Trixie`, per LFS über eine eigene Regel
+in `.gitattributes`, weil die Datei keine Endung hat). Der Bootstrap braucht nur libc und
+entpackt bei jedem Start rund 170 MB nach `$TMPDIR`. Stattdessen entpackt
+`unpack-nuitka.py` den zstd-Payload zur Build-Zeit (direkt hinter dem ELF-Ende: `KAY`,
+zstd-Stream aus `name\0`, Flag-Byte, Größe als u64), danach verdrahtet `autoPatchelfHook`
+die Laufzeit-Libs. Ignoriert werden nur `libQt6EglFsKmsGbmSupport.so.6` und
+`libtiff.so.5` (Plugins eglfs-kms und qtiff, auf dem Desktop ungenutzt).
+
+Trixie- statt Bullseye-Build: Qt/PySide6 6.11 und OpenSSL 3 statt 6.9 und OpenSSL 1.1.
+Gegenüber 1.45 entfallen Emulator, `Tools/` und `keyimport.txt`. Einstellungen und Logs
+liegen unter `~/.config/BKM/ConfigTool/`. Seriell über pyserial (Gruppe `dialout` ist
+gesetzt), daneben TCP. Das Tool ruft `https://antunes.it/releasenote.xml` ab.
+
+Bricht das Entpacken bei einem Update, hat BKM die Nuitka-Version und damit eventuell das
+Payload-Format gewechselt.
+
 ### ThinkPad-Akkuwerkzeug (`thinkpadBattery`)
 
 Feature-Flag für HAL9000 und BFG9000 (nicht in `commonFeatures` — SPIELKISTE hat keinen
