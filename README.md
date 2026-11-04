@@ -193,7 +193,7 @@ HAL9000 und BFG9000 übernehmen die Einstellung beim nächsten Rebuild.
 | **better-sqlite3** | Native Node.js SQLite-Modul |
 | **crossover** | Wine-basierter Windows-Runner (für Gaming) |
 | **gns3extras** | Symlink-Manager für GNS3-Pfade |
-| **configtool** | Konfigurationstool |
+| **configtool** | BKM Micronic ConfigTool 2.0.1 (Nuitka-Onefile, zur Build-Zeit entpackt) |
 | **ts3-legacy** | TeamSpeak 3.6.2 aus gepinntem nixos-25.11 mit bewusst akzeptierter EOL-Qt5-WebEngine |
 
 `ts3-legacy` wird wie die anderen eigenen Pakete per `pkgs.callPackage` eingebunden;

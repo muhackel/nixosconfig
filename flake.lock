@@ -63,11 +63,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793383463,
-        "narHash": "sha256-rBpVz+B2qE8CJw/fUtHRE1oNnPLzuKcRjr19/7YuGUI=",
+        "lastModified": 1793442439,
+        "narHash": "sha256-kHj3MowFRHh6SGTiJunKG+wUhQBep+cfPxGdTgBdmAk=",
         "owner": "muhackel",
         "repo": "codexbar-plasma-nix",
-        "rev": "d3949fbab852525914fa6c255af66bec1600bb72",
+        "rev": "e89d9c6ee868be4f856f3cfffb8bebf41a8e7fb3",
         "type": "github"
       },
       "original": {
@@ -115,11 +115,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790898470,
-        "narHash": "sha256-zTwuwezD0w3hpga6a6P8emidzAZFyWqlNeRBlpWOOl8=",
+        "lastModified": 1793576659,
+        "narHash": "sha256-V1h85lUaJBQoHFrB2vpXZOE0Ju1MYSnIpsehoVZYlDo=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "024633cd702b10285db5cb19b40ad48d2399ba60",
+        "rev": "ea2630b7470978622c7689a1ff75d2b389175399",
         "type": "github"
       },
       "original": {
@@ -225,11 +225,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1793425587,
-        "narHash": "sha256-tIBzmDPf+2pLZ5rchF0qWhfMiDmmKsc/l/36D1bfIHA=",
+        "lastModified": 1793708775,
+        "narHash": "sha256-TCztCGO7C7rgg3S4JscvKm4lA5b1R3zy5MPKfYirOHI=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "28d5a74ef304d1a3c7a5f6cacfb52bacbf922698",
+        "rev": "a854ddf4456f5fd67474e2d844cb4a29c32702d0",
         "type": "github"
       },
       "original": {
